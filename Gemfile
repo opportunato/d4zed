@@ -18,7 +18,7 @@ gem 'mina-sidekiq', group: :development
 
 gem 'figaro'
 
-gem 'puma', '~> 2.10.0'
+gem 'puma'
 gem 'sidekiq'
 
 group :development, :test do
