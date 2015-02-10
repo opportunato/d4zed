@@ -13,6 +13,8 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'rails_admin'
 
+gem 'mina-stack', github: 'div/mina-stack', group: :development
+gem 'mina-sidekiq'
 
 group :development, :test do
   gem 'byebug'
