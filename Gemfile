@@ -18,6 +18,9 @@ gem 'mina-sidekiq', group: :development
 
 gem 'figaro'
 
+gem 'mini_magick'
+gem 'carrierwave'
+
 gem 'puma'
 gem 'sidekiq'
 
@@ -26,4 +29,3 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'spring'
 end
-
