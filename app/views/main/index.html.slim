@@ -1,0 +1,31 @@
+header
+  = image_tag "logo.svg", class: "logo"
+  ul.menu
+    li = link_to "Work", "#work"
+    li = link_to "About", "#about"
+    li = link_to "Contact", "#contacts"
+    = link_to "https://www.facebook.com/D4ZEDD4ZED", target: "_blank" do
+      i.icon-facebook
+    = link_to "https://twitter.com/d_4_z_e_d", target: "_blank" do
+      i.icon-twitter
+section#work
+  - @videos.each_with_index do |video, index|
+    article[class=video_class(index) data-vimeo-id=video.vimeo_id]
+      .cover[style="background-image: url(#{video.thumbnail_url})"]
+      .info
+        header = "#{video.brand} - #{video.name}"
+        p = video.description
+        table
+          tr
+            th Director
+            th Music
+          tr
+            td = video.director
+            td = video.music
+        .player
+          i.icon-play
+          | Play Video
+footer#about
+  .address
+  .address
+  .email

@@ -18,11 +18,15 @@ gem 'mina-sidekiq', group: :development
 
 gem 'figaro'
 
+gem 'autoprefixer-rails'
+
 gem 'mini_magick'
 gem 'carrierwave'
 
 gem 'puma'
 gem 'sidekiq'
+
+gem 'slim'
 
 group :development, :test do
   gem 'byebug'
