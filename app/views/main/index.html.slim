@@ -23,7 +23,7 @@ header
       header Work
 
       - videos = video_group(@videos)
-      if videos[:main].present?
+      - if videos[:main].present?
         = render partial: "main/video", locals: { video: videos[:main] }
       .first
         - videos[:first].each do |video|
