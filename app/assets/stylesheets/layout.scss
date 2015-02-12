@@ -18,7 +18,7 @@ a {
   text-decoration: none;
 }
 
-$height-width: 180px;
+$height-width: 5 * $gutter-size;
 $half-width: 17 * $gutter-size;
 $full-width: 35 * $gutter-size;
 
@@ -33,14 +33,57 @@ body {
     width: 100%;
     z-index: 1;
 
+    .wrapper {
+      display: table;
+      height: 100%;
+      margin: auto;
+      position: relative;
+      width: $full-width;
+    }
+
+    .logo, ul {
+      position: absolute;
+      top: 50%;
+      margin-top: -17px;
+    }
+
     .logo {
-      height: 40px;
-      width: 180px;
+      color: $color-secondary;
+      height: 35px;
+      left: 0;
+      width: 175px;
     }
 
     ul {
+      display: table-cell;
+      line-height: 35px;
       list-style-type: none;
       margin: 0;
+      margin-top: -17px;
+      vertical-align: middle;
+
+      > li {
+        float: left;
+      }
+
+      &.menu {
+        left: $half-width;
+        float: left;
+        font-weight: 700;
+
+        > li {
+          margin-right: 70px;
+        }
+      }
+
+      &.social {
+        right: 0;
+        font-size: 16px;
+
+        > li {
+          margin-left: 20px;
+        }
+      }
     }
 
     a {
@@ -57,7 +100,7 @@ body {
   margin-top: $height-width;
   width: 100%;
 
-  .inner-wrapper {
+  .wrapper {
     margin: auto;
     padding-top: 2 * $gutter-size - 2;
     position: relative;

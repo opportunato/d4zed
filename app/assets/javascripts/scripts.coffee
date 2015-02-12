@@ -1,12 +1,15 @@
-$mainContainer = $('#main .inner-wrapper')
+$main    = $('#main .wrapper')
+$header  = $('body > header > .wrapper')
 
 calculateLeftMargin = ->
   $windowWidth   = $(window).width()
-  $blockWidth    = $mainContainer.width()
+  $blockWidth    = $main.width()
 
   difference = Math.ceil(($windowWidth - $blockWidth)/(2*35)) * 35
 
-  $mainContainer.css('margin-left', difference - 2)
+  $main.css('margin-left', difference - 2)
+  $header.css('margin-left', difference - 2)
+
 
 $ ->
   calculateLeftMargin()
