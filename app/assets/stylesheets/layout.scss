@@ -19,8 +19,8 @@ a {
 }
 
 $height-width: 5 * $gutter-size;
-$half-width: 17 * $gutter-size;
-$full-width: 35 * $gutter-size;
+$half-width: 17 * $gutter-size + 2;
+$full-width: 35 * $gutter-size + 2;
 
 body { 
 
@@ -124,10 +124,9 @@ section > header {
 #about, #news {
   background-color: $color-secondary;
   border: 2px solid $color-main;
-  border-right: none;
   height: 4 * $gutter-size + 2;
   float: left;
-  margin-bottom: 3 * $gutter-size;
+  margin-bottom: 3 * $gutter-size - 2;
   padding: $gutter-size;
   position: relative;
   width: $half-width;
@@ -141,33 +140,46 @@ section > header {
 }
 
 #about {
-  margin-right: $gutter-size;
+  margin-right: $gutter-size - 2;
 }
 
 #work {
   clear: both;
   position: relative;
 
+  &:after {
+    content: '';
+    clear: both;
+    display: block;
+  }
+
+  .first, .second {
+    float: left;
+    width: $half-width;
+  }
+
+  .first {
+    margin-right: $gutter-size - 2;
+  }
+
+  .first > article:nth-child(2n+1),
+  .second > article:nth-child(2n) {
+    height: 17 * $gutter-size + 2;
+  }
+
+  .first > article:nth-child(2n),
+  .second > article:nth-child(2n+1) {
+    height: 8 * $gutter-size + 2;
+  }
+
   article {
-    margin-top: $gutter-size;
+    margin-top: $gutter-size - 2;
     position: relative;
-
-    &.main {
-      height: 16 * $gutter-size;
-      width: 100%;
-    }
-
-    &.big {
-      height: 17 * $gutter-size;
-      width: $half-width;
-    }
-
-    &.small {
-      height: 8 * $gutter-size;
-      width: $half-width;
-    }
+    height: 16 * $gutter-size + 2;
+    width: 100%;
 
     .cover, .info {
+      border: 2px solid $color-main;
       position: absolute;
 
       top: 0;
@@ -178,6 +190,7 @@ section > header {
 
     .cover {
       background-size: cover;
+      background-position: center;
     }
 
     .info {
@@ -188,11 +201,43 @@ section > header {
       padding: 35px;
 
       header, th {
+        font-weight: 700;
         text-transform: uppercase;
+      }
+
+      p {
+        margin-top: 3px;
+        margin-bottom: 10px;
       }
 
       th, td {
         text-align: left;
+        padding: 3px;
+        padding-left: 0;
+        padding-right: 10px;
+      }
+
+      .player {
+        border: 2px solid $color-secondary;
+        cursor: pointer;
+        font-size: 12px;
+        height: 34px;
+        position: absolute;
+        bottom: $gutter-size;
+        text-transform: uppercase;
+        width: 140px;
+
+        i {
+          font-size: 30px;
+          height: 100%;
+          padding-right: 18px;
+        }
+
+        span {
+          line-height: 30px;
+          position: relative;
+          top: -10px;
+        }
       }
     }
 

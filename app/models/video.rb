@@ -3,5 +3,5 @@ class Video < ActiveRecord::Base
 
   scope :published, -> { where(is_published: true) }
 
-  validates_presence_of :name, :brand, :director, :music, :vimeo_id, :thumbnail
+  validates_presence_of :name, :director, :music, :vimeo_id, :thumbnail
 end

@@ -1,0 +1,19 @@
+article[data-vimeo-id=video.vimeo_id]
+  .cover[style="background-image: url(#{video.thumbnail_url})"]
+  .info
+    header 
+      - if video.brand.present?
+        = "#{video.brand} - #{video.name}"
+      - else
+        = video.name
+    p = video.description
+    table
+      tr
+        th Director
+        th Music
+      tr
+        td = video.director
+        td = video.music
+    .player
+      i.icon-play
+      span Play Video

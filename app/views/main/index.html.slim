@@ -22,19 +22,11 @@ header
     section#work
       header Work
 
-      - @videos.each_with_index do |video, index|
-        article[class=video_class(index) data-vimeo-id=video.vimeo_id]
-          .cover[style="background-image: url(#{video.thumbnail_url})"]
-          .info
-            header = "#{video.brand} - #{video.name}"
-            p = video.description
-            table
-              tr
-                th Director
-                th Music
-              tr
-                td = video.director
-                td = video.music
-            .player
-              i.icon-play
-              | Play Video
+      - videos = video_group(@videos)
+      = render partial: "main/video", locals: { video: videos[:main] }
+      .first
+        - videos[:first].each do |video|
+          = render partial: "main/video", locals: { video: video }
+      .second
+        - videos[:second].each do |video|
+          = render partial: "main/video", locals: { video: video }
