@@ -7,6 +7,11 @@ html {
 
 body {
   font-family: 'Helvetica Neue';
+  font-size: 12px;
+}
+
+p {
+  margin: 0;
 }
 
 a {
@@ -14,13 +19,14 @@ a {
 }
 
 $height-width: 180px;
+$half-width: 17 * $gutter-size;
+$full-width: 35 * $gutter-size;
 
-body > .main { 
+body { 
 
   > header {
     background-color: $color-main;
     color: $color-secondary;
-    font-size: 12px;
     height: $height-width;
     position: fixed;
     top: 0;
@@ -44,31 +50,78 @@ body > .main {
   }
 }
 
-#work {
+#main {
   background-image: image_url('bg.svg');
   background-size: $gutter-size;
   color: $color-secondary;
   margin-top: $height-width;
-  padding-top: $gutter-size;
+  width: 100%;
+
+  .inner-wrapper {
+    margin: auto;
+    padding-top: 2 * $gutter-size - 2;
+    position: relative;
+    width: $full-width;
+  }
+}
+
+section > header {
+  background-color: $color-main;
+  height: $gutter-size;
+  line-height: $gutter-size;
+  text-align: center;
+  text-transform: uppercase;
+  width: 4 * $gutter-size;
+
+  position: absolute;
+  top: -$gutter-size;
+  left: $gutter-size;  
+}
+
+#about, #news {
+  background-color: $color-secondary;
+  border: 2px solid $color-main;
+  border-right: none;
+  height: 4 * $gutter-size + 2;
+  float: left;
+  margin-bottom: 3 * $gutter-size;
+  padding: $gutter-size;
+  position: relative;
+  width: $half-width;
+
+  p {
+    color: $color-main;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+}
+
+#about {
+  margin-right: $gutter-size;
+}
+
+#work {
+  clear: both;
+  position: relative;
 
   article {
-    margin: auto;
     margin-top: $gutter-size;
     position: relative;
 
     &.main {
       height: 16 * $gutter-size;
-      width: 35 * $gutter-size;
+      width: 100%;
     }
 
     &.big {
       height: 17 * $gutter-size;
-      width: 17 * $gutter-size;
+      width: $half-width;
     }
 
     &.small {
       height: 8 * $gutter-size;
-      width: 17 * $gutter-size;
+      width: $half-width;
     }
 
     .cover, .info {

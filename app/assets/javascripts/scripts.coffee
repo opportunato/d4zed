@@ -1,4 +1,18 @@
+$mainContainer = $('#main .inner-wrapper')
+
+calculateLeftMargin = ->
+  $windowWidth   = $(window).width()
+  $blockWidth    = $mainContainer.width()
+
+  difference = Math.ceil(($windowWidth - $blockWidth)/(2*35)) * 35
+
+  $mainContainer.css('margin-left', difference - 2)
+
 $ ->
+  calculateLeftMargin()
+
+  $(window).on 'resize', calculateLeftMargin
+
   player = null
 
   $('.player').on 'click', (e) ->

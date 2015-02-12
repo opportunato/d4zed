@@ -8,24 +8,31 @@ header
       i.icon-facebook
     = link_to "https://twitter.com/d_4_z_e_d", target: "_blank" do
       i.icon-twitter
-section#work
-  - @videos.each_with_index do |video, index|
-    article[class=video_class(index) data-vimeo-id=video.vimeo_id]
-      .cover[style="background-image: url(#{video.thumbnail_url})"]
-      .info
-        header = "#{video.brand} - #{video.name}"
-        p = video.description
-        table
-          tr
-            th Director
-            th Music
-          tr
-            td = video.director
-            td = video.music
-        .player
-          i.icon-play
-          | Play Video
-footer#about
-  .address
-  .address
-  .email
+#main
+  .inner-wrapper
+    section#about
+      header About
+      p D4ZED is a new Copenhagen/Los Angeles based collective of composers, producers, sound designers and music supervisors coming from a wide variety of acknowledged constellations.
+
+    section#news
+      header News
+
+    section#work
+      header Work
+
+      - @videos.each_with_index do |video, index|
+        article[class=video_class(index) data-vimeo-id=video.vimeo_id]
+          .cover[style="background-image: url(#{video.thumbnail_url})"]
+          .info
+            header = "#{video.brand} - #{video.name}"
+            p = video.description
+            table
+              tr
+                th Director
+                th Music
+              tr
+                td = video.director
+                td = video.music
+            .player
+              i.icon-play
+              | Play Video
