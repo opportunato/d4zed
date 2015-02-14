@@ -1,4 +1,6 @@
 class Video < ActiveRecord::Base
+  include Taggable
+
   mount_uploader :thumbnail, ThumbnailUploader
 
   scope :published, -> { where(is_published: true) }
