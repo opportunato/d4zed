@@ -18,6 +18,18 @@ header
 
     section#news
       header News
+      .wrapper
+        - @news.each do |news|
+          article[data-date=news.created_at.to_s]
+            .cover[style="background-image: url(#{news.picture_url})"]
+            p = news.content.html_safe
+      - if @news.first.present?
+        .info
+          .date = format_date(@news.first.created_at)
+          button
+            i.icon-chevron-left
+          button
+            i.icon-chevron-right
 
     section#work
       header Work

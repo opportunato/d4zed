@@ -18,7 +18,7 @@ a {
   text-decoration: none;
 }
 
-$height-width: 5 * $gutter-size;
+$height-width: 3 * $gutter-size;
 $half-width: 17 * $gutter-size + 2;
 $full-width: 35 * $gutter-size + 2;
 
@@ -33,7 +33,7 @@ body {
     width: 100%;
     z-index: 1;
 
-    .wrapper {
+    > .wrapper {
       display: table;
       height: 100%;
       margin: auto;
@@ -100,7 +100,7 @@ body {
   margin-top: $height-width;
   width: 100%;
 
-  .wrapper {
+  > .wrapper {
     margin: auto;
     padding-top: 2 * $gutter-size - 2;
     position: relative;
@@ -141,6 +141,77 @@ section > header {
 
 #about {
   margin-right: $gutter-size - 2;
+}
+
+#news {
+  padding: 0;
+
+  > .wrapper {
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  > .container {
+    position: absolute;
+    height: 100%;
+    width: 100000%;
+  }
+
+  article {
+    color: $color-main;
+    float: left;
+    height: 100%;
+    width: $half-width - 2;
+
+    > * {
+      float: left;
+    }
+
+    .cover {
+      background-size: cover;
+      background-position: center;
+      height: 100%;
+      width: 4 * $gutter-size;
+    }
+
+    p {
+      padding: $gutter-size;
+      width: $half-width - 4 * $gutter-size - 2;
+    }
+  }
+
+  .info {
+    background-color: $color-main;
+    float: left;
+    left: 6 * $gutter-size - 2;
+    line-height: $gutter-size;
+    height: $gutter-size;
+    width: 5 * $gutter-size;
+
+    position: absolute;
+    top: 100%;
+
+    > * {
+      float: left;
+    }
+
+    .date {
+      height: 100%;
+      line-height: $gutter-size;
+      text-align: center;
+      width: 3 * $gutter-size;
+    }
+
+    button {
+      background-color: transparent;
+      border: none;
+      color: $color-secondary;
+      line-height: $gutter-size;
+      height: 100%;
+      width: $gutter-size;
+    }
+  }
 }
 
 #work {

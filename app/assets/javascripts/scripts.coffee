@@ -1,4 +1,4 @@
-$main    = $('#main .wrapper')
+$main    = $('#main > .wrapper')
 $header  = $('body > header > .wrapper')
 
 calculateLeftMargin = ->
