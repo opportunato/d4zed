@@ -226,30 +226,22 @@ section > header {
     display: block;
   }
 
-  .first, .second {
-    float: left;
-    width: $half-width;
-  }
-
-  .first {
-    margin-right: $gutter-size - 2;
-  }
-
-  .first > article:nth-child(2n+1),
-  .second > article:nth-child(2n) {
-    height: 17 * $gutter-size + 2;
-  }
-
-  .first > article:nth-child(2n),
-  .second > article:nth-child(2n+1) {
-    height: 8 * $gutter-size + 2;
-  }
-
   article {
+    float: left;
     margin-top: $gutter-size - 2;
     position: relative;
-    height: 16 * $gutter-size + 2;
-    width: 100%;
+    height: 8 * $gutter-size + 2;
+    width: $half-width;
+
+    &:first-of-type {
+      height: 16 * $gutter-size + 2;
+      margin-top: 0;
+      width: 100%;
+    }
+
+    &:nth-of-type(2n) {
+      margin-right: $gutter-size - 2;
+    }
 
     .cover, .info {
       border: 2px solid $color-main;

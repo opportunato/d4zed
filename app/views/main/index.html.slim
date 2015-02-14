@@ -42,11 +42,8 @@ header
     section#work
       header Work
 
-      - videos = video_group(@videos)
-      - if videos[:main].present?
-        = render partial: "main/video", locals: { video: videos[:main] }
-        - videos[:first].each do |video|
-          = render partial: "main/video", locals: { video: video }
+      - @videos.each do |video|
+        = render partial: "main/video", locals: { video: video }
 
     footer
       section#contacts
