@@ -103,6 +103,7 @@ body {
   > .wrapper {
     margin: auto;
     padding-top: 2 * $gutter-size - 2;
+    padding-bottom: 2 * $gutter-size - 2;
     position: relative;
     width: $full-width;
   }
@@ -121,12 +122,13 @@ section > header {
   left: $gutter-size;  
 }
 
-#about, #news {
+#about, #news, #contacts {
   background-color: $color-secondary;
   border: 2px solid $color-main;
   height: 4 * $gutter-size + 2;
   float: left;
   margin-bottom: 3 * $gutter-size - 2;
+  overflow: hidden;
   padding: $gutter-size;
   position: relative;
   width: $half-width;
@@ -338,3 +340,54 @@ section > header {
     }
   }
 }
+
+footer {
+  margin-top: 2 * $gutter-size - 2;
+  height: 4 * $gutter-size;
+  width: 100%;
+
+  #contacts {
+    color: $color-main;
+    float: left;
+    width: 24 * $gutter-size + 2;
+
+    header {
+      color: $color-secondary;
+    }
+
+    .column {
+      float: left;
+      font-size: 16px;
+      line-height: 1.5;
+      margin-right: $gutter-size;
+      width: 7 * $gutter-size;
+
+      &:last-child {
+        margin-right: 0;
+        width: 5 * $gutter-size;
+      }
+    }
+  }
+
+  .social {
+    float: right;
+  }
+
+  .facebook,
+  .twitter {
+    background-color: $color-main;
+    height: 2 * $gutter-size;
+    float: left;
+    font-size: 16px;
+    margin-top: $gutter-size;
+    margin-right: $gutter-size;
+    text-align: center;
+    width: 2 * $gutter-size;
+
+    a {
+      color: $color-secondary;
+      line-height: 2 * $gutter-size;
+    }
+  }
+}
+
