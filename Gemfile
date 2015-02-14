@@ -17,6 +17,7 @@ gem 'mina-stack', github: 'div/mina-stack', group: :development
 gem 'mina-sidekiq', group: :development
 
 gem 'figaro'
+gem 'meta-tags'
 
 gem 'autoprefixer-rails'
 
