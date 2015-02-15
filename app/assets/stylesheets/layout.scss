@@ -130,7 +130,7 @@ section > header {
 #about, #news, #contacts {
   background-color: $color-secondary;
   border: 2px solid $color-main;
-  height: 4 * $gutter-size + 2px;
+  height: 5 * $gutter-size + 2px;
   float: left;
   margin-bottom: 3 * $gutter-size - 2px;
   padding: 0;
@@ -150,13 +150,43 @@ section > header {
     line-height: 1.5;
     padding: $gutter-size;
   }
+
+  button {
+    outline: 0;
+    position: absolute;
+    right: $gutter-size;
+    bottom: -$gutter-size;
+
+    background-color: $color-main;
+    border: none;
+    color: $color-secondary;
+    line-height: $gutter-size;
+    height: $gutter-size;
+    width: $gutter-size;
+  }
 }
 
 #about {
   margin-right: $gutter-size - 2px;
+
+  p {
+    padding-bottom: 0;
+    visibility: hidden;
+
+    &:first-child {
+      visibility: visible;
+    }
+  }
+
+  &.expanded {
+    p {
+      visibility: visible;
+    }
+  }
 }
 
 #contacts {
+  height: 4 * $gutter-size + 2px;
   padding: $gutter-size;
 }
 
@@ -216,6 +246,7 @@ section > header {
       color: $color-secondary;
       line-height: $gutter-size;
       height: 100%;
+      outline: 0;
       width: $gutter-size;
     }
   }
@@ -275,6 +306,7 @@ section > header {
       }
 
       p {
+        line-height: 1.5;
         margin-top: 3px;
         margin-bottom: 10px;
       }

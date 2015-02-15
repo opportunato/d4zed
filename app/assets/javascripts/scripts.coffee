@@ -13,6 +13,19 @@ calculateLeftMargin = ->
     'width': newWidth
   )
 
+expand = ($section) ->
+  $section.toggleClass('expanded')
+
+  if $section.hasClass('expanded')
+    $content = $section.find('.content')
+    fullHeight = $content.height()
+
+    newHeight = Math.ceil(fullHeight/gutterSize) * gutterSize + gutterSize - 2
+
+    $section.height(newHeight)
+  else
+    $section.height(5 * gutterSize - 2)
+
 
 $ ->
   calculateLeftMargin()
@@ -21,6 +34,9 @@ $ ->
   $(window).on 'resize', calculateLeftMargin
 
   player = null
+
+  $('.expander').on 'click', ->
+    expand($(@).parents('section'))
 
   $('.player').on 'click', (e) ->
     $container = $(e.target).parents('article')
