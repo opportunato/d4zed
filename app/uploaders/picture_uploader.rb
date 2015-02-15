@@ -8,4 +8,9 @@ class PictureUploader < BaseUploader
     process resize_to_limit: [315, 315]
     process convert: 'jpg'
   end
+
+  version :huge do
+    process resize_to_limit: [600, 600]
+    process convert: 'jpg'
+  end
 end
