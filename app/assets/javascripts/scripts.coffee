@@ -1,6 +1,7 @@
 gutterSize = 35
 $main      = $('#main > .wrapper')
 $header    = $('body > header > .wrapper')
+$news      = $('#news article')
 
 calculateLeftMargin = ->
   $windowWidth   = $(window).width()
@@ -12,6 +13,8 @@ calculateLeftMargin = ->
     'margin-left': 2 * gutterSize - 2
     'width': newWidth
   )
+
+  $news.css(width: (newWidth - gutterSize)/2)
 
 expand = ($section) ->
   $section.toggleClass('expanded')
@@ -26,6 +29,40 @@ expand = ($section) ->
   else
     $section.height(5 * gutterSize - 2)
 
+currentNewsIndex = 0
+$newsContainer   = $('#news .container')
+newsNumber       = $newsContainer.children().length
+
+updateNews = ->
+  $block = $($newsContainer.children().get(currentNewsIndex))
+
+  $('#news .date').text($block.data('date'))
+
+  if currentNewsIndex == 0
+    $('.prev i').hide();
+    $('.next i').show();
+  else if currentNewsIndex == newsNumber - 1
+    $('.prev i').show();
+    $('.next i').hide();
+  else
+    $('.next i, .prev i').show();
+
+navigateNews = (direction) ->
+  newsWidth = $newsContainer.children().width()
+
+  if direction == 'prev'
+    return if currentNewsIndex == 0
+
+    currentNewsIndex -= 1
+  else if direction == 'next'
+    return if currentNewsIndex == newsNumber - 1
+
+    currentNewsIndex += 1
+  else
+    return
+
+  $newsContainer.css('left', - currentNewsIndex * newsWidth)
+  updateNews()
 
 $ ->
   calculateLeftMargin()
@@ -37,6 +74,14 @@ $ ->
 
   $('.expander').on 'click', ->
     expand($(@).parents('section'))
+
+  $('.prev').on 'click', ->
+    navigateNews('prev')
+
+  $('.next').on 'click', ->
+    navigateNews('next')
+
+  updateNews()
 
   $('.player').on 'click', (e) ->
     $container = $(e.target).parents('article')

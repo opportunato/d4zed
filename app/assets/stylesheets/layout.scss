@@ -140,6 +140,7 @@ section > header {
   > .wrapper {
     height: 100%;
     overflow: hidden;
+    position: relative;
     width: 100%;
   }
 
@@ -151,7 +152,7 @@ section > header {
     padding: $gutter-size;
   }
 
-  button {
+  button.expander {
     outline: 0;
     position: absolute;
     right: $gutter-size;
@@ -191,7 +192,7 @@ section > header {
 }
 
 #news {
-  > .container {
+  .container {
     position: absolute;
     height: 100%;
     width: 100000%;
@@ -201,6 +202,7 @@ section > header {
     color: $color-main;
     float: left;
     height: 100%;
+    width: 16 * $gutter-size;
 
     > * {
       float: left;
@@ -210,11 +212,12 @@ section > header {
       background-size: cover;
       background-position: center;
       height: 100%;
-      width: 4 * $gutter-size;
+      width: 5 * $gutter-size;
     }
 
     p {
       padding: $gutter-size;
+      width: calc(100% - 5 * 35px);
     }
   }
 

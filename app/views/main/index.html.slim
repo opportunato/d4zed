@@ -32,16 +32,16 @@ header
       header News
       .wrapper
         .container
-          - @news.each do |news|
-            article[data-date=news.created_at.to_s]
+          - @news.each_with_index do |news, index|
+            article[data-date=format_date(news.created_at) data-index=index]
               .cover[style="background-image: url(#{news.picture_url})"]
               p = news.content.html_safe
       - if @news.first.present?
         .info
           .date = format_date(@news.first.created_at)
-          button
+          button.prev
             i.icon-chevron-left
-          button
+          button.next
             i.icon-chevron-right
 
     section#work
