@@ -6,7 +6,7 @@ html {
 }
 
 body {
-  font-family: 'Helvetica Neue';
+  font-family: "aktiv-grotesk-std", "Helvetica Neue";
   font-size: 12px;
 }
 
@@ -262,9 +262,8 @@ section > header {
     }
 
     .info {
-      background-color: #AF4E7B;
+      background-color: rgba(175, 78, 123, 0.8);
       display: none;
-      opacity: 0.8;
       float: left;
       padding: 35px;
 

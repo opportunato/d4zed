@@ -9,7 +9,7 @@ calculateLeftMargin = ->
   newWidth = Math.floor($blockWidth / gutterSize) * gutterSize + 2
 
   $main.add($header).css(
-    'margin-left': 2 * gutterSize  - 2
+    'margin-left': 2 * gutterSize - 2
     'width': newWidth
   )
 
