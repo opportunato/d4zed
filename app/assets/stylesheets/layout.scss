@@ -19,8 +19,7 @@ a {
 }
 
 $height-width: 3 * $gutter-size;
-$half-width: 17 * $gutter-size + 2;
-$full-width: 35 * $gutter-size + 2;
+$half-width: calc(50% - 35px/2 - 3px);
 
 body { 
 
@@ -37,14 +36,14 @@ body {
       display: table;
       height: 100%;
       margin: auto;
+      width: calc(100% - 4 * 35px + 4px);
       position: relative;
-      width: $full-width;
     }
 
     .logo, ul {
       position: absolute;
       top: 50%;
-      margin-top: -17px;
+      margin-top: -$gutter-size/2;
     }
 
     .logo {
@@ -67,7 +66,8 @@ body {
       }
 
       &.menu {
-        left: $half-width;
+        position: absolute;
+        left: 50%;
         float: left;
         font-weight: 700;
 
@@ -77,6 +77,7 @@ body {
       }
 
       &.social {
+        position: absolute;
         right: 0;
         font-size: 16px;
 
@@ -101,11 +102,11 @@ body {
   width: 100%;
 
   > .wrapper {
+    width: calc(100% - 4 * 35px + 4px);
     margin: auto;
-    padding-top: 2 * $gutter-size - 2;
-    padding-bottom: 2 * $gutter-size - 2;
+    padding-top: 2 * $gutter-size - 2px;
+    padding-bottom: 2 * $gutter-size - 2px;
     position: relative;
-    width: $full-width;
   }
 }
 
@@ -125,28 +126,12 @@ section > header {
 #about, #news, #contacts {
   background-color: $color-secondary;
   border: 2px solid $color-main;
-  height: 4 * $gutter-size + 2;
+  height: 4 * $gutter-size + 2px;
   float: left;
-  margin-bottom: 3 * $gutter-size - 2;
-  overflow: hidden;
-  padding: $gutter-size;
+  margin-bottom: 3 * $gutter-size - 2px;
+  padding: 0;
   position: relative;
   width: $half-width;
-
-  p {
-    color: $color-main;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 1.5;
-  }
-}
-
-#about {
-  margin-right: $gutter-size - 2;
-}
-
-#news {
-  padding: 0;
 
   > .wrapper {
     height: 100%;
@@ -154,6 +139,20 @@ section > header {
     width: 100%;
   }
 
+  p {
+    color: $color-main;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    padding: $gutter-size;
+  }
+}
+
+#about {
+  margin-right: $gutter-size - 2px;
+}
+
+#news {
   > .container {
     position: absolute;
     height: 100%;
@@ -164,7 +163,6 @@ section > header {
     color: $color-main;
     float: left;
     height: 100%;
-    width: $half-width - 2;
 
     > * {
       float: left;
@@ -179,7 +177,6 @@ section > header {
 
     p {
       padding: $gutter-size;
-      width: $half-width - 4 * $gutter-size - 2;
     }
   }
 
@@ -240,7 +237,7 @@ section > header {
     }
 
     &:nth-of-type(2n) {
-      margin-right: $gutter-size - 2;
+      margin-right: $gutter-size;
     }
 
     .cover, .info {

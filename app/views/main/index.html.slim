@@ -16,21 +16,23 @@ header
   .wrapper
     section#about
       header About
-      p D4ZED is a new Copenhagen / Los Angeles based collective of composers, producers, sound designers and music supervisors coming from a wide variety of acknowledged constellations.
+      .wrapper
+        p D4ZED is a new Copenhagen / Los Angeles based collective of composers, producers, sound designers and music supervisors coming from a wide variety of acknowledged constellations.
 
-      p We compose, arrange and orchestrate music. We design, record and mix soundscapes. We music supervise and clear music. All together our mission is to create the best sound and music for advertising, television and film.
+        p We compose, arrange and orchestrate music. We design, record and mix soundscapes. We music supervise and clear music. All together our mission is to create the best sound and music for advertising, television and film.
 
-      p D4ZED is made up of Adrian Aurelius, Gregers Mærsk Møller, Lasse Martinussen, Simon Littauer and Sune Rose Wagner.
+        p D4ZED is made up of Adrian Aurelius, Gregers Mærsk Møller, Lasse Martinussen, Simon Littauer and Sune Rose Wagner.
 
-      p Explore our work below and get in touch
+        p Explore our work below and get in touch
 
     section#news
       header News
       .wrapper
-        - @news.each do |news|
-          article[data-date=news.created_at.to_s]
-            .cover[style="background-image: url(#{news.picture_url})"]
-            p = news.content.html_safe
+        .container
+          - @news.each do |news|
+            article[data-date=news.created_at.to_s]
+              .cover[style="background-image: url(#{news.picture_url})"]
+              p = news.content.html_safe
       - if @news.first.present?
         .info
           .date = format_date(@news.first.created_at)
