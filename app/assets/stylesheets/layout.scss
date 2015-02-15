@@ -221,6 +221,12 @@ section > header {
     }
   }
 
+  &.expanded {
+    .cover {
+      width: 100%;
+    }
+  }
+
   .info {
     background-color: $color-main;
     float: left;

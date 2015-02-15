@@ -16,18 +16,33 @@ calculateLeftMargin = ->
 
   $news.css(width: (newWidth - gutterSize)/2)
 
-expand = ($section) ->
-  $section.toggleClass('expanded')
+expandAbout = ->
+  $about = $('#about')
 
-  if $section.hasClass('expanded')
-    $content = $section.find('.content')
+  $about.toggleClass('expanded')
+
+  if $about.hasClass('expanded')
+    $content = $about.find('.content')
     fullHeight = $content.height()
 
     newHeight = Math.ceil(fullHeight/gutterSize) * gutterSize + gutterSize - 2
 
-    $section.height(newHeight)
+    $about.height(newHeight)
   else
-    $section.height(5 * gutterSize - 2)
+    $about.height(5 * gutterSize - 2)
+
+expandNews = ->
+  $news = $('#news')
+
+  $news.toggleClass('expanded')
+
+  if $news.hasClass('expanded')
+    width = $news.width()
+
+    $news.height(width + 4 * gutterSize)
+    $news.find('.cover').height(width + 2)
+  else
+    $news.height(5 * gutterSize - 2)
 
 currentNewsIndex = 0
 $newsContainer   = $('#news .container')
@@ -72,8 +87,11 @@ $ ->
 
   player = null
 
-  $('.expander').on 'click', ->
-    expand($(@).parents('section'))
+  $('#about .expander').on 'click', ->
+    expandAbout()
+
+  $('#news .expander').on 'click', ->
+    expandNews()
 
   $('.prev').on 'click', ->
     navigateNews('prev')
