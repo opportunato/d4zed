@@ -1,19 +1,22 @@
-# gutterSize = 35
-# $main      = $('#main > .wrapper')
-# $header    = $('body > header > .wrapper')
+gutterSize = 35
+$main      = $('#main > .wrapper')
+$header    = $('body > header > .wrapper')
 
-# calculateLeftMargin = ->
-#   $windowWidth   = $(window).width()
-#   $blockWidth    = $main.width()
+calculateLeftMargin = ->
+  $windowWidth   = $(window).width()
+  $blockWidth    = $main.width()
 
-#   difference = Math.floor(($windowWidth - $blockWidth)/(2*gutterSize)) * gutterSize
+  newWidth = Math.floor($blockWidth / gutterSize) * gutterSize + 2
 
-#   $main.css('margin-left', difference - 2)
-#   $header.css('margin-left', difference - 2)
+  $main.add($header).css(
+    'margin-left': 2 * gutterSize  - 2
+    'width': newWidth
+  )
 
 
 $ ->
   calculateLeftMargin()
+  $('body').css('visibility', 'visible')
 
   $(window).on 'resize', calculateLeftMargin
 
