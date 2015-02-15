@@ -8,6 +8,8 @@ html {
 body {
   font-family: "aktiv-grotesk-std", "Helvetica Neue";
   font-size: 12px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 p {
