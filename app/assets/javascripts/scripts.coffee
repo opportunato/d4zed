@@ -105,7 +105,7 @@ $ ->
   $('.player').on 'click', (e) ->
     $container = $(e.target).parents('article')
 
-    $container.addClass('playing')
+    $container.addClass('loading')
 
     if $container.children('iframe').length == 0
       $container.append("<iframe src='//player.vimeo.com/video/" + $container.data("vimeoId") + "?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff' width='560' height='315' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>");
@@ -116,6 +116,8 @@ $ ->
       player = $f($container.children('iframe')[0])
 
       player.addEvent "ready", ->
+        $container.removeClass('loading').addClass('playing')
+
         player.api("play")
         
         player.addEvent "finish", ->
