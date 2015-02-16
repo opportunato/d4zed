@@ -390,6 +390,10 @@ section > header {
       .info, .bg, .gradient {
         display: block;
       }
+
+      .cover {
+        filter: grayscale(100%);
+      }
     }
   }
 }
