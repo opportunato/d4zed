@@ -43,6 +43,7 @@ expandNews = ->
     $news.find('.cover').height(width + 2)
   else
     $news.height(5 * gutterSize - 2)
+    $news.find('.cover').css('height', '100%')
 
 currentNewsIndex = 0
 $newsContainer   = $('#news .container')
