@@ -3,16 +3,18 @@
 header
   .wrapper
     = image_tag "logo.svg", class: "logo"
-    ul.menu
-      li = link_to "Work", "#work"
-      li = link_to "About", "#about"
-      li = link_to "Contact", "#contacts"
+    .menu-wrapper
+      ul.menu
+        li = link_to "Work", "#work"
+        li = link_to "About", "#about"
+        li = link_to "Contact", "#contacts"
     ul.social
       li = link_to "https://www.facebook.com/D4ZEDD4ZED", target: "_blank" do
         i.d4zed-icon-facebook
       li = link_to "https://twitter.com/d_4_z_e_d", target: "_blank" do
         i.d4zed-icon-twitter
     button.mobile-menu-button
+      i.d4zed-icon-menu-close
       i.d4zed-icon-navicon
 #main
   .wrapper

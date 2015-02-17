@@ -2,9 +2,8 @@ body {
   visibility: hidden;
 
   &.menu-opened {
-    .menu {
+    .menu-wrapper {
       background-color: $color-main;
-      display: block;
       position: fixed;
 
       top: $mobile-header-height;
@@ -18,6 +17,16 @@ body {
         margin: auto;
         text-align: center;
         width: 150px;
+      }
+    }
+
+    .mobile-menu-button {
+      .d4zed-icon-menu-close {
+        display: block;
+      }
+
+      .d4zed-icon-navicon {
+        display: none;
       }
     }
   }
@@ -73,6 +82,14 @@ body {
 
       @include respond-to(small) {
         display: block;
+
+        .d4zed-icon-menu-close {
+          display: none;
+        }
+
+        .d4zed-icon-navicon {
+          display: block;
+        }
       }
     }
 

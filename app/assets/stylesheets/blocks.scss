@@ -131,6 +131,10 @@ article > .expander {
 }
 
 #news {
+  @include respond-to(small) {
+    height: 14 * $gutter-size + 2;
+  }
+
   .container {
     position: absolute;
     height: 100%;
@@ -153,13 +157,21 @@ article > .expander {
     .cover {
       background-size: cover;
       background-position: center;
-      height: 100%;
+      height: 9 * $gutter-size;
       width: 5 * $gutter-size;
+
+      @include respond-to(small) {
+        width: 100%;
+      }
     }
 
     p {
       padding: $gutter-size;
       width: calc(100% - 5 * 35px);
+
+      @include respond-to(small) {
+        width: 100%;
+      }
     }
   }
 

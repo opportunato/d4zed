@@ -8,8 +8,13 @@ scrollToBlock = (event) ->
   event.preventDefault()
   id = $(this).attr('href')
 
+  $('body').removeClass('menu-opened')
+
   aTag = $("#{id}")
-  $('html,body').animate({ scrollTop: aTag.offset().top - 5 * 35 }, 'slow')
+  windowWidth   = $(window).width()
+  headerOffset = if windowWidth > 768 then 5 * 35 else 4 * 35
+
+  $('html,body').animate({ scrollTop: aTag.offset().top - headerOffset }, 'slow')
 
 calculateMainWidth = ->
   windowWidth   = $(window).width()
