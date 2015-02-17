@@ -9,11 +9,11 @@ header
       li = link_to "Contact", "#contacts"
     ul.social
       li = link_to "https://www.facebook.com/D4ZEDD4ZED", target: "_blank" do
-        i.icon-facebook
+        i.d4zed-icon-facebook
       li = link_to "https://twitter.com/d_4_z_e_d", target: "_blank" do
-        i.icon-twitter
+        i.d4zed-icon-twitter
     button.mobile-menu-button
-      i.icon-navicon
+      i.d4zed-icon-navicon
 #main
   .wrapper
     section#about
@@ -28,7 +28,8 @@ header
 
           p Explore our work below and get in touch
       button.expander
-        i.icon-expand
+        i.d4zed-icon-close
+        i.d4zed-icon-expand
 
     section#news
       header News
@@ -42,9 +43,9 @@ header
         .date = format_date(@news.first.created_at)
         .buttons
           button.prev
-            i.icon-chevron-left
+            i.d4zed-icon-chevron-left
           button.next
-            i.icon-chevron-right
+            i.d4zed-icon-chevron-right
 
     section#work
       header Work
@@ -75,7 +76,7 @@ header
       .social  
         .facebook
           = link_to "https://www.facebook.com/D4ZEDD4ZED", target: "_blank" do
-            i.icon-facebook
+            i.d4zed-icon-facebook
         .twitter 
           = link_to "https://twitter.com/d_4_z_e_d", target: "_blank" do
-            i.icon-twitter
+            i.d4zed-icon-twitter

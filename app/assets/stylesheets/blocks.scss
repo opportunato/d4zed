@@ -28,10 +28,30 @@ article > .expander {
   line-height: $gutter-size;
   height: $gutter-size;
   width: $gutter-size;
+
+  .d4zed-icon-close {
+    display: none;
+  }
+
+  .d4zed-icon-expand {
+    display: block;
+  }
 }
 
 article > .expander {
   display: none;
+}
+
+.expanded {
+  .expander {
+    .d4zed-icon-close {
+      display: block;
+    }
+
+    .d4zed-icon-expand {
+      display: none;
+    }
+  }
 }
 
 @include respond-to(small) {

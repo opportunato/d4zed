@@ -1,19 +1,19 @@
 @charset "UTF-8";
 
 @font-face {
-  font-family: "icons";
-  src:asset_url("icons.eot");
-  src:asset_url("icons.eot?#iefix") format("embedded-opentype"),
-    asset_url("icons.woff") format("woff"),
-    asset_url("icons.ttf") format("truetype"),
-    asset_url("icons.svg#icons") format("svg");
+  font-family: "d4zed";
+  src:asset_url("d4zed.eot");
+  src:asset_url("d4zed.eot?#iefix") format("embedded-opentype"),
+    asset_url("d4zed.woff") format("woff"),
+    asset_url("d4zed.ttf") format("truetype"),
+    asset_url("d4zed.svg#d4zed") format("svg");
   font-weight: normal;
   font-style: normal;
 
 }
 
 [data-icon]:before {
-  font-family: "icons" !important;
+  font-family: "d4zed" !important;
   content: attr(data-icon);
   font-style: normal !important;
   font-weight: normal !important;
@@ -25,9 +25,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-[class^="icon-"]:before,
-[class*=" icon-"]:before {
-  font-family: "icons" !important;
+[class^="d4zed-icon-"]:before,
+[class*=" d4zed-icon-"]:before {
+  font-family: "d4zed" !important;
   font-style: normal !important;
   font-weight: normal !important;
   font-variant: normal !important;
@@ -38,24 +38,27 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-chevron-right:before {
+.d4zed-icon-chevron-right:before {
   content: "a";
 }
-.icon-chevron-left:before {
+.d4zed-icon-chevron-left:before {
   content: "b";
 }
-.icon-expand:before {
+.d4zed-icon-expand:before {
   content: "c";
 }
-.icon-facebook:before {
+.d4zed-icon-facebook:before {
   content: "d";
 }
-.icon-play:before {
+.d4zed-icon-play:before {
   content: "e";
 }
-.icon-twitter:before {
+.d4zed-icon-twitter:before {
   content: "f";
 }
-.icon-navicon:before {
+.d4zed-icon-navicon:before {
   content: "g";
+}
+.d4zed-icon-close:before {
+  content: "h";
 }
