@@ -18,6 +18,10 @@ p {
 
 a {
   text-decoration: none;
+
+  &:hover {
+    border-bottom: 1px solid $color-secondary;
+  }
 }
 
 button {

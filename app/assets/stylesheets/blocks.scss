@@ -77,18 +77,21 @@ article > .expander {
 #about {
   margin-right: $gutter-size - 2px;
 
+  transition: height .2s ease-in-out;
+
   p {
     padding-bottom: 0;
-    visibility: hidden;
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
 
     &:first-child {
-      visibility: visible;
+      opacity: 1;
     }
   }
 
   &.expanded {
     p {
-      visibility: visible;
+      opacity: 1;
     }
   }
 }
@@ -102,7 +105,10 @@ article > .expander {
   .container {
     position: absolute;
     height: 100%;
+    left: 0;
     width: 100000%;
+
+    transition: left .2s ease-in-out;
   }
 
   article {
