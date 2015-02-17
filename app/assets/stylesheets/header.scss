@@ -2,8 +2,9 @@ body {
   visibility: hidden;
 
   &.menu-opened {
-    .menu-wrapper {
+    .menu {
       background-color: $color-main;
+      display: block;
       position: fixed;
 
       top: $mobile-header-height;
@@ -16,6 +17,9 @@ body {
         float: none;
         margin: auto;
         text-align: center;
+        position: relative;
+        top: 70px;
+
         width: 150px;
       }
     }
