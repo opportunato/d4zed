@@ -1,20 +1,43 @@
 gutterSize = 35
 $main      = $('#main > .wrapper')
+$videos    = $('#work > article')
 $header    = $('body > header > .wrapper')
 $news      = $('#news article')
 
-calculateLeftMargin = ->
-  $windowWidth   = $(window).width()
-  $blockWidth    = $main.width()
+calculateMainWidth = ->
+  windowWidth   = $(window).width()
 
-  newWidth = Math.floor($blockWidth / gutterSize) * gutterSize + 2
+  if windowWidth > 768
+    blockWidth    = windowWidth - 4 * gutterSize
 
-  $main.add($header).css(
-    'margin-left': 2 * gutterSize - 2
-    'width': newWidth
-  )
+    gutterNumber = Math.floor(blockWidth / gutterSize)
 
-  $news.css(width: (newWidth - gutterSize)/2)
+    marginNumber = 2
+
+    if gutterNumber % 2 == 0
+      gutterNumber -= 1
+      marginNumber = 3
+
+    newWidth = gutterNumber * gutterSize + 2
+
+    $main.add($header).css(
+      'margin-left': marginNumber * gutterSize - 2
+      'width': newWidth
+    )
+
+    $news.css(width: (newWidth - gutterSize)/2)
+
+assignMargins = ->
+  smallVideoCount = 0
+
+  $videos.each (index, video) ->
+    if $(video).hasClass('big')
+      smallVideoCount = 0
+    else
+      smallVideoCount += 1
+
+      if smallVideoCount % 2 == 0
+        $(video).css('margin-right', 0)
 
 expandAbout = ->
   $about = $('#about')
@@ -81,10 +104,11 @@ navigateNews = (direction) ->
   updateNews()
 
 $ ->
-  calculateLeftMargin()
+  calculateMainWidth()
+  assignMargins()
   $('body').css('visibility', 'visible')
 
-  $(window).on 'resize', calculateLeftMargin
+  $(window).resize(calculateMainWidth)
 
   player = null
 
@@ -125,9 +149,8 @@ $ ->
 
         player.addEvent "pause", ->
           $container.removeClass('playing')
-
     else
-      $container.children("iframe").show()
+      $container.addClass('playing').removeClass('loading')
       
       player = $f($container.children('iframe')[0])
       player.api("play")

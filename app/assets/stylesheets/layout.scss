@@ -24,7 +24,7 @@ $height-width: 3 * $gutter-size;
 $full-width: calc(100% - 4 * 35px + 4px);
 $half-width: calc(50% - 35px/2 + 1px);
 
-body { 
+body {
   visibility: hidden;
 
   > header {
@@ -273,18 +273,17 @@ section > header {
 
   article {
     float: left;
-    margin-top: $gutter-size - 2;
+    margin-bottom: $gutter-size - 2;
     position: relative;
     height: 8 * $gutter-size + 2;
     width: $half-width;
 
-    &:first-of-type {
+    &.big {
       height: 16 * $gutter-size + 2;
-      margin-top: 0;
       width: 100%;
     }
 
-    &:nth-of-type(2n) {
+    &.small {
       margin-right: $gutter-size - 2;
     }
 
@@ -443,7 +442,7 @@ section > header {
 }
 
 footer {
-  margin-top: 2 * $gutter-size - 2;
+  margin-top: 2 * $gutter-size;
   height: 4 * $gutter-size;
   width: 100%;
 
