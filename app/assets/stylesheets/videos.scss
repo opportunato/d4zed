@@ -15,6 +15,8 @@
     height: 8 * $gutter-size + 2;
     width: $half-width;
 
+    transition: height .2s ease-in-out;
+
     &.big {
       height: 16 * $gutter-size + 2;
       width: 100%;
@@ -22,16 +24,6 @@
 
     &.small {
       margin-right: $gutter-size - 2;
-    }
-
-    @include respond-to(small) {
-      margin-bottom: 2 * $gutter-size - 2;
-
-      &.small, &.big {
-        height: 5 * $gutter-size + 2;
-        width: 100%;
-        margin-right: 0;
-      }
     }
 
     .info, .bg, .gradient, .animation {
@@ -46,10 +38,28 @@
 
     .cover {
       border: 2px solid $color-main;
-      position: static;
+      position: relative;
 
       height: 100%;
       width: 100%;
+    }
+
+    @include respond-to(small) {
+      margin-bottom: 2 * $gutter-size - 2;
+
+      &.small, &.big {
+        height: 5 * $gutter-size + 2;
+        width: 100%;
+        margin-right: 0;
+      }
+
+      .cover {
+        height: 5 * $gutter-size + 2;
+      }
+
+      &.expanded {
+        height: 10 * $gutter-size + 2;
+      }
     }
 
     .animation {
@@ -147,6 +157,34 @@
         padding: 3px;
         padding-left: 0;
         padding-right: 10px;
+      }
+
+      .mobile {
+        display: none;
+      }
+
+      @include respond-to(small) {
+        border-top: none;
+        height: 5 * $gutter-size;
+
+        .mobile {
+          display: block;
+
+          h2 {
+            text-transform: uppercase;
+            font-size: 12px;
+            margin: 0;
+          }
+
+          p {
+            margin-top: 1px;
+            margin-bottom: 10px;
+          }
+        }
+
+        .player, .desktop {
+          display: none;
+        }
       }
 
       .player {
