@@ -94,6 +94,15 @@ article > .expander {
   }
 }
 
+#about:hover,
+#news:hover {
+  background-color: $color-main;
+
+  p {
+    color: $color-secondary;
+  }
+}
+
 #about {
   margin-right: $gutter-size - 2px;
 

@@ -32,18 +32,26 @@ footer {
 
   .facebook,
   .twitter {
-    background-color: $color-main;
-    height: 2 * $gutter-size;
+    background-color: $color-secondary;
+    color: $color-main;
+    height: 2 * $gutter-size - 2;
     float: left;
     font-size: 16px;
-    margin-top: $gutter-size;
-    margin-right: $gutter-size;
+    margin-top: $gutter-size + 2;
+    margin-right: $gutter-size + 2;
     text-align: center;
-    width: 2 * $gutter-size;
+    width: 2 * $gutter-size - 2;
 
-    a {
-      color: $color-secondary;
+    i {
       line-height: 2 * $gutter-size;
+    }
+
+    &:hover {
+      background-color: $color-main;
+
+      i {
+        color: $color-secondary;
+      }
     }
   }
 }

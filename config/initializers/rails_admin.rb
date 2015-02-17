@@ -24,7 +24,7 @@ RailsAdmin.config do |config|
   config.authenticate_with do
     require_login
   end
-  
+
   config.main_app_name = ['d4zed', 'Admin']
 
   config.included_models = [Tag, News, Video]
@@ -35,7 +35,9 @@ RailsAdmin.config do |config|
       field :brand
       field :director
       field :music
-      field :description, :wysihtml5
+      field :description, :wysihtml5 do
+        config_options parserRules: { tags: { p:1 } }, toolbar: { fa: true }
+      end
       field :vimeo_id
       field :bg_color
       field :size, :enum
@@ -49,7 +51,9 @@ RailsAdmin.config do |config|
   config.model 'News' do
     edit do
       field :picture
-      field :content, :wysihtml5
+      field :content, :wysihtml5 do
+        config_options parserRules: { tags: { p:1 } }, toolbar: { fa: true }
+      end
       field :is_published
     end
   end

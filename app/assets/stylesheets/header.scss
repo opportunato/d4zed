@@ -97,6 +97,10 @@ body {
         > li {
           margin-right: 70px;
         }
+
+        a:hover {
+          border-bottom: 1px solid $color-secondary;
+        }
       }
 
       &.social {

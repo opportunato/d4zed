@@ -2,11 +2,11 @@
 
 @font-face {
   font-family: "d4zed";
-  src:asset_url("d4zed.eot");
-  src:asset_url("d4zed.eot?#iefix") format("embedded-opentype"),
-    asset_url("d4zed.woff") format("woff"),
-    asset_url("d4zed.ttf") format("truetype"),
-    asset_url("d4zed.svg#d4zed") format("svg");
+  src:url("fonts/d4zed.eot");
+  src:url("fonts/d4zed.eot?#iefix") format("embedded-opentype"),
+    url("fonts/d4zed.woff") format("woff"),
+    url("fonts/d4zed.ttf") format("truetype"),
+    url("fonts/d4zed.svg#d4zed") format("svg");
   font-weight: normal;
   font-style: normal;
 
