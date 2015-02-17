@@ -31,12 +31,21 @@ RailsAdmin.config do |config|
       field :brand
       field :director
       field :music
+      field :description, :wysihtml5
       field :vimeo_id
       field :bg_color
       field :size, :enum
       field :thumbnail
       field :tags
       field :created_at
+      field :is_published
+    end
+  end
+
+  config.model 'News' do
+    edit do
+      field :picture
+      field :content, :wysihtml5
       field :is_published
     end
   end

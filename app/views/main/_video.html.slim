@@ -17,7 +17,7 @@ article[data-vimeo-id=video.vimeo_id class=video.size]
         = "#{video.brand} - #{video.name}"
       - else
         = video.name
-    p = video.description
+    p = video.description.html_safe
     table
       tr
         th Director
