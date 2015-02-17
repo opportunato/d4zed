@@ -32,7 +32,10 @@ calculateMainWidth = ->
     'width': newWidth
   )
 
-  $news.css(width: (newWidth - gutterSize)/2)
+  if windowWidth > 768
+    $news.css(width: (newWidth - gutterSize)/2)
+  else
+    $news.css(width: newWidth)
 
 assignMargins = ->
   smallVideoCount = 0
@@ -60,20 +63,6 @@ expandAbout = ->
     $about.height(newHeight)
   else
     $about.height(5 * gutterSize - 2)
-
-expandNews = ->
-  $news = $('#news')
-
-  $news.toggleClass('expanded')
-
-  if $news.hasClass('expanded')
-    width = $news.width()
-
-    $news.height(width + 4 * gutterSize)
-    $news.find('.cover').height(width + 2)
-  else
-    $news.height(5 * gutterSize - 2)
-    $news.find('.cover').css('height', '100%')
 
 expandVideo = ($video) ->
   $video.toggleClass('expanded')
@@ -124,9 +113,6 @@ $ ->
 
   $('#about .expander').on 'click', ->
     expandAbout()
-
-  $('#news .expander').on 'click', ->
-    expandNews()
 
   $('#work .expander').on 'click', ->
     expandVideo($(@).closest('article'))

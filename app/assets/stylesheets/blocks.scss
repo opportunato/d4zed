@@ -30,9 +30,17 @@ article > .expander {
   width: $gutter-size;
 }
 
+article > .expander {
+  display: none;
+}
+
 @include respond-to(small) {
   #work > header, #contacts > header {
     width: 3 * $gutter-size;
+  }
+
+  article > .expander {
+    display: block;
   }
 }
 
@@ -63,12 +71,6 @@ article > .expander {
     font-weight: 700;
     line-height: 1.5;
     padding: $gutter-size;
-  }
-}
-
-@include respond-to(small) {
-  #news > .expander {
-    display: none;
   }
 }
 
@@ -153,8 +155,10 @@ article > .expander {
 
   .buttons {
     left: 9 * $gutter-size - 2;
+    width: 2 * $gutter-size;
 
     @include respond-to(small) {
+      left: auto;
       right: $gutter-size - 2;
     }
   }
