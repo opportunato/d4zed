@@ -1,0 +1,122 @@
+body {
+  visibility: hidden;
+
+  &.menu-opened {
+    .menu {
+      background-color: $color-main;
+      display: block;
+      position: fixed;
+
+      top: $mobile-header-height;
+      margin-top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      li {
+        float: none;
+        margin: auto;
+        text-align: center;
+        width: 150px;
+      }
+    }
+  }
+
+  > header {
+    background-color: $color-main;
+    color: $color-secondary;
+    height: $header-height;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+
+    @include respond-to(small) {
+      height: $mobile-header-height;
+    }
+
+    > .wrapper {
+      display: table;
+      height: 100%;
+      margin: auto;
+      width: $full-width;
+      position: relative;
+
+      @include respond-to(small) {
+        width: $mobile-full-width;
+      }
+    }
+
+    > .mobile-menu {
+      display: none;
+    }
+
+    .logo, ul, button {
+      position: absolute;
+      top: 50%;
+      margin-top: -$gutter-size/2;
+    }
+
+    .logo {
+      color: $color-secondary;
+      height: 35px;
+      left: 0;
+      width: 175px;
+    }
+
+    .mobile-menu-button {
+      display: none;
+      position: absolute;
+      font-size: 30px;
+      line-height: 35px;
+      right: 0;
+
+      @include respond-to(small) {
+        display: block;
+      }
+    }
+
+    ul {
+      display: table-cell;
+      line-height: 35px;
+      list-style-type: none;
+      margin: 0;
+      margin-top: -17px;
+      vertical-align: middle;
+
+      > li {
+        float: left;
+      }
+
+      &.menu {
+        position: absolute;
+        left: calc(50% - 35px/2);
+        float: left;
+        font-weight: 700;
+
+        > li {
+          margin-right: 70px;
+        }
+      }
+
+      &.social {
+        position: absolute;
+        right: 0;
+        font-size: 16px;
+
+        > li {
+          margin-left: 20px;
+        }
+      }
+
+      @include respond-to(small) {
+        display: none;
+      }
+    }
+
+    a {
+      color: $color-secondary;
+      text-transform: uppercase;
+    }
+  }
+}

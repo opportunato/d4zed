@@ -8,24 +8,31 @@ calculateMainWidth = ->
   windowWidth   = $(window).width()
 
   if windowWidth > 768
-    blockWidth    = windowWidth - 4 * gutterSize
+    marginSize = 4
+  else
+    marginSize = 2
 
-    gutterNumber = Math.floor(blockWidth / gutterSize)
+  blockWidth    = windowWidth - marginSize * gutterSize
 
+  gutterNumber  = Math.floor(blockWidth / gutterSize)
+
+  if windowWidth > 768 
     marginNumber = 2
 
     if gutterNumber % 2 == 0
       gutterNumber -= 1
       marginNumber = 3
+  else
+    marginNumber = 1
 
-    newWidth = gutterNumber * gutterSize + 2
+  newWidth = gutterNumber * gutterSize + 2
 
-    $main.add($header).css(
-      'margin-left': marginNumber * gutterSize - 2
-      'width': newWidth
-    )
+  $main.add($header).css(
+    'margin-left': marginNumber * gutterSize - 2
+    'width': newWidth
+  )
 
-    $news.css(width: (newWidth - gutterSize)/2)
+  $news.css(width: (newWidth - gutterSize)/2)
 
 assignMargins = ->
   smallVideoCount = 0
@@ -67,6 +74,9 @@ expandNews = ->
   else
     $news.height(5 * gutterSize - 2)
     $news.find('.cover').css('height', '100%')
+
+expandVideo = ($video) ->
+  $video.toggleClass('expanded')
 
 currentNewsIndex = 0
 $newsContainer   = $('#news .container')
@@ -118,11 +128,17 @@ $ ->
   $('#news .expander').on 'click', ->
     expandNews()
 
+  $('#work .expander').on 'click', ->
+    expandVideo($(@).closest('article'))
+
   $('.prev').on 'click', ->
     navigateNews('prev')
 
   $('.next').on 'click', ->
     navigateNews('next')
+
+  $('.mobile-menu-button').on 'click', ->
+    $('body').toggleClass('menu-opened')
 
   updateNews()
 
@@ -132,6 +148,7 @@ $ ->
     $container.addClass('loading')
 
     if $container.children('iframe').length == 0
+      $videos.removeClass('playing loading')
       $container.append("<iframe src='//player.vimeo.com/video/" + $container.data("vimeoId") + "?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff' width='560' height='315' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>");
   
       if player
@@ -150,6 +167,7 @@ $ ->
         player.addEvent "pause", ->
           $container.removeClass('playing')
     else
+      $videos.removeClass('playing loading')
       $container.addClass('playing').removeClass('loading')
       
       player = $f($container.children('iframe')[0])

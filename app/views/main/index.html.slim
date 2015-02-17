@@ -12,6 +12,8 @@ header
         i.icon-facebook
       li = link_to "https://twitter.com/d_4_z_e_d", target: "_blank" do
         i.icon-twitter
+    button.mobile-menu-button
+      i.icon-navicon
 #main
   .wrapper
     section#about
@@ -37,8 +39,8 @@ header
               .cover[style="background-image: url(#{news.picture_url})"]
               p = news.content.html_safe
       - if @news.first.present?
-        .info
-          .date = format_date(@news.first.created_at)
+        .date = format_date(@news.first.created_at)
+        .buttons
           button.prev
             i.icon-chevron-left
           button.next

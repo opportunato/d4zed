@@ -1,0 +1,169 @@
+section > header {
+  background-color: $color-main;
+  height: $gutter-size;
+  line-height: $gutter-size;
+  text-align: center;
+  text-transform: uppercase;
+  width: 4 * $gutter-size;
+
+  position: absolute;
+  top: -$gutter-size;
+  left: $gutter-size;  
+
+  @include respond-to(small) {
+    width: 2 * $gutter-size;
+  }
+}
+
+section > .expander,
+article > .expander {
+  outline: 0;
+  position: absolute;
+  right: $gutter-size;
+  bottom: -$gutter-size;
+
+  background-color: $color-main;
+  border: none;
+  color: $color-secondary;
+  line-height: $gutter-size;
+  height: $gutter-size;
+  width: $gutter-size;
+}
+
+@include respond-to(small) {
+  #work > header, #contacts > header {
+    width: 3 * $gutter-size;
+  }
+}
+
+#about, #news, #contacts {
+  background-color: $color-secondary;
+  border: 2px solid $color-main;
+  height: 5 * $gutter-size + 2px;
+  float: left;
+  margin-bottom: 3 * $gutter-size - 2px;
+  padding: 0;
+  position: relative;
+  width: $half-width;
+
+  @include respond-to(small) {
+    width: 100%;
+  }
+
+  > .wrapper {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  p {
+    color: $color-main;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    padding: $gutter-size;
+  }
+}
+
+@include respond-to(small) {
+  #news > .expander {
+    display: none;
+  }
+}
+
+#about {
+  margin-right: $gutter-size - 2px;
+
+  p {
+    padding-bottom: 0;
+    visibility: hidden;
+
+    &:first-child {
+      visibility: visible;
+    }
+  }
+
+  &.expanded {
+    p {
+      visibility: visible;
+    }
+  }
+}
+
+#contacts {
+  height: 4 * $gutter-size + 2px;
+  padding: $gutter-size;
+}
+
+#news {
+  .container {
+    position: absolute;
+    height: 100%;
+    width: 100000%;
+  }
+
+  article {
+    color: $color-main;
+    float: left;
+    height: 100%;
+    width: 16 * $gutter-size;
+
+    > * {
+      float: left;
+    }
+
+    .cover {
+      background-size: cover;
+      background-position: center;
+      height: 100%;
+      width: 5 * $gutter-size;
+    }
+
+    p {
+      padding: $gutter-size;
+      width: calc(100% - 5 * 35px);
+    }
+  }
+
+  &.expanded {
+    .cover {
+      width: 100%;
+    }
+  }
+
+  .date, .buttons {
+    background-color: $color-main;
+    height: $gutter-size;
+    line-height: $gutter-size;
+
+    position: absolute;
+    top: 100%;
+  }
+
+  .date {
+    left: 6 * $gutter-size - 2;
+    text-align: center;
+    width: 3 * $gutter-size;
+
+    @include respond-to(small) {
+      left: $gutter-size - 2;
+    }
+  }
+
+  .buttons {
+    left: 9 * $gutter-size - 2;
+
+    @include respond-to(small) {
+      right: $gutter-size - 2;
+    }
+  }
+
+  button {
+    float: left;
+    height: 100%;
+    line-height: $gutter-size;
+    outline: 0;
+    width: $gutter-size;
+  }
+}

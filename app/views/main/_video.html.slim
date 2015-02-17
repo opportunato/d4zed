@@ -5,6 +5,10 @@ article[data-vimeo-id=video.vimeo_id class=video.size]
       .bounce2
       .bounce3
   .cover[style="background-image: url(#{video.thumbnail_url});"]
+    .cover-info
+      - if video.brand.present?
+        .brand = video.brand
+      .name = video.name
   .bg[style="background-color: ##{video.bg_color};"]
   .gradient
   .info
@@ -24,3 +28,5 @@ article[data-vimeo-id=video.vimeo_id class=video.size]
     .player
       i.icon-play
       span Play Video
+  button.expander
+    i.icon-expand
