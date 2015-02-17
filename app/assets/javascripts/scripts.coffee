@@ -4,6 +4,13 @@ $videos    = $('#work > article')
 $header    = $('body > header > .wrapper')
 $news      = $('#news article')
 
+scrollToBlock = (event) ->
+  event.preventDefault()
+  id = $(this).attr('href')
+
+  aTag = $("#{id}")
+  $('html,body').animate({ scrollTop: aTag.offset().top - 5 * 35 }, 'slow')
+
 calculateMainWidth = ->
   windowWidth   = $(window).width()
 
@@ -125,6 +132,8 @@ $ ->
 
   $('.mobile-menu-button').on 'click', ->
     $('body').toggleClass('menu-opened')
+
+  $('.menu a').on 'click', scrollToBlock
 
   updateNews()
 
