@@ -21,6 +21,10 @@ end
 ActiveRecord::Base.send(:extend, ActiveRecord::RailsAdminEnum)
 
 RailsAdmin.config do |config|
+  config.authenticate_with do
+    require_login
+  end
+  
   config.main_app_name = ['d4zed', 'Admin']
 
   config.included_models = [Tag, News, Video]
