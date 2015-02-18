@@ -57,7 +57,7 @@ calculateMainWidth = ->
 
   $videos.each (index, video) ->
     $video = $(video)
-    ratio = if $video.hasClass('interactive') then 1 else 1.8
+    ratio = if $video.hasClass('interactive') then 1 else 2
     width = if $video.hasClass('big') then newWidth else ((newWidth - gutterSize)/2 + 1)
     height = Math.floor(width/(ratio * gutterSize)) * gutterSize + 2
 
@@ -89,8 +89,8 @@ calculateMainWidth = ->
       else
         newTop = Math.max(leftTop, rightTop) - 2
         newPosition = leftPosition
-        leftTop = newTop
-        rightTop = newTop
+        leftTop = newTop + $video.height()
+        rightTop = newTop + $video.height()
 
       $video.css(
         position: 'absolute'
