@@ -16,6 +16,11 @@ scrollToBlock = (event) ->
 
   $('html,body').animate({ scrollTop: aTag.offset().top - headerOffset }, 'slow')
 
+scrollToTop = (event) ->
+  event.preventDefault()
+  $('html,body').animate({ scrollTop: 0 }, 'slow')
+
+
 calculateMainWidth = ->
   windowWidth   = $(window).width()
 
@@ -89,13 +94,13 @@ updateNews = ->
   $('#news .date').text($block.data('date'))
 
   if currentNewsIndex == 0
-    $('.prev i').hide();
-    $('.next i').show();
+    $('.prev i').addClass('inactive');
+    $('.next i').removeClass('inactive');
   else if currentNewsIndex == newsNumber - 1
-    $('.prev i').show();
-    $('.next i').hide();
+    $('.prev i').removeClass('inactive');
+    $('.next i').addClass('inactive');
   else
-    $('.next i, .prev i').show();
+    $('.next i, .prev i').removeClass('inactive');
 
 navigateNews = (direction) ->
   newsWidth = $newsContainer.children().width()
@@ -139,6 +144,7 @@ $ ->
     $('body').toggleClass('menu-opened')
 
   $('.menu a').on 'click', scrollToBlock
+  $('.root-link').on 'click', scrollToTop
 
   updateNews()
 

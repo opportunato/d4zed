@@ -27,6 +27,13 @@ button {
   outline: 0;
 }
 
+a:hover {
+  i {
+    opacity: .5;
+  }
+}
+
+
 $header-height: 3 * $gutter-size;
 $mobile-header-height: 2 * $gutter-size;
 $full-width: calc(100% - 4 * 35px + 4px);

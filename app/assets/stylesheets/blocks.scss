@@ -2,6 +2,7 @@ section > header {
   background-color: $color-main;
   height: $gutter-size;
   line-height: $gutter-size;
+  font-weight: 700;
   text-align: center;
   text-transform: uppercase;
   width: 4 * $gutter-size;
@@ -88,7 +89,6 @@ article > .expander {
   p {
     color: $color-main;
     font-size: 16px;
-    font-weight: 700;
     line-height: 1.5;
     padding: $gutter-size;
   }
@@ -201,12 +201,12 @@ article > .expander {
   }
 
   .buttons {
-    left: 9 * $gutter-size - 2;
+    right: $gutter-size - 2;
     width: 2 * $gutter-size;
 
-    @include respond-to(small) {
-      left: auto;
-      right: $gutter-size - 2;
+    &.inactive {
+      cursor: default;
+      opacity: .5;
     }
   }
 
