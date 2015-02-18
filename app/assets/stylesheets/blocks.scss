@@ -73,7 +73,6 @@ article > .expander {
   margin-bottom: 3 * $gutter-size - 2px;
   padding: 0;
   position: relative;
-  width: $half-width;
 
   @include respond-to(small) {
     width: 100%;

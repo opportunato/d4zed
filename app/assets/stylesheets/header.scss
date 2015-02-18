@@ -52,12 +52,8 @@ body {
       display: table;
       height: 100%;
       margin: auto;
-      width: $full-width;
+      max-width: $max-width;
       position: relative;
-
-      @include respond-to(small) {
-        width: $mobile-full-width;
-      }
     }
 
     > .mobile-menu {

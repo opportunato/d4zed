@@ -2,6 +2,7 @@ gutterSize = 35
 $main      = $('#main > .wrapper')
 $videos    = $('#work > article')
 $header    = $('body > header > .wrapper')
+$sections  = $('#about, #news')
 $news      = $('#news article')
 
 scrollToBlock = (event) ->
@@ -24,35 +25,48 @@ scrollToTop = (event) ->
 calculateMainWidth = ->
   windowWidth   = $(window).width()
 
-  if windowWidth > 768
-    marginSize = 4
-  else
-    marginSize = 2
+  if windowWidth > 1507
+    newWidth = 1367
+    marginLeft = 'auto'
+  else 
+    if windowWidth > 768
+      marginSize = 4
+    else
+      marginSize = 2
 
-  blockWidth    = windowWidth - marginSize * gutterSize
+    blockWidth    = windowWidth - marginSize * gutterSize
 
-  gutterNumber  = Math.floor(blockWidth / gutterSize)
+    gutterNumber  = Math.floor(blockWidth / gutterSize)
 
-  if windowWidth > 768 
-    marginNumber = 2
+    if windowWidth > 768 
+      marginNumber = 2
 
-    if gutterNumber % 2 == 0
-      gutterNumber -= 1
-      marginNumber = 3
-  else
-    marginNumber = 1
+      if gutterNumber % 2 == 0
+        gutterNumber -= 1
+        marginNumber = 3
+    else
+      marginNumber = 1
 
-  newWidth = gutterNumber * gutterSize + 2
+    newWidth = gutterNumber * gutterSize + 2
+    marginLeft = marginNumber * gutterSize - 2
 
   $main.add($header).css(
-    'margin-left': marginNumber * gutterSize - 2
+    'margin-left': marginLeft
     'width': newWidth
   )
 
+  $videos.each (index, video) ->
+    $video = $(video)
+    ratio = if $video.hasClass('interactive') then 1 else 1.8
+    width = if $video.hasClass('big') then newWidth else ((newWidth - gutterSize)/2 + 1)
+    height = Math.floor(width/(ratio * gutterSize)) * gutterSize + 2
+
+    $video.css(width: width, height: height)    
+
   if windowWidth > 768
-    $news.css(width: (newWidth - gutterSize)/2)
+    $news.add($sections).css(width: (newWidth - gutterSize)/2 + 1)
   else
-    $news.css(width: newWidth)
+    $news.add($sections).css(width: newWidth)
 
 assignMargins = ->
   smallVideoCount = 0
@@ -122,7 +136,10 @@ navigateNews = (direction) ->
 $ ->
   calculateMainWidth()
   assignMargins()
-  $('body').css('visibility', 'visible')
+
+  setTimeout ->
+    $('body').css('visibility', 'visible')
+  , 100
 
   $(window).resize(calculateMainWidth)
 

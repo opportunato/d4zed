@@ -1,17 +1,17 @@
-article[data-vimeo-id=video.vimeo_id class=video.size]
+article[data-vimeo-id=video.vimeo_id class=video_class(video)]
   .animation
     .spinner
       .bounce1
       .bounce2
       .bounce3
-  .cover[style="background-image: url(#{video.thumbnail_url});"]
+  .cover[style="background-image: url(#{video_url(video)});"]
     .cover-info
       - if video.brand.present?
         .brand = video.brand
       .name = video.name
   .bg[style="background-color: ##{video.bg_color};"]
   .gradient
-  .info[style="background-color: ##{video.bg_color};"]
+  .info
     header 
       - if video.brand.present?
         = "#{video.brand} - #{video.name}"

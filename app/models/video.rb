@@ -11,7 +11,7 @@ class Video < ActiveRecord::Base
 
   validates_presence_of :name, :director, :music, :vimeo_id, :thumbnail, :size
 
-  def is_interactive?
+  def interactive?
     link.present?
   end
 

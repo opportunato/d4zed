@@ -40,9 +40,7 @@ a:hover {
 
 $header-height: 3 * $gutter-size;
 $mobile-header-height: 2 * $gutter-size;
-$full-width: calc(100% - 4 * 35px + 4px);
-$half-width: calc(50% - 35px/2 + 1px);
-$mobile-full-width: calc(100% - 2 * 35px + 4px);
+$max-width: 1367px;
 
 
 #main {
@@ -57,14 +55,13 @@ $mobile-full-width: calc(100% - 2 * 35px + 4px);
   }
 
   > .wrapper {
-    width: $full-width;
+    max-width: $max-width;
     margin: auto;
     padding-top: 2 * $gutter-size - 2px;
     padding-bottom: 3 * $gutter-size;
     position: relative;
 
     @include respond-to(small) {
-      width: $mobile-full-width;
       margin-left: $gutter-size - 2px;
     }
   }
