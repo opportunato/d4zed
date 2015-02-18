@@ -3,10 +3,20 @@ footer {
   height: 4 * $gutter-size;
   width: 100%;
 
+  @include respond-to(small) {
+    height: auto;
+  }
+
   #contacts {
     color: $color-main;
     float: left;
     width: 24 * $gutter-size + 2;
+
+    @include respond-to(small) {
+      height: 7 * $gutter-size + 2;
+      margin-bottom: $gutter-size;
+      width: 100%;
+    }
 
     header {
       color: $color-secondary;
@@ -23,11 +33,27 @@ footer {
         margin-right: 0;
         width: 5 * $gutter-size;
       }
+
+      @include respond-to(small) {
+        float: none;
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
     }
   }
 
   .social {
     float: right;
+
+    @include respond-to(small) {
+      clear: both;
+      float: none;
+      width: 5 * $gutter-size;
+      margin: auto;
+      position: relative;
+      left: 1px;
+    }
   }
 
   .facebook,
@@ -41,6 +67,14 @@ footer {
     margin-right: $gutter-size + 2;
     text-align: center;
     width: 2 * $gutter-size - 2;
+
+    @include respond-to(small) {
+      margin-top: 0;
+    }
+
+    &.twitter {
+      margin-right: 2px;
+    }
 
     i {
       line-height: 2 * $gutter-size;

@@ -49,7 +49,7 @@ $mobile-full-width: calc(100% - 2 * 35px + 4px);
     width: $full-width;
     margin: auto;
     padding-top: 2 * $gutter-size - 2px;
-    padding-bottom: 2 * $gutter-size - 2px;
+    padding-bottom: 3 * $gutter-size;
     position: relative;
 
     @include respond-to(small) {
