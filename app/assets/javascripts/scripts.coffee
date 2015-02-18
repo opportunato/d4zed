@@ -58,7 +58,11 @@ calculateMainWidth = ->
   $videos.each (index, video) ->
     $video = $(video)
     ratio = if $video.hasClass('interactive') then 1 else 2
-    width = if $video.hasClass('big') then newWidth else ((newWidth - gutterSize)/2 + 1)
+    if windowWidth > 768
+      width = if $video.hasClass('big') then newWidth else ((newWidth - gutterSize)/2 + 1)
+    else
+      width = newWidth
+
     height = Math.floor(width/(ratio * gutterSize)) * gutterSize + 2
 
     $video.css(width: width, height: height)  
@@ -100,7 +104,7 @@ calculateMainWidth = ->
 
     $('#work').height(Math.max(leftTop, rightTop))
   else
-    $videos.css('position', 'static')
+    $videos.css('position', 'relative')
 
 expandAbout = ->
   $about = $('#about')

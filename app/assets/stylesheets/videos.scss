@@ -12,16 +12,6 @@
     float: left;
     margin-bottom: $gutter-size - 2;
     position: relative;
-    height: 8 * $gutter-size + 2;
-
-    &.big {
-      height: 16 * $gutter-size + 2;
-      width: 100%;
-    }
-
-    &.small {
-      margin-right: $gutter-size - 2;
-    }
 
     .info, .bg, .gradient, .animation {
       border: 2px solid $color-main;
@@ -43,20 +33,6 @@
 
     @include respond-to(small) {
       margin-bottom: 2 * $gutter-size - 2;
-
-      &.small, &.big {
-        height: 5 * $gutter-size + 2;
-        width: 100%;
-        margin-right: 0;
-      }
-
-      .cover {
-        height: 5 * $gutter-size + 2;
-      }
-
-      &.expanded {
-        height: 10 * $gutter-size + 2;
-      }
     }
 
     .animation {
