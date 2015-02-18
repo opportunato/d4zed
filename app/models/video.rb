@@ -7,7 +7,7 @@ class Video < ActiveRecord::Base
 
   mount_uploader :thumbnail, ThumbnailUploader
 
-  scope :published, -> { where(is_published: true).order('order_number DESC, created_at ASC') }
+  scope :published, -> { where(is_published: true).order('order_number DESC, created_at DESC') }
 
   validates_presence_of :name, :director, :music, :vimeo_id, :thumbnail, :size
 
