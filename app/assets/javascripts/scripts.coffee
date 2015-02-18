@@ -55,15 +55,22 @@ calculateMainWidth = ->
     'width': newWidth
   )
 
+  smallWidth  = ((newWidth - gutterSize)/2 + 1)
+  smallHeight = Math.floor(smallWidth/(2 * gutterSize)) * gutterSize + 2
+  squareHeight = 2 * smallHeight + gutterSize - 2
+
   $videos.each (index, video) ->
     $video = $(video)
     ratio = if $video.hasClass('interactive') then 1 else 2
     if windowWidth > 768
-      width = if $video.hasClass('big') then newWidth else ((newWidth - gutterSize)/2 + 1)
+      width = if $video.hasClass('big') then newWidth else smallWidth
     else
       width = newWidth
 
-    height = Math.floor(width/(ratio * gutterSize)) * gutterSize + 2
+    height = if $video.hasClass('big')
+      Math.floor(width/(ratio * gutterSize)) * gutterSize + 2
+    else
+      if $video.hasClass('interactive') then squareHeight else smallHeight
 
     $video.css(width: width, height: height)  
 
@@ -91,16 +98,18 @@ calculateMainWidth = ->
           newPosition = rightPosition
           rightTop += $video.height() + gutterSize - 2
       else
-        newTop = Math.max(leftTop, rightTop) - 2
+        newTop = Math.max(leftTop, rightTop)
         newPosition = leftPosition
-        leftTop = newTop + $video.height()
-        rightTop = newTop + $video.height()
+        leftTop = newTop + $video.height() + gutterSize - 2
+        rightTop = newTop + $video.height() + gutterSize - 2
 
       $video.css(
         position: 'absolute'
         top: newTop
         left: newPosition
       )
+
+
 
     $('#work').height(Math.max(leftTop, rightTop))
   else
