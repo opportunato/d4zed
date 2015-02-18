@@ -43,8 +43,17 @@ RailsAdmin.config do |config|
       field :size, :enum
       field :thumbnail
       field :tags
-      field :created_at
+      field :order_number
       field :is_published
+    end
+
+    list do
+      sort_by :order_number
+      field :name
+      field :is_published
+      field :order_number do
+        sort_reverse true
+      end
     end
   end
 

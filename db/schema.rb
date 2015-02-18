@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217205907) do
+ActiveRecord::Schema.define(version: 20150218190254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20150217205907) do
     t.boolean  "is_published", default: false
     t.string   "bg_color",     default: "af4e7b"
     t.integer  "size",         default: 0
+    t.integer  "order_number", default: 0
   end
 
 end
