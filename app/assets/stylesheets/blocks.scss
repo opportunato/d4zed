@@ -80,6 +80,8 @@ article > .expander {
   }
 
   > .wrapper {
+    @include custom-transition(background-color);
+
     height: 100%;
     overflow: hidden;
     position: relative;
@@ -87,6 +89,8 @@ article > .expander {
   }
 
   p {
+    @include custom-transition(color);
+
     color: $color-main;
     font-size: 16px;
     line-height: 1.5;
@@ -94,8 +98,8 @@ article > .expander {
   }
 }
 
-#about:hover,
-#news:hover {
+#about > .wrapper:hover,
+#news  > .wrapper:hover {
   background-color: $color-main;
 
   p {
@@ -191,7 +195,7 @@ article > .expander {
   }
 
   .date {
-    left: 6 * $gutter-size - 2;
+    right: 3 * $gutter-size - 2;
     text-align: center;
     width: 3 * $gutter-size;
 
@@ -204,9 +208,12 @@ article > .expander {
     right: $gutter-size - 2;
     width: 2 * $gutter-size;
 
-    &.inactive {
+    button.inactive {
       cursor: default;
-      opacity: .5;
+
+      i {
+        opacity: .5;
+      }
     }
   }
 

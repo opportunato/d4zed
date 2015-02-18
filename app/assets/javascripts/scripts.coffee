@@ -94,13 +94,13 @@ updateNews = ->
   $('#news .date').text($block.data('date'))
 
   if currentNewsIndex == 0
-    $('.prev i').addClass('inactive');
-    $('.next i').removeClass('inactive');
+    $('.prev').addClass('inactive');
+    $('.next').removeClass('inactive');
   else if currentNewsIndex == newsNumber - 1
-    $('.prev i').removeClass('inactive');
-    $('.next i').addClass('inactive');
+    $('.prev').removeClass('inactive');
+    $('.next').addClass('inactive');
   else
-    $('.next i, .prev i').removeClass('inactive');
+    $('.next, .prev').removeClass('inactive');
 
 navigateNews = (direction) ->
   newsWidth = $newsContainer.children().width()

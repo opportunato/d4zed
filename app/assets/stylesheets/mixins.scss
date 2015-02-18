@@ -3,3 +3,7 @@
     @media only screen and (max-width: 768px) { @content; }
   }
 }
+
+@mixin custom-transition($property) {
+  transition: $property .125s cubic-bezier(0.215, 0.610, 0.355, 1.000)
+}

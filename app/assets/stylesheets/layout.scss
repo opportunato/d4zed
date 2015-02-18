@@ -18,6 +18,10 @@ p {
 
 a {
   text-decoration: none;
+
+  i {
+    @include custom-transition(opacity);
+  }
 }
 
 button {
