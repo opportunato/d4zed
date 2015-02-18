@@ -39,6 +39,7 @@ RailsAdmin.config do |config|
         config_options parserRules: { tags: { p:1 } }, toolbar: { fa: true }
       end
       field :vimeo_id
+      field :link
       field :bg_color
       field :size, :enum
       field :thumbnail

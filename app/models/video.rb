@@ -11,6 +11,10 @@ class Video < ActiveRecord::Base
 
   validates_presence_of :name, :director, :music, :vimeo_id, :thumbnail, :size
 
+  def is_interactive?
+    link.present?
+  end
+
   def set_order_number
     if self.order_number.blank?
       self.order_number = Video.all.order('order_number DESC').first.order_number
