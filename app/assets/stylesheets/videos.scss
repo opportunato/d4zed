@@ -79,6 +79,10 @@
     &:hover {
       .cover-info {
         display: none;
+
+        @include respond-to(small) {
+          display: block;
+        }
       }
     }
 
@@ -246,14 +250,6 @@
         @include respond-to(small) {
           filter: none;
         }
-      }
-    }
-
-    &.expanded {
-      .info {
-        display: block;
-        position: relative;
-        width: 100%;
       }
     }
   }

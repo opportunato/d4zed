@@ -4,6 +4,7 @@ footer {
   width: 100%;
 
   @include respond-to(small) {
+    margin-top: $gutter-size;
     height: auto;
   }
 
