@@ -61,24 +61,46 @@ calculateMainWidth = ->
     width = if $video.hasClass('big') then newWidth else ((newWidth - gutterSize)/2 + 1)
     height = Math.floor(width/(ratio * gutterSize)) * gutterSize + 2
 
-    $video.css(width: width, height: height)    
+    $video.css(width: width, height: height)  
 
   if windowWidth > 768
     $news.add($sections).css(width: (newWidth - gutterSize)/2 + 1)
   else
     $news.add($sections).css(width: newWidth)
 
-assignMargins = ->
-  smallVideoCount = 0
+  if windowWidth > 768
+    leftTop = 0
+    rightTop = 0
+    leftPosition = 0
+    rightPosition = (newWidth - gutterSize)/2 + gutterSize - 1
 
-  $videos.each (index, video) ->
-    if $(video).hasClass('big')
-      smallVideoCount = 0
-    else
-      smallVideoCount += 1
+    $videos.each (index, video) ->
+      $video = $(video)
 
-      if smallVideoCount % 2 == 0
-        $(video).css('margin-right', 0)
+      if $video.hasClass('small')
+        if leftTop <= rightTop
+          newTop = leftTop
+          newPosition = leftPosition
+          leftTop += $video.height() + gutterSize - 2
+        else
+          newTop = rightTop
+          newPosition = rightPosition
+          rightTop += $video.height() + gutterSize - 2
+      else
+        newTop = Math.max(leftTop, rightTop) - 2
+        newPosition = leftPosition
+        leftTop = newTop
+        rightTop = newTop
+
+      $video.css(
+        position: 'absolute'
+        top: newTop
+        left: newPosition
+      )
+
+    $('#work').height(Math.max(leftTop, rightTop))
+  else
+    $videos.css('position', 'static')
 
 expandAbout = ->
   $about = $('#about')
@@ -134,12 +156,9 @@ navigateNews = (direction) ->
   updateNews()
 
 $ ->
-  calculateMainWidth()
-  assignMargins()
+  $('body').css('visibility', 'visible')
 
-  setTimeout ->
-    $('body').css('visibility', 'visible')
-  , 100
+  calculateMainWidth()
 
   $(window).resize(calculateMainWidth)
 

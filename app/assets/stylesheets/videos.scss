@@ -14,8 +14,6 @@
     position: relative;
     height: 8 * $gutter-size + 2;
 
-    transition: height .2s ease-in-out;
-
     &.big {
       height: 16 * $gutter-size + 2;
       width: 100%;
@@ -181,12 +179,13 @@
           }
         }
 
-        .player, .desktop {
+        .player, .link, .desktop {
           display: none;
         }
       }
 
-      .player {
+      .player,
+      .link {
         border: 2px solid $color-secondary;
         cursor: pointer;
         font-size: 12px;
@@ -195,6 +194,16 @@
         bottom: $gutter-size;
         text-transform: uppercase;
         width: 140px;
+
+        a {
+          color: $color-secondary;
+
+          &:hover {
+            i {
+              opacity: 1;
+            }
+          }
+        }
 
         i {
           font-size: 30px;
@@ -205,6 +214,7 @@
         span {
           line-height: 30px;
           position: relative;
+          text-align: center;
           top: -10px;
         }
       }
