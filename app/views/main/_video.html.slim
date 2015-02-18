@@ -39,6 +39,13 @@ article[data-vimeo-id=video.vimeo_id class=video_class(video)]
         = link_to video.link, target: "_blank" do
           i.d4zed-icon-play
           span See Project
+  - if !video.interactive?
+      button.player
+        i.d4zed-icon-play
+  - else
+    button.link
+      = link_to video.link, target: "_blank" do
+        i.d4zed-icon-play
   button.expander
     i.d4zed-icon-close
     i.d4zed-icon-expand

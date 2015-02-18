@@ -55,9 +55,14 @@ calculateMainWidth = ->
     'width': newWidth
   )
 
-  smallWidth  = ((newWidth - gutterSize)/2 + 1)
+  if windowWidth > 768
+    smallWidth  = ((newWidth - gutterSize)/2 + 1)
+  else
+    smallWidth = newWidth
+
   smallHeight = Math.floor(smallWidth/(2 * gutterSize)) * gutterSize + 2
   squareHeight = 2 * smallHeight + gutterSize - 2
+
 
   $videos.each (index, video) ->
     $video = $(video)
@@ -109,8 +114,6 @@ calculateMainWidth = ->
         left: newPosition
       )
 
-
-
     $('#work').height(Math.max(leftTop, rightTop))
   else
     $videos.css('position', 'relative')
@@ -132,6 +135,23 @@ expandAbout = ->
 
 expandVideo = ($video) ->
   $video.toggleClass('expanded')
+
+  if $video.hasClass('expanded')
+    $info = $video.find('.info')
+    $info.show()
+
+    $cover = $video.find('.cover')
+    $color = $video.css('backgroundColor')
+
+    $info.css(
+      backgroundColor: $color,
+      position: 'relative',
+      height: '200px'
+    )
+
+    $video.css(
+      height: $video.height() + $info.height()
+    )
 
 currentNewsIndex = 0
 $newsContainer   = $('#news .container')

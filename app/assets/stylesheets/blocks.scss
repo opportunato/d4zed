@@ -17,7 +17,9 @@ section > header {
 }
 
 section > .expander,
-article > .expander {
+article > .expander,
+article > .player,
+article > .link {
   outline: 0;
   position: absolute;
   right: $gutter-size;
@@ -37,9 +39,26 @@ article > .expander {
   .d4zed-icon-expand {
     display: block;
   }
+
+  &.player,
+  &.link {
+    a {
+      color: $color-secondary;
+
+      &:hover {
+        i {
+          opacity: 1;
+        }
+      }
+    }
+
+    right: 2 * $gutter-size;
+  }
 }
 
-article > .expander {
+article > .expander,
+article > .player,
+article > .link {
   display: none;
 }
 
@@ -60,7 +79,9 @@ article > .expander {
     width: 3 * $gutter-size;
   }
 
-  article > .expander {
+  article > .expander,
+  article > .player,
+  article > .link {
     display: block;
   }
 }
