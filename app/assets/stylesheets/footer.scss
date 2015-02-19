@@ -3,7 +3,7 @@ footer {
   height: 4 * $gutter-size;
   width: 100%;
 
-  @include respond-to(small) {
+  @include respond-to(third) {
     margin-top: $gutter-size;
     height: auto;
   }
@@ -17,7 +17,7 @@ footer {
       width: 21 * $gutter-size + 2;
     }
 
-    @include respond-to(small) {
+    @include respond-to(third) {
       height: 7 * $gutter-size + 2;
       margin-bottom: $gutter-size;
       width: 100%;
@@ -51,7 +51,7 @@ footer {
         }
       }
 
-      @include respond-to(small) {
+      @include respond-to(third) {
         float: none;
         font-size: 13px;
         font-weight: 700;
@@ -67,7 +67,7 @@ footer {
   .social {
     float: right;
 
-    @include respond-to(small) {
+    @include respond-to(third) {
       clear: both;
       float: none;
       width: 5 * $gutter-size;
@@ -92,7 +92,7 @@ footer {
 
     @include custom-transition(background-color);
 
-    @include respond-to(small) {
+    @include respond-to(third) {
       margin-top: 0;
     }
 

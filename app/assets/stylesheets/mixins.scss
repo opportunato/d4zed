@@ -6,7 +6,10 @@
     @media only screen and (max-width: 1230px) { @content; }
   }
   @if $media == second {
-    @media only screen and (min-width: 768px) and (max-width: 1096px) { @content; }
+    @media only screen and (min-width: 930px) and (max-width: 1096px) { @content; }
+  }
+  @if $media == third {
+    @media only screen and (max-width: 930px) { @content; }
   }
 }
 
