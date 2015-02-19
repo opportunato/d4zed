@@ -124,6 +124,10 @@ body {
 
         > li {
           margin-right: 70px;
+
+          @include respond-to(third) {
+            margin-right: 50px;
+          }
         }
 
         a:hover {
