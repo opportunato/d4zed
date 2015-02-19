@@ -99,6 +99,11 @@ article > .link {
     width: 100%;
   }
 
+  a {
+    color: $color-main;
+    text-decoration: underline;
+  }
+
   > .wrapper {
     @include custom-transition(background-color);
 
@@ -126,7 +131,7 @@ article > .link {
 #news  > .wrapper:hover {
   background-color: $color-main;
 
-  p {
+  a, p {
     color: $color-secondary;
   }
 }
