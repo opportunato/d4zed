@@ -9,7 +9,7 @@ class Video < ActiveRecord::Base
 
   scope :published, -> { where(is_published: true).order('order_number DESC, created_at DESC') }
 
-  validates_presence_of :name, :director, :music, :vimeo_id, :thumbnail, :size
+  validates_presence_of :name, :music, :vimeo_id, :thumbnail, :size
 
   def interactive?
     link.present?

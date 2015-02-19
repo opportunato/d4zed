@@ -19,16 +19,19 @@ article[data-vimeo-id=video.vimeo_id class=video_class(video)]
         = video.name
     p = video.description.html_safe
     .mobile
-      h2 Director
-      p = video.director
+      - if video.director.present?
+        h2 Director
+        p = video.director
       h2 Music
       p = video.music
     table.desktop
       tr
-        th Director
+        - if video.director.present?
+          th Director
         th Music
       tr
-        td = video.director
+        - if video.director.present?
+          td = video.director
         td = video.music
     - if !video.interactive?
       .player
