@@ -160,7 +160,7 @@ article > .link {
 
 #news {
   @include respond-to(small) {
-    height: 14 * $gutter-size + 2;
+    height: 9 * $gutter-size + 2;
   }
 
   .container {
