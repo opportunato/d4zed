@@ -217,6 +217,7 @@ $ ->
   $('.root-link').on 'click', scrollToTop
 
   $('#work article').on 'touchstart', ->
+    $videos.not($(this)).removeClass('touched')
     $(this).toggleClass('touched')
 
   updateNews()
