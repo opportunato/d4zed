@@ -74,6 +74,24 @@
     .gradient {
       background: linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
       background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+    
+      .cover-info {
+        position: absolute;
+        bottom: $gutter-size;
+        left: $gutter-size;
+
+        .brand, .name {
+          display: block;
+        }
+
+        .brand {
+          text-transform: uppercase;
+        }
+
+        .name {
+          font-size: 22px;
+        }
+      }
     }
 
     &:hover {
@@ -89,27 +107,9 @@
     .cover {
       background-size: cover;
       background-position: center;
-
-      .cover-info {
-        position: absolute;
-        bottom: $gutter-size;
-        left: $gutter-size;
-      }
-
-      .brand, .name {
-        display: block;
-      }
-
-      .brand {
-        text-transform: uppercase;
-      }
-
-      .name {
-        font-size: 22px;
-      }
     }
 
-    .bg, .gradient, .animation {
+    .bg, .animation {
       display: none;
     }
 
