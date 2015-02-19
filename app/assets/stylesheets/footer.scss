@@ -13,6 +13,10 @@ footer {
     float: left;
     width: 24 * $gutter-size + 2;
 
+    @include respond-to(first) {
+      width: 21 * $gutter-size + 2;
+    }
+
     @include respond-to(small) {
       height: 7 * $gutter-size + 2;
       margin-bottom: $gutter-size;
@@ -33,6 +37,18 @@ footer {
       &:last-child {
         margin-right: 0;
         width: 5 * $gutter-size;
+      }
+
+      @include respond-to(first) {
+        width: 5 * $gutter-size;
+
+        &:nth-of-type(2) {
+          width: 6 * $gutter-size;
+        }
+
+        &:last-child {
+          width: 5 * $gutter-size;
+        }
       }
 
       @include respond-to(small) {
@@ -66,6 +82,7 @@ footer {
     background-color: $color-secondary;
     color: $color-main;
     height: 2 * $gutter-size - 2;
+    display: block;
     float: left;
     font-size: 16px;
     margin-top: $gutter-size + 2;
@@ -77,6 +94,21 @@ footer {
 
     @include respond-to(small) {
       margin-top: 0;
+    }
+
+    @include respond-to(second) {
+      float: none;
+      margin-top: 0;
+      margin-right: 0;
+
+      &.facebook {
+        margin-top: 2px;
+      }
+
+      &.twitter {
+        border-top: 2px solid $color-main;
+        height: 2 * $gutter-size;
+      }
     }
 
     &.twitter {

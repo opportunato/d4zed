@@ -235,7 +235,8 @@
       }
     }
 
-    &:hover {
+    &:hover,
+    &.touched {
       .info, .bg, .gradient {
         display: block;
 

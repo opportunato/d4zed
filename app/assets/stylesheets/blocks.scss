@@ -112,7 +112,7 @@ article > .link {
     @include custom-transition(color);
 
     color: $color-main;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.5;
     padding: $gutter-size;
 
@@ -185,7 +185,7 @@ article > .link {
     .cover {
       background-size: cover;
       background-position: center;
-      height: 9 * $gutter-size;
+      height: 5 * $gutter-size;
       width: 5 * $gutter-size;
 
       @include respond-to(small) {

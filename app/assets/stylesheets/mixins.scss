@@ -2,6 +2,12 @@
   @if $media == small {
     @media only screen and (max-width: 768px) { @content; }
   }
+  @if $media == first {
+    @media only screen and (max-width: 1230px) { @content; }
+  }
+  @if $media == second {
+    @media only screen and (min-width: 768px) and (max-width: 1096px) { @content; }
+  }
 }
 
 @mixin custom-transition($property) {

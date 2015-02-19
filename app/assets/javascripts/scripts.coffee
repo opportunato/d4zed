@@ -4,6 +4,7 @@ $videos    = $('#work > article')
 $header    = $('body > header > .wrapper')
 $sections  = $('#about, #news')
 $news      = $('#news article')
+mobileBreakpoint = 768
 
 scrollToBlock = (event) ->
   event.preventDefault()
@@ -13,7 +14,7 @@ scrollToBlock = (event) ->
 
   aTag = $("#{id}")
   windowWidth   = $(window).width()
-  headerOffset = if windowWidth > 768 then 5 * 35 else 4 * 35
+  headerOffset = if windowWidth > mobileBreakpoint then 5 * 35 else 4 * 35
 
   $('html,body').animate({ scrollTop: aTag.offset().top - headerOffset }, 'slow')
 
@@ -29,7 +30,7 @@ calculateMainWidth = ->
     newWidth = 1367
     marginLeft = 'auto'
   else 
-    if windowWidth > 768
+    if windowWidth > mobileBreakpoint
       marginSize = 4
     else
       marginSize = 2
@@ -38,7 +39,7 @@ calculateMainWidth = ->
 
     gutterNumber  = Math.floor(blockWidth / gutterSize)
 
-    if windowWidth > 768 
+    if windowWidth > mobileBreakpoint 
       marginNumber = 2
 
       if gutterNumber % 2 == 0
@@ -55,7 +56,7 @@ calculateMainWidth = ->
     'width': newWidth
   )
 
-  if windowWidth > 768
+  if windowWidth > mobileBreakpoint
     smallWidth  = ((newWidth - gutterSize)/2 + 1)
   else
     smallWidth = newWidth
@@ -67,7 +68,7 @@ calculateMainWidth = ->
   $videos.each (index, video) ->
     $video = $(video)
     ratio = if $video.hasClass('interactive') then 1 else 2
-    if windowWidth > 768
+    if windowWidth > mobileBreakpoint
       width = if $video.hasClass('big') then newWidth else smallWidth
     else
       width = newWidth
@@ -79,12 +80,12 @@ calculateMainWidth = ->
 
     $video.css(width: width, height: height)  
 
-  if windowWidth > 768
+  if windowWidth > mobileBreakpoint
     $news.add($sections).css(width: (newWidth - gutterSize)/2 + 1)
   else
     $news.add($sections).css(width: newWidth)
 
-  if windowWidth > 768
+  if windowWidth > mobileBreakpoint
     leftTop = 0
     rightTop = 0
     leftPosition = 0
@@ -214,6 +215,9 @@ $ ->
 
   $('.menu a').on 'click', scrollToBlock
   $('.root-link').on 'click', scrollToTop
+
+  $('#work article').on 'touchstart', ->
+    $(this).toggleClass('touched')
 
   updateNews()
 
