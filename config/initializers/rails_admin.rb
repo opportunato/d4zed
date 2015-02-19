@@ -27,7 +27,7 @@ RailsAdmin.config do |config|
 
   config.main_app_name = ['d4zed', 'Admin']
 
-  config.included_models = [Tag, News, Video]
+  config.included_models = [Tag, News, Video, Page]
 
   config.model 'Video' do
     edit do
@@ -54,6 +54,15 @@ RailsAdmin.config do |config|
       field :is_published
       field :order_number do
         sort_reverse true
+      end
+    end
+  end
+
+  config.model 'Page' do
+    edit do
+      field :category, :enum
+      field :text, :wysihtml5 do
+        config_options parserRules: { tags: { p:1 } }, toolbar: { fa: true }
       end
     end
   end

@@ -26,14 +26,7 @@ header
     section#about
       header About
       .wrapper
-        .content
-          p D4ZED is a new Copenhagen / Los Angeles based collective of composers, producers, sound designers and music supervisors coming from a wide variety of acknowledged constellations.
-
-          p We compose, arrange and orchestrate music. We design, record and mix soundscapes. We music supervise and clear music. All together our mission is to create the best sound and music for advertising, television and film.
-
-          p D4ZED is made up of Adrian Aurelius, Gregers Mærsk Møller, Lasse Martinussen, Simon Littauer and Sune Rose Wagner.
-
-          p Explore our work below and get in touch
+        .content = Page.about_text.try(:html_safe)
       button.expander
         i.d4zed-icon-close
         i.d4zed-icon-expand
