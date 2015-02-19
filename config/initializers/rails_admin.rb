@@ -64,6 +64,7 @@ RailsAdmin.config do |config|
       field :content, :wysihtml5 do
         config_options parserRules: { tags: { p:1 } }, toolbar: { fa: true }
       end
+      field :created_at
       field :is_published
     end
   end
