@@ -213,7 +213,7 @@
     }
 
     &.playing, .loading {
-      .cover {
+      .cover, .player {
         display: none;
       }
 

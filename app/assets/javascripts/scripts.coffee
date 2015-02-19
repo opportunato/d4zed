@@ -136,22 +136,35 @@ expandAbout = ->
 
 expandVideo = ($video) ->
   $video.toggleClass('expanded')
+  $cover = $video.find('.cover')
+  $bg = $video.find('.bg')
+  $info = $video.find('.info')
 
   if $video.hasClass('expanded')
-    $info = $video.find('.info')
     $info.show()
 
-    $cover = $video.find('.cover')
-    $color = $video.css('backgroundColor')
+    $color = $bg.css('backgroundColor')
+    $cover.css(
+      height: $video.height()
+      position: 'relative'
+    )
 
     $info.css(
+      borderTop: 'none'
       backgroundColor: $color,
-      position: 'relative',
-      height: '200px'
+      display: 'block'
+      position: 'relative'
+      height: 175
+      width: '100%'
     )
 
     $video.css(
-      height: $video.height() + $info.height()
+      height: $cover.height() + $info.innerHeight() + 6
+    )
+  else
+    $info.hide()
+    $video.css(
+      height: $cover.height() + 4
     )
 
 currentNewsIndex = 0
