@@ -11,7 +11,7 @@ videos = {
 }
 
 mobileBreakpoint = 804
-tabletBreakpoint = 1014
+tabletBreakpoint = 1024
 largeBreakbpoint = 1507
 maxWidth         = 1367
 
@@ -141,7 +141,7 @@ calculateMainWidth = ->
     $videos.css('position', 'relative')
 
 updateVideos = ($updatedVideo, additionalHeight) ->
-  position = if $updatedVideo.css('marginLeft') == '0px' then 'left' else 'right'
+  position = if $updatedVideo.css('left') == '0px' then 'left' else 'right'
 
   index = videos[position].indexOf($updatedVideo)
 
@@ -288,7 +288,7 @@ $ ->
     $container.addClass('loading')
 
     if $container.children('iframe').length == 0
-      $videos.removeClass('playing loading')
+      $videos.removeClass('playing')
       $container.append("<iframe src='//player.vimeo.com/video/" + $container.data("vimeoId") + "?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff' width='560' height='315' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>");
   
       if player

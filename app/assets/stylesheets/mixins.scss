@@ -3,7 +3,7 @@
     @media only screen and (max-width: 804px) { @content; }
   }
   @if $media == tablet {
-    @media only screen and (max-width: 1014px) { @content; }
+    @media only screen and (max-width: 1024px) { @content; }
   }
   @if $media == first {
     @media only screen and (max-width: 1230px) { @content; }

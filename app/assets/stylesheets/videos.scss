@@ -23,6 +23,10 @@
       right: 0;    
     }
 
+    .animation {
+      z-index: 3;
+    }
+
     .cover {
       border: 2px solid $color-main;
       position: relative;
@@ -228,6 +232,10 @@
 
       iframe {
         display: block;
+      }
+
+      .cover-info {
+        display: none;
       }
     }
 
