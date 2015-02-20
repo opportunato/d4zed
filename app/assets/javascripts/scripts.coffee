@@ -138,7 +138,12 @@ calculateMainWidth = ->
 
     $('#work').height(Math.max(leftTop, rightTop))
   else
-    $videos.css('position', 'relative')
+    $videos.css(
+      position: 'relative'
+      left: 0
+      top: 0
+    )
+    $('#work').height('auto')
 
 updateVideos = ($updatedVideo, additionalHeight) ->
   position = if $updatedVideo.css('left') == '0px' then 'left' else 'right'
