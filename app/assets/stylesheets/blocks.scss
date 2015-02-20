@@ -123,6 +123,10 @@ article > .link {
     line-height: 1.5;
     padding: $gutter-size;
 
+    @include respond-to(extratablet) {
+      font-size: 12px;
+    }
+
     @include respond-to(small) {
       font-size: 14px;
     }

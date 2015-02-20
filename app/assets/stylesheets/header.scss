@@ -125,8 +125,8 @@ body {
         > li {
           margin-right: 70px;
 
-          @include respond-to(third) {
-            margin-right: 50px;
+          @include respond-to(extratablet) {
+            margin-right: 35px;
           }
         }
 
