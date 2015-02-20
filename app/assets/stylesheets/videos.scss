@@ -125,11 +125,11 @@
       header, th {
         font-weight: 700;
         text-transform: uppercase;
+        margin-bottom: 3px;
       }
 
       > p {
         line-height: 1.5;
-        margin-top: 3px;
         margin-bottom: 10px;
 
         @include respond-to(first) {

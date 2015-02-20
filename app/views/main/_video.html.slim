@@ -14,9 +14,9 @@ article[data-vimeo-id=video.vimeo_id class=video_class(video)]
   .info
     header 
       - if video.brand.present?
-        = "#{video.brand} - #{video.name}"
+        = "#{video.brand} - #{video.name} #{video_categories(video)}"
       - else
-        = video.name
+        = "#{video.name} #{video_categories(video)}"
     p = video.description.html_safe
     .mobile
       - if video.director.present?

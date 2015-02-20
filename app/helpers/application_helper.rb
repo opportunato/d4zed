@@ -16,4 +16,12 @@ module ApplicationHelper
   def video_url(video)
     video.thumbnail_url
   end
+
+  def video_categories(video)
+    if video.tags.length > 0
+      "(#{video.tags.map(&:name).join(' ')})"
+    else
+      ""
+    end
+  end
 end
