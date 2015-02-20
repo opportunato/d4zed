@@ -37,6 +37,12 @@ a:hover {
   }
 }
 
+body.no-transition {
+  * {
+    transition: none !important;
+  }
+}
+
 
 $header-height: 3 * $gutter-size;
 $mobile-header-height: 2 * $gutter-size;

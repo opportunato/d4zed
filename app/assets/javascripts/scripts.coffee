@@ -4,6 +4,7 @@ $videos    = $('#work > article')
 $header    = $('body > header > .wrapper')
 $sections  = $('#about, #news')
 $news      = $('#news article')
+$about     = $('#about')
 
 videos = {
   left: []
@@ -14,6 +15,17 @@ mobileBreakpoint = 804
 tabletBreakpoint = 1024
 largeBreakbpoint = 1507
 maxWidth         = 1367
+
+calculateAboutHeight = ->
+  if $(window).width() < mobileBreakpoint
+    height = $about.find('p').height()
+    newHeight = Math.ceil(height/gutterSize) * gutterSize + 2 * gutterSize - 2
+  else
+    newHeight = 5 * gutterSize - 2
+
+  $about.height(newHeight)
+  $about.data('height', newHeight)
+  
 
 scrollToBlock = (event) ->
   event.preventDefault()
@@ -97,6 +109,8 @@ calculateMainWidth = ->
   else
     $news.add($sections).css(width: newWidth)
 
+  calculateAboutHeight()
+
   if windowWidth > mobileBreakpoint
     leftTop = 0
     rightTop = 0
@@ -174,7 +188,7 @@ expandAbout = ->
 
     $about.height(newHeight)
   else
-    $about.height(5 * gutterSize - 2)
+    $about.height($about.data('height'))
 
 expandVideo = ($video) ->
   $videos.not($video).each (index, video) ->
@@ -265,6 +279,10 @@ $ ->
         expandVideo($(video))
 
     calculateMainWidth()
+
+  setTimeout ->
+    $('body').removeClass('no-animation')
+  , 300
 
   player = null
 
