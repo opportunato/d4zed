@@ -254,7 +254,7 @@ $ ->
 
   calculateMainWidth()
 
-  $(window).on 'resize', 'orientationchange', ->
+  $(window).on 'resize orientationchange', ->
     $videos.each (index, video) ->
       if $(video).hasClass('expanded')
         expandVideo($(video))
