@@ -4,7 +4,16 @@ $videos    = $('#work > article')
 $header    = $('body > header > .wrapper')
 $sections  = $('#about, #news')
 $news      = $('#news article')
-mobileBreakpoint = 768
+
+videos = {
+  left: []
+  right: []
+}
+
+mobileBreakpoint = 804
+tabletBreakpoint = 1014
+largeBreakbpoint = 1507
+maxWidth         = 1367
 
 scrollToBlock = (event) ->
   event.preventDefault()
@@ -24,11 +33,15 @@ scrollToTop = (event) ->
 
 
 calculateMainWidth = ->
+  videos = {
+    left: []
+    right: []
+  }
   windowWidth   = $(window).width()
 
-  if windowWidth > 1507
-    newWidth = 1367
-    marginLeft = 'auto'
+  if windowWidth > largeBreakbpoint
+    newWidth = maxWidth
+    marginLeft = Math.floor(Math.floor((windowWidth - newWidth)/gutterSize) * gutterSize / 2)
   else 
     if windowWidth > mobileBreakpoint
       marginSize = 4
@@ -64,7 +77,6 @@ calculateMainWidth = ->
   smallHeight = Math.floor(smallWidth/(2 * gutterSize)) * gutterSize + 2
   squareHeight = 2 * smallHeight + gutterSize - 2
 
-
   $videos.each (index, video) ->
     $video = $(video)
     ratio = if $video.hasClass('interactive') then 1 else 2
@@ -91,6 +103,11 @@ calculateMainWidth = ->
     leftPosition = 0
     rightPosition = (newWidth - gutterSize)/2 + gutterSize - 1
 
+    videoGutter = if windowWidth > tabletBreakpoint
+      gutterSize - 2
+    else
+      2 * gutterSize - 2
+
     $videos.each (index, video) ->
       $video = $(video)
 
@@ -98,16 +115,20 @@ calculateMainWidth = ->
         if leftTop <= rightTop
           newTop = leftTop
           newPosition = leftPosition
-          leftTop += $video.height() + gutterSize - 2
+          leftTop += $video.height() + videoGutter
+          videos.left.push $video
         else
           newTop = rightTop
           newPosition = rightPosition
-          rightTop += $video.height() + gutterSize - 2
+          rightTop += $video.height() + videoGutter
+          videos.right.push $video
       else
         newTop = Math.max(leftTop, rightTop)
         newPosition = leftPosition
-        leftTop = newTop + $video.height() + gutterSize - 2
-        rightTop = newTop + $video.height() + gutterSize - 2
+        leftTop = newTop + $video.height() + videoGutter
+        rightTop = newTop + $video.height() + videoGutter
+        videos.left.push $video
+        videos.right.push $video
 
       $video.css(
         position: 'absolute'
@@ -118,6 +139,22 @@ calculateMainWidth = ->
     $('#work').height(Math.max(leftTop, rightTop))
   else
     $videos.css('position', 'relative')
+
+updateVideos = ($updatedVideo, additionalHeight) ->
+  position = if $updatedVideo.css('marginLeft') == '0px' then 'left' else 'right'
+
+  index = videos[position].indexOf($updatedVideo)
+
+  laterVideos = videos[position].filter ($video) ->
+    parseInt($video.css('top')) > parseInt($updatedVideo.css('top'))
+
+  laterVideos.forEach ($video) ->
+    currentTop = parseInt($video.css('top'))
+
+    $video.css('top', currentTop + additionalHeight)
+
+  $('#work').height($('#work').height() + additionalHeight)
+
 
 expandAbout = ->
   $about = $('#about')
@@ -135,6 +172,10 @@ expandAbout = ->
     $about.height(5 * gutterSize - 2)
 
 expandVideo = ($video) ->
+  $videos.not($video).each (index, video) ->
+    if $(video).hasClass('expanded')
+      expandVideo($(video))
+
   $video.toggleClass('expanded')
   $cover = $video.find('.cover')
   $bg = $video.find('.bg')
@@ -158,14 +199,20 @@ expandVideo = ($video) ->
       width: '100%'
     )
 
+    additionalHeight = $info.innerHeight() + 2
+
     $video.css(
       height: $cover.height() + $info.innerHeight() + 6
     )
   else
+    additionalHeight = ($cover.height() + 4) - $video.height()
+
     $info.hide()
     $video.css(
       height: $cover.height() + 4
     )
+
+  updateVideos($video, additionalHeight)
 
 currentNewsIndex = 0
 $newsContainer   = $('#news .container')

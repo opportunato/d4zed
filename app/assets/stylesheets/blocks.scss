@@ -78,7 +78,9 @@ article > .link {
   #work > header, #contacts > header {
     width: 3 * $gutter-size;
   }
+}
 
+@include respond-to(tablet) {
   article > .expander,
   article > .player,
   article > .link {

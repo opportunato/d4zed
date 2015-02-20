@@ -1,6 +1,9 @@
 @mixin respond-to($media) {
   @if $media == small {
-    @media only screen and (max-width: 768px) { @content; }
+    @media only screen and (max-width: 804px) { @content; }
+  }
+  @if $media == tablet {
+    @media only screen and (max-width: 1014px) { @content; }
   }
   @if $media == first {
     @media only screen and (max-width: 1230px) { @content; }

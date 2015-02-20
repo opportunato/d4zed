@@ -31,7 +31,7 @@
       width: 100%;
     }
 
-    @include respond-to(small) {
+    @include respond-to(tablet) {
       margin-bottom: 2 * $gutter-size - 2;
     }
 
@@ -98,7 +98,7 @@
       .cover-info {
         display: none;
 
-        @include respond-to(small) {
+        @include respond-to(tablet) {
           display: block;
         }
       }
@@ -145,8 +145,11 @@
       }
 
       @include respond-to(small) {
-        border-top: none;
         height: 5 * $gutter-size;
+      }
+
+      @include respond-to(tablet) {
+        border-top: none; 
 
         .mobile {
           display: block;
@@ -244,8 +247,10 @@
     &.touched {
       .info, .bg, .gradient {
         display: block;
+      }
 
-        @include respond-to(small) {
+      @include respond-to(tablet) {
+        .bg, .info {
           display: none;
         }
       }
@@ -253,7 +258,7 @@
       .cover {
         filter: grayscale(100%);
 
-        @include respond-to(small) {
+        @include respond-to(tablet) {
           filter: none;
         }
       }
