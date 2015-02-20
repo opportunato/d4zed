@@ -310,6 +310,9 @@ $ ->
 
   updateNews()
 
+  $('article iframe').on 'webkitfullscreenchange mozfullscreenchange fullscreenchange', ->
+    debugger
+
   $('.player').on 'click', (e) ->
     $container = $(e.target).parents('article')
 
@@ -328,12 +331,6 @@ $ ->
         $container.removeClass('loading').addClass('playing')
 
         player.api("play")
-        
-        player.addEvent "finish", ->
-          $container.removeClass('playing')
-
-        player.addEvent "pause", ->
-          $container.removeClass('playing')
     else
       $videos.removeClass('playing loading')
       $container.addClass('playing').removeClass('loading')
