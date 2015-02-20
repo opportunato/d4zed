@@ -41,7 +41,7 @@ calculateMainWidth = ->
 
   if windowWidth > largeBreakbpoint
     newWidth = maxWidth
-    marginLeft = Math.floor(Math.floor((windowWidth - newWidth)/gutterSize) * gutterSize / 2)
+    marginLeft = Math.floor(Math.floor((windowWidth - newWidth)/gutterSize) * gutterSize / 2) - 2
   else 
     if windowWidth > mobileBreakpoint
       marginSize = 4
@@ -254,7 +254,12 @@ $ ->
 
   calculateMainWidth()
 
-  $(window).resize(calculateMainWidth)
+  $(window).on 'resize', 'orientationchange', ->
+    $videos.each (index, video) ->
+      if $(video).hasClass('expanded')
+        expandVideo($(video))
+
+    calculateMainWidth()
 
   player = null
 
