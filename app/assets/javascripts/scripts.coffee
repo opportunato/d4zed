@@ -39,6 +39,7 @@ scrollToBlock = (event) ->
 
   $('html,body').animate({ scrollTop: aTag.offset().top - headerOffset }, 'slow')
 
+
 scrollToTop = (event) ->
   event.preventDefault()
   $('html,body').animate({ scrollTop: 0 }, 'slow')
@@ -105,9 +106,12 @@ calculateMainWidth = ->
     $video.css(width: width, height: height)  
 
   if windowWidth > mobileBreakpoint
-    $news.add($sections).css(width: (newWidth - gutterSize)/2 + 1)
+    newsWidth = (newWidth - gutterSize)/2 + 1
   else
-    $news.add($sections).css(width: newWidth)
+    newsWidth = newWidth
+
+  $news.add($sections).css(width: newsWidth)
+  $newsContainer.css('left', - currentNewsIndex * newsWidth)
 
   calculateAboutHeight()
 
@@ -237,6 +241,7 @@ currentNewsIndex = 0
 $newsContainer   = $('#news .container')
 newsNumber       = $newsContainer.children().length
 
+
 updateNews = ->
   $block = $($newsContainer.children().get(currentNewsIndex))
 
@@ -250,6 +255,7 @@ updateNews = ->
     $('.next').addClass('inactive');
   else
     $('.next, .prev').removeClass('inactive');
+
 
 navigateNews = (direction) ->
   newsWidth = $newsContainer.children().width()

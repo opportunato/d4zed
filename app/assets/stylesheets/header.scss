@@ -32,14 +32,24 @@ body {
     }
 
     .mobile-menu-button {
-      .d4zed-icon-menu-close {
-        display: block;
-      }
+      .d4zed-navicon {
+        width: 27px;
 
-      .d4zed-icon-navicon {
-        display: none;
+        .bar:first-child {
+          transform: rotate(45deg);
+          transform-origin: 2px 0px 0;
+        }
+
+        .bar:nth-child(2) {
+          opacity: 0;
+        }
+
+        .bar:last-child {
+          transform: rotate(-45deg);
+          transform-origin: 2px 2px 0;
+        }
       }
-    }
+    } 
   }
 
   > header {
@@ -90,12 +100,17 @@ body {
       @include respond-to(small) {
         display: block;
 
-        .d4zed-icon-menu-close {
-          display: none;
-        }
-
-        .d4zed-icon-navicon {
+        .d4zed-navicon {
           display: block;
+          cursor: pointer;
+          width: 30px;
+
+          .bar {
+            transition: all 0.6s ease-in-out;
+            height: 2px;
+            background-color: $color-secondary;
+            margin: 6px 0;
+          }
         }
       }
     }
