@@ -1,4 +1,7 @@
 @mixin respond-to($media) {
+  @if $media  == mobile {
+    @media only screen and (max-width: 500px) { @content; }
+  }
   @if $media == small {
     @media only screen and (max-width: 804px) { @content; }
   }

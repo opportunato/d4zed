@@ -91,7 +91,7 @@ article > .link {
 #about, #news, #contacts {
   background-color: $color-secondary;
   border: 2px solid $color-main;
-  height: 5 * $gutter-size + 2px;
+  height: 6 * $gutter-size + 2px;
   float: left;
   margin-bottom: 3 * $gutter-size - 2px;
   padding: 0;
@@ -120,7 +120,7 @@ article > .link {
     padding: $gutter-size;
 
     @include respond-to(extratablet) {
-      font-size: 12px;
+      font-size: 14px;
     }
   }
 }
@@ -175,7 +175,7 @@ article > .link {
 
 #news {
   @include respond-to(small) {
-    height: 9 * $gutter-size + 2;
+    height: 10 * $gutter-size + 2;
   }
 
   .container {
@@ -203,7 +203,7 @@ article > .link {
       height: 5 * $gutter-size;
       width: 5 * $gutter-size;
 
-      @include respond-to(small) {
+      @include respond-to(mobile) {
         width: 100%;
       }
     }
@@ -212,7 +212,7 @@ article > .link {
       padding: $gutter-size;
       width: calc(100% - 5 * 35px);
 
-      @include respond-to(small) {
+      @include respond-to(mobile) {
         width: 100%;
       }
     }

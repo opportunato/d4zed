@@ -12,28 +12,30 @@ videos = {
   right: []
 }
 
-mobileBreakpoint = 804
-tabletBreakpoint = 1024
-largeBreakbpoint = 1507
-maxWidth         = 1367
+smallMobileBreakpoint = 500
+mobileBreakpoint      = 804
+smallTabletBreakpoint = 900
+tabletBreakpoint      = 1024
+largeBreakbpoint      = 1507
+maxWidth              = 1367
 
 calculateNewsHeight = ->
-  if $(window).width() < mobileBreakpoint
+  if $(window).width() < smallMobileBreakpoint
     coverHeight = $newsBlock.width()
-    newHeight = coverHeight + 4 * gutterSize
+    newHeight = coverHeight + 5 * gutterSize
   else
-    newHeight = 5 * gutterSize - 2
+    newHeight = 6 * gutterSize - 2
     coverHeight = '100%'
 
   $newsBlock.height(newHeight)
   $newsBlock.find('.cover').css('height', coverHeight)
 
 calculateAboutHeight = ->
-  if $(window).width() < mobileBreakpoint
+  if $(window).width() < smallTabletBreakpoint
     height = $about.find('p').height()
     newHeight = Math.ceil(height/gutterSize) * gutterSize + 2 * gutterSize - 2
   else
-    newHeight = 5 * gutterSize - 2
+    newHeight = 6 * gutterSize - 2
 
   $about.height(newHeight)
   $about.data('height', newHeight)
@@ -119,7 +121,7 @@ calculateMainWidth = ->
 
     $video.css(width: width, height: height)  
 
-  if windowWidth > mobileBreakpoint
+  if windowWidth > smallTabletBreakpoint
     newsWidth = (newWidth - gutterSize)/2 + 1
   else
     newsWidth = newWidth
