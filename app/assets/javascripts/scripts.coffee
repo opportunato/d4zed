@@ -108,7 +108,8 @@ calculateMainWidth = ->
     else
       if $video.hasClass('interactive') then squareHeight else smallHeight
 
-    $video.css(width: width, height: height)  
+    $video.css(width: width, height: height) 
+    $video.find('iframe').css(height: height) 
 
   if windowWidth > tabletBreakpoint
     newsWidth = (newWidth - gutterSize)/2 + 1
@@ -325,18 +326,17 @@ $ ->
 
   updateNews()
 
-  $('article iframe').on 'webkitfullscreenchange mozfullscreenchange fullscreenchange', ->
-    debugger
-
-  $('.player').on 'click', (e) ->
+  $('.player, .mobile-player').on 'click', (e) ->
     $container = $(e.target).parents('article')
 
     $container.addClass('loading')
 
     if $container.children('iframe').length == 0
       $videos.removeClass('playing')
-      $container.append("<iframe src='//player.vimeo.com/video/" + $container.data("vimeoId") + "?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff' width='560' height='315' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>");
-  
+      $container.find('.gradient').after("<iframe src='//player.vimeo.com/video/" + $container.data("vimeoId") + "?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff' width='560' height='315' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>");
+      videoHeight = $container.height()
+      $container.find('iframe').css(height: videoHeight)
+
       if player
         player.api("pause");
       

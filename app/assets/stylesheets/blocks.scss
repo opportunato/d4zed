@@ -18,7 +18,7 @@ section > header {
 
 section > .expander,
 article > .expander,
-article > .player,
+article > .mobile-player,
 article > .link {
   outline: 0;
   position: absolute;
@@ -40,7 +40,7 @@ article > .link {
     display: block;
   }
 
-  &.player,
+  &.mobile-player,
   &.link {
     a {
       color: $color-secondary;
@@ -57,7 +57,7 @@ article > .link {
 }
 
 article > .expander,
-article > .player,
+article > .mobile-player,
 article > .link {
   display: none;
 }
@@ -82,7 +82,7 @@ article > .link {
 
 @include respond-to(tablet) {
   article > .expander,
-  article > .player,
+  article > .mobile-player,
   article > .link {
     display: block;
   }
