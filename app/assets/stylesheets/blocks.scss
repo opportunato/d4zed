@@ -200,8 +200,8 @@ article > .link {
     .cover {
       background-size: cover;
       background-position: center;
-      height: 5 * $gutter-size;
-      width: 5 * $gutter-size;
+      height: 6 * $gutter-size;
+      width: 6 * $gutter-size;
 
       @include respond-to(mobile) {
         width: 100%;
@@ -210,7 +210,7 @@ article > .link {
 
     p {
       padding: $gutter-size;
-      width: calc(100% - 5 * 35px);
+      width: calc(100% - 6 * 35px);
 
       @include respond-to(mobile) {
         width: 100%;
