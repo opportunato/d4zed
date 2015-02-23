@@ -20,11 +20,11 @@ largeBreakbpoint      = 1507
 maxWidth              = 1367
 
 calculateAboutHeight = ->
-  if $(window).width() < smallTabletBreakpoint
+  if $(window).width() < tabletBreakpoint
     height = $about.find('p').height()
     newHeight = Math.ceil(height/gutterSize) * gutterSize + 2 * gutterSize - 2
   else
-    newHeight = 6 * gutterSize - 2
+    newHeight = 5 * gutterSize - 2
 
   $about.height(newHeight)
   $about.data('height', newHeight)
@@ -110,7 +110,7 @@ calculateMainWidth = ->
 
     $video.css(width: width, height: height)  
 
-  if windowWidth > smallTabletBreakpoint
+  if windowWidth > tabletBreakpoint
     newsWidth = (newWidth - gutterSize)/2 + 1
   else
     newsWidth = newWidth
