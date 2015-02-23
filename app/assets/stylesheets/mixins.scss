@@ -1,6 +1,6 @@
 @mixin respond-to($media) {
   @if $media  == mobile {
-    @media only screen and (max-width: 500px) { @content; }
+    @media only screen and (max-width: 530px) { @content; }
   }
   @if $media == small {
     @media only screen and (max-width: 804px) { @content; }
@@ -22,6 +22,9 @@
   }
   @if $media == only-tablet {
     @media only screen and (min-width: 930px) and (max-width: 1100px) { @content; }
+  }
+  @if $media == problem {
+    @media only screen and (min-width: 1000px) and (max-width: 1100px) { @content; }
   }
 }
 

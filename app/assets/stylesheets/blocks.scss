@@ -121,7 +121,11 @@ article > .link {
 
     @include respond-to(first) {
       font-size: 14px;
-    }   
+    }  
+
+    @include respond-to(problem) {
+      font-size: 13px;
+    } 
   }
 }
 
