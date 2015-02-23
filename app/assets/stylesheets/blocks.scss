@@ -119,7 +119,11 @@ article > .link {
     line-height: 1.5;
     padding: $gutter-size;
 
-    @include respond-to(extratablet) {
+    @include respond-to(tablet) {
+      font-size: 12px;
+    }
+
+    @include respond-to(mobile) {
       font-size: 14px;
     }
   }
@@ -135,7 +139,7 @@ article > .link {
 }
 
 #about, #news {
-  @include respond-to(tablet) {
+  @include respond-to(small) {
     width: 100%;
   }
 }
@@ -175,7 +179,7 @@ article > .link {
 
 #news {
   @include respond-to(small) {
-    height: 9 * $gutter-size + 2;
+    height: 5 * $gutter-size + 2px;
   }
 
   .container {
@@ -202,19 +206,11 @@ article > .link {
       background-position: center;
       height: 5 * $gutter-size;
       width: 5 * $gutter-size;
-
-      @include respond-to(small) {
-        width: 100%;
-      }
     }
 
     p {
       padding: $gutter-size;
       width: calc(100% - 5 * 35px);
-
-      @include respond-to(small) {
-        width: 100%;
-      }
     }
   }
 
