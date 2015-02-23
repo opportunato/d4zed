@@ -119,7 +119,7 @@ article > .link {
     line-height: 1.5;
     padding: $gutter-size;
 
-    @include respond-to(mobile) {
+    @include respond-to(first) {
       font-size: 14px;
     }   
   }
