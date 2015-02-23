@@ -17,7 +17,7 @@ largeBreakbpoint = 1507
 maxWidth         = 1367
 
 calculateAboutHeight = ->
-  if $(window).width() < mobileBreakpoint
+  if $(window).width() < tabletBreakpoint
     height = $about.find('p').height()
     newHeight = Math.ceil(height/gutterSize) * gutterSize + 2 * gutterSize - 2
   else
@@ -46,6 +46,7 @@ scrollToTop = (event) ->
 
 
 calculateMainWidth = ->
+  $('body').addClass('no-animation')
   videos = {
     left: []
     right: []
@@ -105,7 +106,7 @@ calculateMainWidth = ->
 
     $video.css(width: width, height: height)  
 
-  if windowWidth > mobileBreakpoint
+  if windowWidth > tabletBreakpoint
     newsWidth = (newWidth - gutterSize)/2 + 1
   else
     newsWidth = newWidth
@@ -162,6 +163,8 @@ calculateMainWidth = ->
       top: 0
     )
     $('#work').height('auto')
+
+  $('body').removeClass('no-animation')
 
 updateVideos = ($updatedVideo, additionalHeight) ->
   position = if $updatedVideo.css('left') == '0px' then 'left' else 'right'

@@ -97,10 +97,6 @@ article > .link {
   padding: 0;
   position: relative;
 
-  @include respond-to(small) {
-    width: 100%;
-  }
-
   a {
     color: $color-main;
     text-decoration: underline;
@@ -135,6 +131,18 @@ article > .link {
 
   a, p {
     color: $color-secondary;
+  }
+}
+
+#about, #news {
+  @include respond-to(tablet) {
+    width: 100%;
+  }
+}
+
+#contact {
+  @include respond-to(small) {
+    width: 100%;
   }
 }
 
