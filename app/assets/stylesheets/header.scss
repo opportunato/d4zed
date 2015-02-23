@@ -94,8 +94,9 @@ body {
       display: none;
       position: absolute;
       font-size: 30px;
+      width: 30px;
       line-height: 35px;
-      right: 0;
+      right: 0px;
 
       @include respond-to(small) {
         display: block;
