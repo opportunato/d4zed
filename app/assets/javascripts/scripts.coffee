@@ -5,6 +5,7 @@ $header    = $('body > header > .wrapper')
 $sections  = $('#about, #news')
 $news      = $('#news article')
 $about     = $('#about')
+$newsBlock = $('#news')
 
 videos = {
   left: []
@@ -15,6 +16,17 @@ mobileBreakpoint = 804
 tabletBreakpoint = 1024
 largeBreakbpoint = 1507
 maxWidth         = 1367
+
+calculateNewsHeight = ->
+  if $(window).width() < mobileBreakpoint
+    coverHeight = $newsBlock.width()
+    newHeight = coverHeight + 4 * gutterSize
+  else
+    newHeight = 5 * gutterSize - 2
+    coverHeight = '100%'
+
+  $newsBlock.height(newHeight)
+  $newsBlock.find('.cover').css('height', coverHeight)
 
 calculateAboutHeight = ->
   if $(window).width() < mobileBreakpoint
@@ -46,7 +58,8 @@ scrollToTop = (event) ->
 
 
 calculateMainWidth = ->
-  $('body').addClass('no-animation')
+  $('body').addClass('no-transition')
+
   videos = {
     left: []
     right: []
@@ -115,6 +128,7 @@ calculateMainWidth = ->
   $newsContainer.css('left', - currentNewsIndex * newsWidth)
 
   calculateAboutHeight()
+  calculateNewsHeight()
 
   if windowWidth > mobileBreakpoint
     leftTop = 0
@@ -164,7 +178,9 @@ calculateMainWidth = ->
     )
     $('#work').height('auto')
 
-  $('body').removeClass('no-animation')
+  setTimeout ->
+    $('body').removeClass('no-transition')
+  , 250
 
 updateVideos = ($updatedVideo, additionalHeight) ->
   position = if $updatedVideo.css('left') == '0px' then 'left' else 'right'
@@ -290,7 +306,7 @@ $ ->
     calculateMainWidth()
 
   setTimeout ->
-    $('body').removeClass('no-animation')
+    $('body').removeClass('no-transition')
   , 300
 
   player = null
