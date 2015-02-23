@@ -14,21 +14,10 @@ videos = {
 
 smallMobileBreakpoint = 500
 mobileBreakpoint      = 804
-smallTabletBreakpoint = 900
+smallTabletBreakpoint = 930
 tabletBreakpoint      = 1024
 largeBreakbpoint      = 1507
 maxWidth              = 1367
-
-calculateNewsHeight = ->
-  if $(window).width() < smallMobileBreakpoint
-    coverHeight = $newsBlock.width()
-    newHeight = coverHeight + 5 * gutterSize
-  else
-    newHeight = 6 * gutterSize - 2
-    coverHeight = '100%'
-
-  $newsBlock.height(newHeight)
-  $newsBlock.find('.cover').css('height', coverHeight)
 
 calculateAboutHeight = ->
   if $(window).width() < smallTabletBreakpoint
@@ -130,7 +119,6 @@ calculateMainWidth = ->
   $newsContainer.css('left', - currentNewsIndex * newsWidth)
 
   calculateAboutHeight()
-  calculateNewsHeight()
 
   if windowWidth > mobileBreakpoint
     leftTop = 0

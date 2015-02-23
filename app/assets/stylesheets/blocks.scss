@@ -175,7 +175,7 @@ article > .link {
 
 #news {
   @include respond-to(small) {
-    height: 10 * $gutter-size + 2;
+    height: 5 * $gutter-size + 2;
   }
 
   .container {
@@ -203,14 +203,26 @@ article > .link {
       height: 6 * $gutter-size;
       width: 6 * $gutter-size;
 
+      @include respond-to(second) {
+        height: 4 * $gutter-size;
+        width: 4 * $gutter-size;
+        margin-right: $gutter-size;
+        float: left;
+      } 
+
       @include respond-to(mobile) {
-        width: 100%;
+        display: none;
       }
     }
 
     p {
       padding: $gutter-size;
       width: calc(100% - 6 * 35px);
+
+      @include respond-to(second) {
+        float: none;
+        width: auto;
+      }
 
       @include respond-to(mobile) {
         width: 100%;
