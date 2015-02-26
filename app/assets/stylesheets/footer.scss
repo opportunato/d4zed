@@ -18,9 +18,16 @@ footer {
     }
 
     @include respond-to(third) {
-      height: 7 * $gutter-size + 2;
+      display: flex;
+      justify-content: space-between;
+      height: 4 * $gutter-size + 2;
       margin-bottom: $gutter-size;
       width: 100%;
+    }
+
+    @include respond-to(mobile) {
+      display: block;
+      height: 7 * $gutter-size + 2;
     }
 
     header {
@@ -52,10 +59,12 @@ footer {
       }
 
       @include respond-to(third) {
-        float: none;
         font-size: 13px;
-        font-weight: 700;
         margin-bottom: 10px;
+      }
+
+      @include respond-to(mobile) {
+        float: none;
       }
     }
 

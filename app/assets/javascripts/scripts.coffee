@@ -6,6 +6,7 @@ $sections  = $('#about, #news')
 $news      = $('#news article')
 $about     = $('#about')
 $newsBlock = $('#news')
+$social    = $('footer .social')
 
 videos = {
   left: []
@@ -91,6 +92,12 @@ calculateMainWidth = ->
     smallWidth  = ((newWidth - gutterSize)/2 + 1)
   else
     smallWidth = newWidth
+
+  if windowWidth < smallTabletBreakpoint
+    socialMargin = Math.ceil(Math.floor((newWidth - $social.width())/gutterSize) / 2) * gutterSize + 1
+    $social.css('margin-left', "#{socialMargin}px")
+  else
+    $social.css('margin-left', 'auto')
 
   smallHeight = Math.floor(smallWidth/(2 * gutterSize)) * gutterSize + 2
   squareHeight = 2 * smallHeight + gutterSize - 2
