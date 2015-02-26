@@ -31,10 +31,7 @@ calculateAboutHeight = ->
   $about.data('height', newHeight)
   
 
-scrollToBlock = (event) ->
-  event.preventDefault()
-  id = $(this).attr('href')
-
+scrollToBlock = (id) ->
   $('body').removeClass('menu-opened')
 
   aTag = $("#{id}")
@@ -324,12 +321,16 @@ $ ->
   $('.mobile-menu-button').on 'click', ->
     $('body').toggleClass('menu-opened')
 
-  $('.menu a').on 'click', scrollToBlock
+  $('.menu a').on 'click', (event) ->
+    event.preventDefault()
+    id = $(this).attr('href')
+
+    scrollToBlock(id)
+
   $('.root-link').on 'click', scrollToTop
 
-  $('#work article').on 'touchstart', ->
-    $videos.not($(this)).removeClass('touched')
-    $(this).toggleClass('touched')
+  if location.hash != ''
+    scrollToBlock(location.hash)
 
   updateNews()
 
