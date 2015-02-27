@@ -71,7 +71,7 @@
       animation-delay: -0.16s;
     }
 
-    .gradient, .bg {
+    .bg {
       opacity: 0;
       opacity: 0;
       will-change: opacity;
@@ -262,10 +262,6 @@
 
       .bg {
         opacity: 0.5;
-      }
-
-      .gradient {
-        opacity: 1;
       }
 
       @include respond-to(tablet) {
