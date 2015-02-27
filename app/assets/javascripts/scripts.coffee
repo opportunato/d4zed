@@ -58,24 +58,14 @@ calculateMainWidth = ->
   if windowWidth > largeBreakbpoint
     newWidth = maxWidth
     marginLeft = Math.ceil(Math.floor((windowWidth - newWidth)/gutterSize) / 2) * gutterSize - 2
-  else 
-    if windowWidth > mobileBreakpoint
-      marginSize = 4
-    else
-      marginSize = 2
+  else
+    marginSize = 2
 
     blockWidth    = windowWidth - marginSize * gutterSize
 
     gutterNumber  = Math.floor(blockWidth / gutterSize)
 
-    if windowWidth > mobileBreakpoint 
-      marginNumber = 2
-
-      if gutterNumber % 2 == 0
-        gutterNumber -= 1
-        marginNumber = 3
-    else
-      marginNumber = 1
+    marginNumber = 1
 
     newWidth = gutterNumber * gutterSize + 2
     marginLeft = marginNumber * gutterSize - 2
@@ -86,7 +76,7 @@ calculateMainWidth = ->
   )
 
   if windowWidth > mobileBreakpoint
-    smallWidth  = ((newWidth - gutterSize)/2 + 1)
+    smallWidth  = Math.ceil(Math.floor((newWidth - gutterSize)/gutterSize) / 2) * gutterSize + 2
   else
     smallWidth = newWidth
 
@@ -120,7 +110,7 @@ calculateMainWidth = ->
   else
     newsWidth = newWidth
 
-  $news.add($sections).css(width: newsWidth)
+  $news.add($sections).css(width: smallWidth)
   $newsContainer.css('left', - currentNewsIndex * newsWidth)
 
   calculateAboutHeight()
@@ -129,7 +119,7 @@ calculateMainWidth = ->
     leftTop = 0
     rightTop = 0
     leftPosition = 0
-    rightPosition = (newWidth - gutterSize)/2 + gutterSize - 1
+    rightPosition = smallWidth + gutterSize - 2
 
     videoGutter = if windowWidth > tabletBreakpoint
       gutterSize - 2
