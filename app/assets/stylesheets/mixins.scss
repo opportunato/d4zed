@@ -24,7 +24,16 @@
     @media only screen and (min-width: 930px) and (max-width: 1100px) { @content; }
   }
   @if $media == problem {
-    @media only screen and (min-width: 1000px) and (max-width: 1100px) { @content; }
+    @media only screen and (min-width: 1087px) and (max-width: 1155px) { @content; }
+  }
+  @if $media == next-problem {
+    @media only screen and (min-width: 1024px) and (max-width: 1087px) { @content; }
+  }
+  @if $media == large-problem {
+    @media only screen and (max-width: 1024px) { @content; }
+  }
+  @if $media == small-problem {
+    @media only screen and (max-width: 600px) { @content; }
   }
 }
 

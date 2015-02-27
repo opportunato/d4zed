@@ -126,6 +126,18 @@ article > .link {
     @include respond-to(problem) {
       font-size: 13px;
     } 
+
+    @include respond-to(next-problem) {
+      font-size: 11px;
+    }
+
+    @include respond-to(large-problem) {
+      font-size: 16px;
+    }  
+
+    @include respond-to(small-problem) {
+      font-size: 14px;
+    }  
   }
 }
 

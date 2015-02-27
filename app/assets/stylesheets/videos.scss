@@ -71,8 +71,11 @@
       animation-delay: -0.16s;
     }
 
-    .bg {
-      opacity: 0.5;
+    .gradient, .bg {
+      opacity: 0;
+      opacity: 0;
+      will-change: opacity;
+      transition: opacity .25s;
     }
 
     .gradient {
@@ -113,7 +116,7 @@
       background-position: center;
     }
 
-    .bg, .animation {
+    .animation {
       display: none;
     }
 
@@ -253,8 +256,16 @@
 
     &:hover,
     &.touched {
-      .info, .bg, .gradient {
+      .info {
         display: block;
+      }
+
+      .bg {
+        opacity: 0.5;
+      }
+
+      .gradient {
+        opacity: 1;
       }
 
       @include respond-to(tablet) {
