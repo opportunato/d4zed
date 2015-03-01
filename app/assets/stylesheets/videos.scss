@@ -121,7 +121,8 @@
     }
 
     .info {
-      display: none;
+      opacity: 0;
+      overflow: hidden;
       float: left;
       padding: 35px;
 
@@ -129,6 +130,18 @@
         font-weight: 700;
         text-transform: uppercase;
         margin-bottom: 3px;
+      }
+
+      header {
+        transform: translate3d(0, -100px, 0);
+      }
+
+      header, table, p, .link, .player {
+        transition: transform .2s ease-out;
+      }
+
+      p, table {
+        transform: translate3d(-100%, 0, 0);
       }
 
       > p {
@@ -188,16 +201,11 @@
         position: absolute;
         bottom: $gutter-size;
         text-transform: uppercase;
+        transform: translate3d(0, 100px, 0);
         width: 140px;
 
         a {
           color: $color-secondary;
-
-          &:hover {
-            i {
-              opacity: 1;
-            }
-          }
         }
 
         i {
@@ -259,10 +267,15 @@
       }
     }
 
-    &:hover,
-    &.touched {
+    &:hover {
       .info {
-        display: block;
+        opacity: 1;
+
+        table, p, header,
+        .player,
+        .link {
+          transform: translate3d(0, 0, 0);
+        }
       }
 
       .bg {
