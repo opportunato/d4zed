@@ -223,8 +223,12 @@
       z-index: -10;
     }
 
-    &.playing, .loading {
+    &.playing, &.loading {
       .cover, .player {
+        display: none;
+      }
+
+      .mobile-player {
         display: none;
       }
 
