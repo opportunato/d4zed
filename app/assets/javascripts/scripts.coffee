@@ -354,8 +354,7 @@ $ ->
       player = $f($container.children('iframe')[0])
 
       player.addEvent "ready", ->
-        player.addEvent "play", ->
-          $container.removeClass('loading').addClass('playing')
+        $container.removeClass('loading').addClass('playing')
 
         player.api("play")
 
