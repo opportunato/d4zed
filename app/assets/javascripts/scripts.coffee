@@ -337,10 +337,16 @@ $ ->
   $('.player, .mobile-player').on 'click', (e) ->
     $container = $(e.target).parents('article')
 
+    $videos.each (index, video) ->
+      $video = $(video)
+      $video.removeClass('playing loading')
+
+      if player = $video.find('iframe')[0]
+        $f(player).api("pause")
+
     $container.addClass('loading')
 
     if $container.children('iframe').length == 0
-      $videos.removeClass('playing')
       $container.find('.gradient').after("<iframe src='//player.vimeo.com/video/" + $container.data("vimeoId") + "?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff' width='560' height='315' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>");
       videoHeight = $container.height()
       $container.find('iframe').css(height: videoHeight)
@@ -348,7 +354,8 @@ $ ->
       player = $f($container.children('iframe')[0])
 
       player.addEvent "ready", ->
-        $container.removeClass('loading').addClass('playing')
+        player.addEvent "play", ->
+          $container.removeClass('loading').addClass('playing')
 
         player.api("play")
 

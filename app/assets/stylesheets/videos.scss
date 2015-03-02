@@ -24,7 +24,7 @@
     }
 
     .animation {
-      z-index: 3;
+      z-index: 20;
     }
 
     .cover {
@@ -117,7 +117,7 @@
     }
 
     .animation {
-      display: none;
+      z-index: -20;
     }
 
     .info {
@@ -257,13 +257,13 @@
 
     &.playing {
       .animation {
-        display: none;
+        display: -20;
       }
     }
 
     &.loading {
       .animation {
-        display: block;
+        z-index: 50;
       }
     }
 
