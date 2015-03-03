@@ -14,14 +14,13 @@ module ApplicationHelper
   end
 
   def video_url(video)
-    # if video.interactive?
-    #   video.thumbnail_url(:square)
-    # elsif video.big?
-    #   video.thumbnail_url(:main)
-    # else
-    #   video.thumbnail_url(:large)
-    # end
-    video.thumbnail_url
+    if video.interactive?
+      video.thumbnail_url(:square)
+    elsif video.big?
+      video.thumbnail_url(:main)
+    else
+      video.thumbnail_url(:large)
+    end
   end
 
   def video_categories(video)
