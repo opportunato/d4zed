@@ -10,7 +10,7 @@ class ThumbnailUploader < BaseUploader
   end
 
   version :square do
-    process resize_to_fill: [nil, 600]
+    process resize_to_fill: [600, 600]
     process convert: 'jpg' 
   end
 

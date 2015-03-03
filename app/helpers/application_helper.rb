@@ -14,7 +14,9 @@ module ApplicationHelper
   end
 
   def video_url(video)
-    # if video.big?
+    # if video.interactive?
+    #   video.thumbnail_url(:square)
+    # elsif video.big?
     #   video.thumbnail_url(:main)
     # else
     #   video.thumbnail_url(:large)
