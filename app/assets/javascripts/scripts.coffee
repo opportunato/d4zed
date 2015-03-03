@@ -23,7 +23,7 @@ maxWidth              = 1367
 calculateAboutHeight = ->
   if $(window).width() < tabletBreakpoint
     height = $about.find('p').height()
-    newHeight = Math.floor(height/gutterSize) * gutterSize + 2 * gutterSize - 2
+    newHeight = Math.ceil(height/gutterSize) * gutterSize + 2 * gutterSize - 2
   else
     newHeight = 5 * gutterSize - 2
 
