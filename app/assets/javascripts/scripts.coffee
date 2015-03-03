@@ -29,7 +29,6 @@ calculateAboutHeight = ->
 
   $about.height(newHeight)
   $about.data('height', newHeight)
-  
 
 scrollToBlock = (id) ->
   $('body').removeClass('menu-opened')
@@ -121,7 +120,7 @@ calculateMainWidth = ->
     newsWidth = newWidth
 
   $news.add($sections).css(width: newsWidth)
-  $newsContainer.css('left', - currentNewsIndex * newsWidth)
+  $newsContainer.css('transform', "translate3d(#{-currentNewsIndex * newsWidth}px, 0, 0)")
 
   calculateAboutHeight()
 
@@ -285,7 +284,7 @@ navigateNews = (direction) ->
   else
     return
 
-  $newsContainer.css('left', - currentNewsIndex * newsWidth)
+  $newsContainer.css('transform', "translate3d(#{-currentNewsIndex * newsWidth}px, 0, 0)")
   updateNews()
 
 $ ->

@@ -209,16 +209,18 @@
         }
 
         i {
-          font-size: 30px;
+          font-size: 32px;
           height: 100%;
           padding-right: 18px;
+          position: relative;
+          top: -1px;
         }
 
         span {
           line-height: 30px;
           position: relative;
           text-align: center;
-          top: -10px;
+          top: -13px;
         }
       }
     }

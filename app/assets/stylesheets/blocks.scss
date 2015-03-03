@@ -194,13 +194,17 @@ article > .link {
     height: 5 * $gutter-size + 2;
   }
 
+  @include respond-to(ultra-small) {
+    height: 8 * $gutter-size + 2;
+  }
+
   .container {
     position: absolute;
     height: 100%;
     left: 0;
     width: 100000%;
 
-    transition: left .2s ease-in-out;
+    transition: transform .2s ease-in-out;
   }
 
   article {
@@ -233,6 +237,7 @@ article > .link {
       width: calc(100% - 6 * 35px);
 
       @include respond-to(mobile) {
+        font-size: 16px;
         width: 100%;
       }
     }
