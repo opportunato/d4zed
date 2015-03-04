@@ -120,7 +120,7 @@ calculateMainWidth = ->
     newsWidth = newWidth
 
   $news.add($sections).css(width: newsWidth)
-  $newsContainer.css('transform', "translate3d(#{-currentNewsIndex * newsWidth}px, 0, 0)")
+  $newsContainer.css('left', -currentNewsIndex * newsWidth)
 
   calculateAboutHeight()
 
@@ -207,6 +207,7 @@ expandAbout = ->
   else
     $about.height($about.data('height'))
 
+
 expandVideo = ($video) ->
   $videos.not($video).each (index, video) ->
     if $(video).hasClass('expanded')
@@ -284,7 +285,7 @@ navigateNews = (direction) ->
   else
     return
 
-  $newsContainer.css('transform', "translate3d(#{-currentNewsIndex * newsWidth}px, 0, 0)")
+  $newsContainer.css('left', -currentNewsIndex * newsWidth)
   updateNews()
 
 $ ->
@@ -296,6 +297,9 @@ $ ->
     $videos.each (index, video) ->
       if $(video).hasClass('expanded')
         expandVideo($(video))
+
+    if $about.hasClass('expanded')
+      expandAbout()
 
     calculateMainWidth()
 
