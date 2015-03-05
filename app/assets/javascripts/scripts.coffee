@@ -352,6 +352,8 @@ $ ->
     if $container.children('iframe').length == 0
       $container.find('.gradient').after("<iframe src='//player.vimeo.com/video/" + $container.data("vimeoId") + "?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff' width='560' height='315' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>");
       videoHeight = $container.height()
+      if $container.hasClass('expanded')
+        videoHeight = videoHeight - 175
       $container.find('iframe').css(height: videoHeight)
       
       player = $f($container.children('iframe')[0])
