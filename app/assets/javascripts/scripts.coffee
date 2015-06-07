@@ -1,7 +1,7 @@
 gutterSize = 35
 $main      = $('#main > .wrapper')
 $videos    = $('#work > article')
-$header    = $('body > header > .wrapper')
+$header    = $('body > header > .header-wrapper > .wrapper')
 $sections  = $('#about, #news')
 $news      = $('#news article')
 $about     = $('#about')

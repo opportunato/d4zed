@@ -1,4 +1,6 @@
 body {
+  background-image: image_url('bg.svg');
+  background-size: $gutter-size;
   visibility: hidden;
 
   &.menu-opened {
@@ -53,11 +55,8 @@ body {
   }
 
   > header {
-    background-color: $color-main;
     color: $color-secondary;
     height: $header-height;
-    position: fixed;
-    top: 0;
     width: 100%;
     z-index: 100;
 
@@ -65,12 +64,22 @@ body {
       height: $mobile-header-height;
     }
 
-    > .wrapper {
-      display: table;
-      height: 100%;
-      margin: auto;
-      max-width: $max-width;
-      position: relative;
+    > .header-wrapper {
+      background-color: $color-main;
+      width: 100%;
+      height: $header-height;
+      z-index: 100;
+      position: fixed;
+      top: 0;
+
+      > .wrapper {
+        display: table;
+        height: 100%;
+        margin: auto;
+        max-width: $max-width;
+        position: absolute;
+        top: 0;
+      }
     }
 
     > .mobile-menu {

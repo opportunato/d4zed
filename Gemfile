@@ -13,7 +13,7 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'rails_admin'
 gem 'bootstrap-sass-rails'
-gem 'bootstrap-wysihtml5-rails', '> 0.3.1.24'
+gem 'rich', github: 'bastiaanterhorst/rich'
 
 gem 'mina-stack', github: 'div/mina-stack', group: :development
 gem 'mina-sidekiq', group: :development

@@ -6,23 +6,24 @@
 - set_meta_tags og: { title: "D4ZED", type: "article", image: image_url('logo.png'), description: description, url: "http://d4zed.com", site_name: "D4ZED" }
 
 header
-  .wrapper
-    = link_to "", class: "root-link" do
-      = image_tag "logo.svg", class: "logo"
-    ul.menu
-      li = link_to "News", "#news"
-      li = link_to "Work", "#work"
-      li = link_to "Contact", "#contacts"
-    ul.social
-      li = link_to "https://www.facebook.com/D4ZEDD4ZED", target: "_blank" do
-        i.d4zed-icon-facebook
-      li = link_to "https://twitter.com/d_4_z_e_d", target: "_blank" do
-        i.d4zed-icon-twitter
-    button.mobile-menu-button
-      .d4zed-navicon
-        .bar
-        .bar
-        .bar
+  .header-wrapper
+    .wrapper
+      = link_to "", class: "root-link" do
+        = image_tag "logo.svg", class: "logo"
+      ul.menu
+        li = link_to "News", "#news"
+        li = link_to "Work", "#work"
+        li = link_to "Contact", "#contacts"
+      ul.social
+        li = link_to "https://www.facebook.com/D4ZEDD4ZED", target: "_blank" do
+          i.d4zed-icon-facebook
+        li = link_to "https://twitter.com/d_4_z_e_d", target: "_blank" do
+          i.d4zed-icon-twitter
+      button.mobile-menu-button
+        .d4zed-navicon
+          .bar
+          .bar
+          .bar
 
 #main
   .wrapper

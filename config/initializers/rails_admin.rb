@@ -35,9 +35,7 @@ RailsAdmin.config do |config|
       field :brand
       field :director
       field :music
-      field :description, :wysihtml5 do
-        config_options parserRules: { tags: { p:1 } }, toolbar: { fa: true }
-      end
+      field :description, :rich_editor
       field :vimeo_id
       field :link
       field :bg_color
@@ -61,18 +59,14 @@ RailsAdmin.config do |config|
   config.model 'Page' do
     edit do
       field :category, :enum
-      field :text, :wysihtml5 do
-        config_options parserRules: { tags: { p:1 } }, toolbar: { fa: true }
-      end
+      field :text, :rich_editor
     end
   end
 
   config.model 'News' do
     edit do
       field :picture
-      field :content, :wysihtml5 do
-        config_options parserRules: { tags: { p:1 } }, toolbar: { fa: true }
-      end
+      field :content, :rich_editor
       field :created_at
       field :is_published
     end

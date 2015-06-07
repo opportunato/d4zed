@@ -50,10 +50,7 @@ $max-width: 1367px;
 
 
 #main {
-  background-image: image_url('bg.svg');
-  background-size: $gutter-size;
   color: $color-secondary;
-  margin-top: $header-height;
   width: 100%;
 
   @include respond-to(small) {

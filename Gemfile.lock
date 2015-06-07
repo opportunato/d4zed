@@ -1,4 +1,16 @@
 GIT
+  remote: git://github.com/bastiaanterhorst/rich.git
+  revision: 3e92749ac77ee171bd6f0643d67b1579cc1c1271
+  specs:
+    rich (1.4.8)
+      jquery-rails
+      kaminari
+      mime-types
+      rack-raw-upload
+      rails (>= 3.2.0)
+      sass-rails
+
+GIT
   remote: git://github.com/div/mina-stack.git
   revision: 1ac92f5e34214c31fbb3feb5a6043ec7a91e9a7e
   specs:
@@ -62,8 +74,6 @@ GEM
       bootstrap-sass (~> 3.1.0.0)
       railties (>= 3.2.0)
       sass-rails (>= 3.2.0)
-    bootstrap-wysihtml5-rails (0.3.3.4)
-      railties (>= 3.0)
     builder (3.2.2)
     byebug (3.5.1)
       columnize (~> 0.8)
@@ -154,6 +164,8 @@ GEM
     rack-pjax (0.8.0)
       nokogiri (~> 1.5)
       rack (~> 1.1)
+    rack-raw-upload (1.1.1)
+      multi_json
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.0)
@@ -255,7 +267,6 @@ DEPENDENCIES
   autoprefixer-rails
   better_errors
   bootstrap-sass-rails
-  bootstrap-wysihtml5-rails (> 0.3.1.24)
   byebug
   carrierwave
   coffee-rails (~> 4.1.0)
@@ -270,6 +281,7 @@ DEPENDENCIES
   puma
   rails (= 4.2.0)
   rails_admin
+  rich!
   sass-rails (~> 5.0)
   sidekiq
   slim
