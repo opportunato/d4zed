@@ -25,6 +25,7 @@ gem 'autoprefixer-rails'
 
 gem 'mini_magick'
 gem 'carrierwave'
+gem 'paperclip'
 
 gem 'sorcery'
 
