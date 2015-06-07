@@ -35,7 +35,7 @@ RailsAdmin.config do |config|
       field :brand
       field :director
       field :music
-      field :description, :rich_editor
+      field :description, :ck_editor
       field :vimeo_id
       field :link
       field :bg_color
@@ -59,14 +59,14 @@ RailsAdmin.config do |config|
   config.model 'Page' do
     edit do
       field :category, :enum
-      field :text, :rich_editor
+      field :text, :ck_editor
     end
   end
 
   config.model 'News' do
     edit do
       field :picture
-      field :content, :rich_editor
+      field :content, :ck_editor
       field :created_at
       field :is_published
     end
