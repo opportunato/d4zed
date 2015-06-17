@@ -1,4 +1,4 @@
-- description = Nokogiri::HTML.parse(Page.about_text).css('p').first.text
+- description = Nokogiri::HTML.parse(Page.about_text).css('p').first.try(:text)
 
 - set_meta_tags description: description, image: image_url('logo.png'), canonical: "http://d4zed.com"
 
