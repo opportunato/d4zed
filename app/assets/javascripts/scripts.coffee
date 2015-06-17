@@ -355,19 +355,18 @@ $ ->
       if $container.hasClass('expanded')
         videoHeight = videoHeight - 175
       $container.find('iframe').css(height: videoHeight)
-      
+
       player = $f($container.children('iframe')[0])
 
-      player.addEvent "ready", ->
-        $container.removeClass('loading').addClass('playing')
+      $container.removeClass('loading').addClass('playing')
 
-        player.api("play")
+      player.api("play")
 
-        player.addEvent "pause", ->
-          $container.removeClass('playing')
+      player.addEvent "pause", ->
+        $container.removeClass('playing')
 
-        player.addEvent "finish", ->
-          $container.removeClass('playing')
+      player.addEvent "finish", ->
+        $container.removeClass('playing')
     else
       $videos.removeClass('playing loading')
       $container.addClass('playing').removeClass('loading')
