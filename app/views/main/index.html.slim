@@ -42,7 +42,7 @@ header
           - @news.each_with_index do |news, index|
             article[data-date=format_date(news.created_at) data-index=index]
               .cover[style="background-image: url(#{news.picture_url(:large)})"]
-              p = news.content.html_safe
+              p = sanitize news.content, tags: %w(a)
       - if @news.first.present?
         .date = format_date(@news.first.created_at)
         .buttons
