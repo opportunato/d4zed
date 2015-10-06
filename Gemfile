@@ -28,6 +28,8 @@ gem 'carrierwave'
 gem 'paperclip'
 
 gem 'sorcery'
+gem 'sprockets-commonjs'
+gem 'react-rails', '~> 1.3.0'
 
 gem 'puma'
 gem 'sidekiq'
@@ -38,5 +40,4 @@ group :development, :test do
   gem 'better_errors'
   gem 'byebug'
   gem 'web-console', '~> 2.0'
-  gem 'spring'
 end
