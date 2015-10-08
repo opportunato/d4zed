@@ -26,56 +26,61 @@ header
           .bar
 
 #main
-  = react_component('Application', { data: serialize_data })
-  / .wrapper
-  /   = react_component('About', { text: Page.about_text.try(:html_safe) })
+  .wrapper
+    section#about
+      header About
+      .wrapper
+        .content = Page.about_text.try(:html_safe)
+      button.expander
+        i.d4zed-icon-close
+        i.d4zed-icon-expand
 
-  /   section#news
-  /     header News
-  /     .wrapper
-  /       .container
-  /         - @news.each_with_index do |news, index|
-  /           article[data-date=format_date(news.created_at) data-index=index]
-  /             .cover[style="background-image: url(#{news.picture_url(:large)})"]
-  /             p = sanitize news.content, tags: %w(a)
-  /     - if @news.first.present?
-  /       .date = format_date(@news.first.created_at)
-  /       .buttons
-  /         button.prev
-  /           i.d4zed-icon-chevron-left
-  /         button.next
-  /           i.d4zed-icon-chevron-right
+    section#news
+      header News
+      .wrapper
+        .container
+          - @news.each_with_index do |news, index|
+            article[data-date=format_date(news.created_at) data-index=index]
+              .cover[style="background-image: url(#{news.picture_url(:large)})"]
+              p = sanitize news.content, tags: %w(a)
+      - if @news.first.present?
+        .date = format_date(@news.first.created_at)
+        .buttons
+          button.prev
+            i.d4zed-icon-chevron-left
+          button.next
+            i.d4zed-icon-chevron-right
 
-    / section#work
-    /   header Work
+    section#work
+      header Work
 
-    /   - @videos.each do |video|
-    /     = render partial: "main/video", locals: { video: video }
+      - @videos.each do |video|
+        = render partial: "main/video", locals: { video: video }
 
-    / footer
-    /   section#contacts
-    /     header Contact
-    /     .column 
-    /       | Vesterbrogade 62D
-    /       br
-    /       | 1620 Copenhagen
-    /       br
-    /       | Denmark
-    /     .column 
-    /       | 108 West 2nd Street #1002
-    /       br
-    /       | Los Angeles, CA 90012
-    /       br
-    /       | United States
-    /     .column 
-    /       | DK: +45 60601221
-    /       br
-    /       | US: +1 (213) 457-3385
-    /       br
-    /       = link_to "hello@d4zed.com", "mailto:hello@d4zed.com"
+    footer
+      section#contacts
+        header Contact
+        .column 
+          | Vesterbrogade 62D
+          br
+          | 1620 Copenhagen
+          br
+          | Denmark
+        .column 
+          | 108 West 2nd Street #1002
+          br
+          | Los Angeles, CA 90012
+          br
+          | United States
+        .column 
+          | DK: +45 60601221
+          br
+          | US: +1 (213) 457-3385
+          br
+          = link_to "hello@d4zed.com", "mailto:hello@d4zed.com"
       
-    /   .social  
-    /     = link_to "https://www.facebook.com/D4ZEDD4ZED", class: "facebook", target: "_blank" do
-    /       i.d4zed-icon-facebook
-    /     = link_to "https://twitter.com/d_4_z_e_d", class: "twitter", target: "_blank" do
-    /       i.d4zed-icon-twitter
+      .social  
+        = link_to "https://www.facebook.com/D4ZEDD4ZED", class: "facebook", target: "_blank" do
+          i.d4zed-icon-facebook
+        = link_to "https://twitter.com/d_4_z_e_d", class: "twitter", target: "_blank" do
+          i.d4zed-icon-twitter

@@ -13,7 +13,3 @@
 //= require jquery
 //= require froogaloop
 //= require scripts
-//= require react
-//= require react_ujs
-//= require classnames
-//= require components
