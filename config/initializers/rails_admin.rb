@@ -27,9 +27,9 @@ RailsAdmin.config do |config|
 
   config.main_app_name = ['d4zed', 'Admin']
 
-  config.included_models = [Tag, News, Video, Page]
+  config.included_models = [Tag, News, Brand, Page]
 
-  config.model 'Video' do
+  config.model 'Brand' do
     edit do
       field :name
       field :brand

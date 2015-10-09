@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150607154858) do
+ActiveRecord::Schema.define(version: 20151009112651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "brands", force: :cascade do |t|
+    t.string   "name"
+    t.string   "brand"
+    t.string   "director"
+    t.string   "music"
+    t.string   "vimeo_id"
+    t.text     "description"
+    t.string   "thumbnail"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_published", default: false
+    t.string   "bg_color",     default: "af4e7b"
+    t.integer  "size",         default: 0
+    t.integer  "order_number", default: 0
+    t.string   "link"
+  end
 
   create_table "news", force: :cascade do |t|
     t.text     "content"
@@ -70,22 +87,5 @@ ActiveRecord::Schema.define(version: 20150607154858) do
   end
 
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
-
-  create_table "videos", force: :cascade do |t|
-    t.string   "name"
-    t.string   "brand"
-    t.string   "director"
-    t.string   "music"
-    t.string   "vimeo_id"
-    t.text     "description"
-    t.string   "thumbnail"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "is_published", default: false
-    t.string   "bg_color",     default: "af4e7b"
-    t.integer  "size",         default: 0
-    t.integer  "order_number", default: 0
-    t.string   "link"
-  end
 
 end

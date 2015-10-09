@@ -1,4 +1,4 @@
-class Video < ActiveRecord::Base
+class Brand < ActiveRecord::Base
   include Taggable
 
   before_save :set_order_number
@@ -17,7 +17,7 @@ class Video < ActiveRecord::Base
 
   def set_order_number
     if self.order_number.blank?
-      self.order_number = Video.all.order('order_number DESC').first.order_number
+      self.order_number = Brand.all.order('order_number DESC').first.order_number
     end
   end
 end

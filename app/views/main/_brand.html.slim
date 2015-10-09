@@ -1,0 +1,54 @@
+article[data-vimeo-id=brand.vimeo_id class=video_class(brand) id=brand.name.gsub(' ', '-').downcase]
+  .animation
+    .spinner
+      .bounce1
+      .bounce2
+      .bounce3
+  .cover[style="background-image: url(#{video_url(brand)});"]
+  .bg[style="background-color: ##{brand.bg_color};"]
+  .gradient
+    .cover-info
+      - if brand.brand.present?
+        .brand = brand.brand
+      .name = brand.name
+  .info
+    header 
+      - if brand.brand.present?
+        = "#{brand.brand} - #{brand.name} #{video_categories(brand)}"
+      - else
+        = "#{brand.name} #{video_categories(brand)}"
+    p = brand.description.html_safe
+    .mobile
+      - if brand.director.present?
+        h2 Director
+        p = brand.director
+      h2 Music
+      p = brand.music
+    table.desktop
+      tr
+        - if brand.director.present?
+          th Director
+        th Music
+      tr
+        - if brand.director.present?
+          td = brand.director
+        td = brand.music
+    - if !brand.interactive?
+      .player
+        i.d4zed-icon-play
+        span Play brand
+    - else
+      .link
+        = link_to brand.link, target: "_blank" do
+          i.d4zed-icon-link
+          span See Project
+  - if !brand.interactive?
+      button.mobile-player
+        i.d4zed-icon-play-standalone
+  - else
+    button.link
+      = link_to brand.link, target: "_blank" do
+        i.d4zed-icon-link-standalone
+  button.expander
+    i.d4zed-icon-close
+    i.d4zed-icon-expand
