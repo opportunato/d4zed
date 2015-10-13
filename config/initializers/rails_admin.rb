@@ -27,10 +27,10 @@ RailsAdmin.config do |config|
 
   config.main_app_name = ['d4zed', 'Admin']
 
-  config.included_models = [Tag, News, Brand, Page]
+  config.included_models = [Tag, News, Brand, Medium, Page]
 
-  config.model 'Brand' do
-    edit do
+  config.model 'Medium' do 
+    edit do 
       field :name
       field :brand
       field :director
@@ -38,17 +38,30 @@ RailsAdmin.config do |config|
       field :description, :ck_editor
       field :vimeo_id
       field :link
-      field :bg_color
-      field :size, :enum
       field :thumbnail
       field :tags
+      field :is_published
+    end
+
+    list do
+      field :name
+      field :brand
+      field :is_published
+    end
+  end
+
+  config.model 'Brand' do
+    edit do
+      field :brand
+      field :bg_color
+      field :size, :enum
       field :order_number
       field :is_published
     end
 
     list do
       sort_by :order_number
-      field :name
+      field :brand
       field :is_published
       field :order_number do
         sort_reverse true
