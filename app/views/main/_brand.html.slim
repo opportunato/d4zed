@@ -1,3 +1,5 @@
+- medium = brand.media.first
+
 article[data-vimeo-id=brand.vimeo_id class=video_class(brand) id=brand.name.gsub(' ', '-').downcase]
   .animation
     .spinner
@@ -10,36 +12,36 @@ article[data-vimeo-id=brand.vimeo_id class=video_class(brand) id=brand.name.gsub
     .cover-info
       - if brand.brand.present?
         .brand = brand.brand
-      .name = brand.name
+      .name = medium.name
   .info
     header 
       - if brand.brand.present?
         = "#{brand.brand} - #{brand.name} #{video_categories(brand)}"
       - else
         = "#{brand.name} #{video_categories(brand)}"
-    p = brand.description.html_safe
+    p = medium.description.html_safe
     .mobile
-      - if brand.director.present?
+      - if medium.director.present?
         h2 Director
-        p = brand.director
+        p = medium.director
       h2 Music
-      p = brand.music
+      p = medium.music
     table.desktop
       tr
-        - if brand.director.present?
+        - if medium.director.present?
           th Director
         th Music
       tr
-        - if brand.director.present?
-          td = brand.director
-        td = brand.music
+        - if medium.director.present?
+          td = medium.director
+        td = medium.music
     - if !brand.interactive?
       .player
         i.d4zed-icon-play
         span Play brand
     - else
       .link
-        = link_to brand.link, target: "_blank" do
+        = link_to medium.link, target: "_blank" do
           i.d4zed-icon-link
           span See Project
   - if !brand.interactive?
@@ -47,7 +49,7 @@ article[data-vimeo-id=brand.vimeo_id class=video_class(brand) id=brand.name.gsub
         i.d4zed-icon-play-standalone
   - else
     button.link
-      = link_to brand.link, target: "_blank" do
+      = link_to medium.link, target: "_blank" do
         i.d4zed-icon-link-standalone
   button.expander
     i.d4zed-icon-close

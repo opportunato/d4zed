@@ -1,6 +1,8 @@
 class Brand < ActiveRecord::Base
   include Taggable
 
+  has_many :media
+
   before_save :set_order_number
 
   enum size: [ :small, :big ]
@@ -12,7 +14,7 @@ class Brand < ActiveRecord::Base
   validates_presence_of :name, :music, :vimeo_id, :thumbnail, :size
 
   def interactive?
-    link.present?
+    media.first.link.present?
   end
 
   def set_order_number
