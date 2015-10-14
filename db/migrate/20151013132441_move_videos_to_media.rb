@@ -19,7 +19,6 @@ class MoveVideosToMedia < ActiveRecord::Migration
         brand.media << medium
         brand.name = brand.brand
         brand.save!
-        Tagging.where(taggable_id: brand.id).update_all("taggable_type = 'Medium', taggable_id = #{medium.id}")
         brand.tags
       end
     end
