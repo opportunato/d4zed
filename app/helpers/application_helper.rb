@@ -10,16 +10,16 @@ module ApplicationHelper
       class_name += " interactive"
     end
 
-    class_name
+    class_name + " wrapper"
   end
 
-  def video_url(video)
-    if video.interactive?
-      video.thumbnail_url(:square)
-    elsif video.big?
-      video.thumbnail_url(:main)
+  def medium_url(medium)
+    if medium.brand.interactive?
+      medium.thumbnail_url(:square)
+    elsif medium.brand.big?
+      medium.thumbnail_url(:main)
     else
-      video.thumbnail_url(:large)
+      medium.thumbnail_url(:large)
     end
   end
 

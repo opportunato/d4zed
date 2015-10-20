@@ -39,7 +39,6 @@ RailsAdmin.config do |config|
       field :vimeo_id
       field :link
       field :thumbnail
-      field :tags
       field :is_published
     end
 
@@ -55,6 +54,7 @@ RailsAdmin.config do |config|
       field :brand
       field :bg_color
       field :size, :enum
+      field :tags
       field :order_number
       field :is_published
     end

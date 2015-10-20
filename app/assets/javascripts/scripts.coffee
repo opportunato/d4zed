@@ -1,6 +1,6 @@
 gutterSize = 35
 $main      = $('#main > .wrapper')
-$videos    = $('#work > article')
+$videos    = $('#work > .wrapper')
 $header    = $('body > header > .header-wrapper > .wrapper')
 $sections  = $('#about, #news')
 $news      = $('#news article')
@@ -111,8 +111,9 @@ calculateMainWidth = ->
     else
       if $video.hasClass('interactive') then squareHeight else smallHeight
 
-    $video.css(width: width, height: height) 
-    $video.find('iframe').css(height: height) 
+    $video.css(width: width, height: height)
+    $video.find('iframe').css(height: height)
+    $video.find('article').css(width: width)
 
   if windowWidth > tabletBreakpoint
     newsWidth = (newWidth - gutterSize)/2 + 1
@@ -120,7 +121,9 @@ calculateMainWidth = ->
     newsWidth = newWidth
 
   $news.add($sections).css(width: newsWidth)
-  $newsContainer.css('left', -currentNewsIndex * newsWidth)
+  updateNews()
+  $videos.each (index, video) ->
+    updateVideo($(video))
 
   calculateAboutHeight()
 
@@ -252,41 +255,56 @@ expandVideo = ($video) ->
   updateVideos($video, additionalHeight)
 
 currentNewsIndex = 0
-$newsContainer   = $('#news .container')
-newsNumber       = $newsContainer.children().length
+$newsWrapper   = $('#news .wrapper')
 
+updateArrows = ($wrapper) ->
+  $container = $wrapper.find(".container")
+  width = $container.children().width()
+  currentIndex = $wrapper.data('index') || 0
+  $container.css('transform', "translate(#{-currentIndex * width}px)")
+
+  $prev = $wrapper.find(".prev")
+  $next = $wrapper.find(".next")
+
+  $prev = $wrapper.closest("#news").find(".prev") if ($prev.length == 0)
+  $next = $wrapper.closest("#news").find(".next") if ($next.length == 0)
+
+  if currentIndex == 0
+    $prev.addClass('inactive');
+    $next.removeClass('inactive');
+  else if currentIndex == $wrapper.find('.container').children().length - 1
+    $prev.removeClass('inactive');
+    $next.addClass('inactive');
+  else
+    $prev.add($next).removeClass('inactive');
+
+updateVideo = ($videoContainer) ->
+  updateArrows($videoContainer)
 
 updateNews = ->
-  $block = $($newsContainer.children().get(currentNewsIndex))
-
+  $container = $newsWrapper.find(".container")
+  $block = $($container.children().get($newsWrapper.data('index')))
   $('#news .date').text($block.data('date'))
 
-  if currentNewsIndex == 0
-    $('.prev').addClass('inactive');
-    $('.next').removeClass('inactive');
-  else if currentNewsIndex == newsNumber - 1
-    $('.prev').removeClass('inactive');
-    $('.next').addClass('inactive');
-  else
-    $('.next, .prev').removeClass('inactive');
+  updateArrows($newsWrapper);
 
-
-navigateNews = (direction) ->
-  newsWidth = $newsContainer.children().width()
+navigate = ($wrapper, direction) ->
+  $container = $wrapper.find(".container")
+  currentIndex = $wrapper.data('index') || 0;
+  blocksNumber = $container.children().length
 
   if direction == 'prev'
-    return if currentNewsIndex == 0
+    return if currentIndex == 0
 
-    currentNewsIndex -= 1
+    currentIndex -= 1
   else if direction == 'next'
-    return if currentNewsIndex == newsNumber - 1
+    return if currentIndex == blocksNumber - 1
 
-    currentNewsIndex += 1
+    currentIndex += 1
   else
     return
 
-  $newsContainer.css('left', -currentNewsIndex * newsWidth)
-  updateNews()
+  $wrapper.data('index', currentIndex)
 
 $ ->
   $('body').css('visibility', 'visible')
@@ -315,11 +333,23 @@ $ ->
   $('#work .expander').on 'click', ->
     expandVideo($(@).closest('article'))
 
-  $('.prev').on 'click', ->
-    navigateNews('prev')
+  $('#news .prev').on 'click', ->
+    navigate($newsWrapper, 'prev')
+    updateNews()
 
-  $('.next').on 'click', ->
-    navigateNews('next')
+  $('#news .next').on 'click', ->
+    navigate($newsWrapper, 'next')
+    updateNews()
+
+  $('#work .prev').on 'click', ->
+    $videoContainer = $(this.closest(".wrapper"))
+    navigate($videoContainer, 'prev')
+    updateVideo($videoContainer)
+
+  $('#work .next').on 'click', ->
+    $videoContainer = $(this.closest(".wrapper"))
+    navigate($videoContainer, 'next')
+    updateVideo($videoContainer)
 
   $('.mobile-menu-button').on 'click', ->
     $('body').toggleClass('menu-opened')
@@ -336,6 +366,8 @@ $ ->
     scrollToBlock(location.hash)
 
   updateNews()
+  $videos.each (index, video) ->
+    updateVideo($(video))
 
   $('.player, .mobile-player').on 'click', (e) ->
     $container = $(e.target).parents('article')

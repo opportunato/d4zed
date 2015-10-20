@@ -1,56 +1,62 @@
-- medium = brand.media.first
-
-article[data-vimeo-id=brand.vimeo_id class=video_class(brand) id=brand.name.gsub(' ', '-').downcase]
-  .animation
-    .spinner
-      .bounce1
-      .bounce2
-      .bounce3
-  .cover[style="background-image: url(#{video_url(brand)});"]
-  .bg[style="background-color: ##{brand.bg_color};"]
-  .gradient
-    .cover-info
-      - if brand.brand.present?
-        .brand = brand.brand
-      .name = medium.name
-  .info
-    header 
-      - if brand.brand.present?
-        = "#{brand.brand} - #{brand.name} #{video_categories(brand)}"
-      - else
-        = "#{brand.name} #{video_categories(brand)}"
-    p = medium.description.html_safe
-    .mobile
-      - if medium.director.present?
-        h2 Director
-        p = medium.director
-      h2 Music
-      p = medium.music
-    table.desktop
-      tr
-        - if medium.director.present?
-          th Director
-        th Music
-      tr
-        - if medium.director.present?
-          td = medium.director
-        td = medium.music
-    - if !brand.interactive?
-      .player
-        i.d4zed-icon-play
-        span Play brand
-    - else
-      .link
-        = link_to medium.link, target: "_blank" do
-          i.d4zed-icon-link
-          span See Project
-  - if !brand.interactive?
-      button.mobile-player
-        i.d4zed-icon-play-standalone
-  - else
-    button.link
-      = link_to medium.link, target: "_blank" do
-        i.d4zed-icon-link-standalone
-  button.expander
-    i.d4zed-icon-close
-    i.d4zed-icon-expand
+div[class=video_class(brand) data-id=brand.id]
+  .container
+    - brand.media.each do |medium|
+      article.media[data-vimeo-id=brand.vimeo_id id=brand.name.gsub(' ', '-').downcase]
+        .animation
+          .spinner
+            .bounce1
+            .bounce2
+            .bounce3
+        .cover[style="background-image: url(#{medium_url(medium)});"]
+        .bg[style="background-color: ##{brand.bg_color};"]
+        .gradient
+          .cover-info
+            - if brand.brand.present?
+              .brand = brand.brand
+            .name = medium.name
+        - if brand.media.length > 1
+          button.prev
+            i.d4zed-icon-chevron-left
+          button.next
+            i.d4zed-icon-chevron-right
+        .info
+          header 
+            - if brand.brand.present?
+              = "#{brand.brand} - #{medium.name} #{video_categories(brand)}"
+            - else
+              = "#{medium.name} #{video_categories(brand)}"
+          p = medium.description.html_safe
+          .mobile
+            - if medium.director.present?
+              h2 Director
+              p = medium.director
+            h2 Music
+            p = medium.music
+          table.desktop
+            tr
+              - if medium.director.present?
+                th Director
+              th Music
+            tr
+              - if medium.director.present?
+                td = medium.director
+              td = medium.music
+          - if !brand.interactive?
+            .player
+              i.d4zed-icon-play
+              span Play video
+          - else
+            .link
+              = link_to medium.link, target: "_blank" do
+                i.d4zed-icon-link
+                span See Project
+        - if !brand.interactive?
+            button.mobile-player
+              i.d4zed-icon-play-standalone
+        - else
+          button.link
+            = link_to medium.link, target: "_blank" do
+              i.d4zed-icon-link-standalone
+        button.expander
+          i.d4zed-icon-close
+          i.d4zed-icon-expand

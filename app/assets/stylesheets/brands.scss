@@ -8,9 +8,29 @@
     display: block;
   }
 
-  article {
+  .wrapper {
     float: left;
-    margin-bottom: $gutter-size - 2;
+    margin-bottom: $gutter-size;
+    position: relative;
+    overflow: hidden;
+
+    @include respond-to(tablet) {
+      margin-bottom: 2 * $gutter-size - 2;
+    }
+  }
+
+  .container {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    width: 100000%;
+
+    transition: transform .2s ease-in-out;
+  }
+
+  article.media {
+    float: left;
+    height: 100%;
     position: relative;
 
     .info, .bg, .gradient, .animation {
@@ -23,6 +43,31 @@
       right: 0;    
     }
 
+    .prev, 
+    .next {
+      position: absolute;
+      top: 50%;
+      cursor: pointer;
+      margin-top: - 10px;
+      z-index: 1000;
+
+      &.prev {
+        left: 3px;
+      }
+
+      &.next {
+        right: 3px;
+      }
+
+      &.inactive {
+        cursor: default;
+
+        i {
+          opacity: 0.5;
+        }
+      }
+    }
+
     .animation {
       z-index: 20;
     }
@@ -33,10 +78,6 @@
 
       height: 100%;
       width: 100%;
-    }
-
-    @include respond-to(tablet) {
-      margin-bottom: 2 * $gutter-size - 2;
     }
 
     .animation {
