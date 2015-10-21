@@ -27,25 +27,31 @@ RailsAdmin.config do |config|
 
   config.main_app_name = ['d4zed', 'Admin']
 
-  config.included_models = [Tag, News, Brand, Medium, Page]
+  config.included_models = [Tag, News, Brand, Medium, Page, Credit]
 
   config.model 'Medium' do 
     edit do 
       field :name
       field :brand
-      field :director
-      field :music
       field :description, :ck_editor
       field :vimeo_id
       field :link
       field :thumbnail
       field :is_published
+      field :credits
     end
 
     list do
       field :name
       field :brand
       field :is_published
+    end
+  end
+
+  config.model 'Credit' do
+    edit do 
+      field :position
+      field :person
     end
   end
 

@@ -27,20 +27,17 @@ div[class=video_class(brand) data-id=brand.id]
               = "#{medium.name} #{video_categories(brand)}"
           p = medium.description.html_safe
           .mobile
-            - if medium.director.present?
-              h2 Director
-              p = medium.director
-            h2 Music
-            p = medium.music
+            - medium.credits.each do |credit|
+              h2 = credit.position.name
+              p = credit.person
           table.desktop
-            tr
-              - if medium.director.present?
-                th Director
-              th Music
-            tr
-              - if medium.director.present?
-                td = medium.director
-              td = medium.music
+              tr
+                - medium.credits.each do |credit|
+                  td
+                    h4 = credit.position.name
+                    p = credit.person
+
+              
           - if !brand.interactive?
             .player
               i.d4zed-icon-play

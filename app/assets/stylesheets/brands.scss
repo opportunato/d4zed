@@ -171,10 +171,11 @@
       float: left;
       padding: 35px;
 
-      header, th {
+      header, td > h4 {
         font-weight: 700;
         text-transform: uppercase;
         margin-bottom: 3px;
+        margin-top: 5px;
       }
 
       header {

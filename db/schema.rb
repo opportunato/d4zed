@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151013132441) do
+ActiveRecord::Schema.define(version: 20151020172227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(version: 20151013132441) do
     t.integer  "size",         default: 0
     t.integer  "order_number", default: 0
     t.string   "link"
+  end
+
+  create_table "credits", force: :cascade do |t|
+    t.string   "person"
+    t.integer  "position_id"
+    t.integer  "medium_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "media", force: :cascade do |t|
@@ -59,6 +67,13 @@ ActiveRecord::Schema.define(version: 20151013132441) do
   create_table "pages", force: :cascade do |t|
     t.text     "text"
     t.integer  "category",   default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "singular",   default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
