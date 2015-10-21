@@ -52,6 +52,7 @@ RailsAdmin.config do |config|
     edit do 
       field :position
       field :person
+      field :order_number
     end
   end
 
