@@ -37,6 +37,7 @@ RailsAdmin.config do |config|
       field :vimeo_id
       field :link
       field :thumbnail
+      field :order_number
       field :is_published
       field :credits
     end
@@ -64,6 +65,7 @@ RailsAdmin.config do |config|
       field :tags
       field :order_number
       field :is_published
+      field :media
     end
 
     list do
