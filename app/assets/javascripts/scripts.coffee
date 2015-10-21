@@ -1,6 +1,7 @@
 gutterSize = 35
 $main      = $('#main > .wrapper')
 $videos    = $('#work > .wrapper')
+$work      = $('#work')
 $header    = $('body > header > .header-wrapper > .wrapper')
 $sections  = $('#about, #news')
 $news      = $('#news article')
@@ -306,7 +307,43 @@ navigate = ($wrapper, direction) ->
 
   $wrapper.data('index', currentIndex)
 
+initiateInfiniteScroll = ->
+  $invisibleVideos = $videos.slice(5)
+  $invisibleVideos.remove()
+  $videos = $('#work > .wrapper')
+
+  $(document).on 'scroll', ->
+    return if ($invisibleVideos.length == 0)
+
+    if $(document).scrollTop() > $work.offset().top + $work.height() - $(window).height()
+      $work.append($invisibleVideos.slice(0, 5))
+      $invisibleVideos = $invisibleVideos.slice(5)
+      $videos = $('#work > .wrapper')
+      calculateMainWidth()
+      initializeVideoSliders()
+
+prevSlide = ->
+  $videoContainer = $(this.closest(".wrapper"))
+  navigate($videoContainer, 'prev')
+  updateVideo($videoContainer)
+
+nextSlide = ->
+  $videoContainer = $(this.closest(".wrapper"))
+  navigate($videoContainer, 'next')
+  updateVideo($videoContainer)
+
+
+initializeVideoSliders = ->
+  $('#work .prev').off 'click', prevSlide
+  $('#work .prev').on 'click', prevSlide
+  $('#work .next').off 'click', nextSlide
+  $('#work .next').on 'click', nextSlide
+  $videos.each (index, video) ->
+    updateVideo($(video))
+
 $ ->
+  initiateInfiniteScroll()
+
   $('body').css('visibility', 'visible')
 
   calculateMainWidth()
@@ -341,16 +378,6 @@ $ ->
     navigate($newsWrapper, 'next')
     updateNews()
 
-  $('#work .prev').on 'click', ->
-    $videoContainer = $(this.closest(".wrapper"))
-    navigate($videoContainer, 'prev')
-    updateVideo($videoContainer)
-
-  $('#work .next').on 'click', ->
-    $videoContainer = $(this.closest(".wrapper"))
-    navigate($videoContainer, 'next')
-    updateVideo($videoContainer)
-
   $('.mobile-menu-button').on 'click', ->
     $('body').toggleClass('menu-opened')
 
@@ -366,8 +393,7 @@ $ ->
     scrollToBlock(location.hash)
 
   updateNews()
-  $videos.each (index, video) ->
-    updateVideo($(video))
+  initializeVideoSliders()
 
   $('.player, .mobile-player').on 'click', (e) ->
     $container = $(e.target).parents('article')
