@@ -30,4 +30,8 @@ module ApplicationHelper
       ""
     end
   end
+
+  def position_name(position, credits)
+    credits.length > 1 && !position.singular ? position.name.pluralize : position.name
+  end
 end

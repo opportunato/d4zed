@@ -31,11 +31,14 @@ div[class=video_class(brand) data-id=brand.id]
               h2 = credit.position.name
               p = credit.person
           table.desktop
+            - medium.credits.map { |credit| { position: credit.position, person: credit.person } }.group_by{ |credit| credit[:position] }.values.in_groups_of(2).each do |group|
               tr
-                - medium.credits.each do |credit|
+                - group.each do |credits|
                   td
-                    h4 = credit.position.name
-                    p = credit.person
+                    - if credits.present?
+                      h4 = position_name(credits[0][:position], credits)
+                      - credits.each do |credit|
+                        p = credit[:person]
 
               
           - if !brand.interactive?
