@@ -15,7 +15,7 @@
     overflow: hidden;
 
     @include respond-to(tablet) {
-      margin-bottom: 2 * $gutter-size - 2;
+      margin-bottom: $gutter-size - 2;
     }
 
     &.playing, &.loading {
@@ -121,14 +121,18 @@
     height: 100%;
     position: relative;
 
-    .info.desktop, .bg, .gradient, .animation {
+    .info.desktop, .bg, .gradient, .animation, .cover {
       border: 2px solid $color-main;
       position: absolute;
 
       top: 0;
       left: 0;
       bottom: 0;
-      right: 0;    
+      right: 0;
+
+      @include respond-to(tiny) {
+        border: none;
+      }
     }
 
     .info.mobile {
@@ -137,14 +141,6 @@
 
     .animation {
       z-index: 20;
-    }
-
-    .cover {
-      border: 2px solid $color-main;
-      position: absolute;
-
-      height: 100%;
-      width: 100%;
     }
 
     .animation {

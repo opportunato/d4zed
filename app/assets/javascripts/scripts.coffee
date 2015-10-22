@@ -60,33 +60,33 @@ calculateMainWidth = ->
     newWidth = maxWidth
     marginLeft = Math.ceil(Math.floor((windowWidth - newWidth)/gutterSize) / 2) * gutterSize - 2
   else 
-    # calculate left/right margin size
-    if windowWidth > mobileBreakpoint
-      marginSize = 4
-    else if windowWidth > tinyMobileBreakpoint
-      marginSize = 2
+    if windowWidth > tinyMobileBreakpoint
+      # calculate left/right margin size
+      if windowWidth > mobileBreakpoint
+        marginSize = 4
+      else
+        marginSize = 2
+
+      # calculate each block width
+      blockWidth    = windowWidth - marginSize * gutterSize
+
+      gutterNumber  = Math.floor(blockWidth / gutterSize)
+
+      # calculate left margin number
+      if windowWidth > mobileBreakpoint 
+        marginNumber = 2
+
+        if gutterNumber % 2 == 0
+          gutterNumber -= 1
+          marginNumber = 3
+      else
+        marginNumber = 1
+
+      newWidth = gutterNumber * gutterSize + 2
+      marginLeft = marginNumber * gutterSize - 2
     else
-      marginSize = 0
-
-    # calculate each block width
-    blockWidth    = windowWidth - marginSize * gutterSize
-
-    gutterNumber  = Math.floor(blockWidth / gutterSize)
-
-    # calculate left margin number
-    if windowWidth > mobileBreakpoint 
-      marginNumber = 2
-
-      if gutterNumber % 2 == 0
-        gutterNumber -= 1
-        marginNumber = 3
-    else if windowWidth > tinyMobileBreakpoint
-      marginNumber = 1
-    else
-      marginNumber = 0
-
-    newWidth = gutterNumber * gutterSize + 2
-    marginLeft = marginNumber * gutterSize - 2
+      newWidth = windowWidth
+      marginLeft = 0
 
   $main.add($header).css(
     'margin-left': marginLeft
@@ -118,13 +118,17 @@ calculateMainWidth = ->
     else
       width = newWidth
 
-    height = if $video.hasClass('big')
-      Math.floor(width/(ratio * gutterSize)) * gutterSize + 2
+    if windowWidth > tinyMobileBreakpoint
+      height = if $video.hasClass('big')
+        height = Math.floor(width/(ratio * gutterSize)) * gutterSize + 2
+      else
+        if $video.hasClass('interactive') then squareHeight else smallHeight
+      
+      if (windowWidth < smallTabletBreakpoint)
+        height += gutterSize
     else
-      if $video.hasClass('interactive') then squareHeight else smallHeight
+      height = Math.floor(newWidth / gutterSize) * gutterSize + 2
 
-    if (windowWidth < smallTabletBreakpoint)
-      height += gutterSize
 
     $video.css(width: width, height: height)
     $video.find('iframe').css(height: height)
@@ -334,6 +338,8 @@ navigate = ($wrapper, direction) ->
 
   $wrapper.data('index', currentIndex)
 
+$invisibleVideos = null
+
 initiateInfiniteScroll = ->
   $invisibleVideos = $videos.slice(5)
   $invisibleVideos.remove()
@@ -343,13 +349,16 @@ initiateInfiniteScroll = ->
     return if ($invisibleVideos.length == 0)
 
     if $(document).scrollTop() > $work.offset().top + $work.height() - $(window).height()
-      $work.append($invisibleVideos.slice(0, 5))
+      loadVideos($invisibleVideos.slice(0, 5))
       $invisibleVideos = $invisibleVideos.slice(5)
-      $videos = $('#work > .wrapper')
-      calculateMainWidth()
-      initializeVideoSliders()
-      initializePlayer()
-      initializeExpand()
+
+loadVideos = (videos) ->
+  $work.append(videos)
+  $videos = $('#work > .wrapper')
+  calculateMainWidth()
+  initializeVideoSliders()
+  initializePlayer()
+  initializeExpand()
 
 prevSlide = ->
   $videoContainer = $(this.closest(".wrapper"))
@@ -463,6 +472,10 @@ $ ->
   $('.menu a').on 'click', (event) ->
     event.preventDefault()
     id = $(this).attr('href')
+
+    if $(@).data('loadAll')
+      loadVideos($invisibleVideos)
+      $invisibleVideos = []
 
     scrollToBlock(id)
 
