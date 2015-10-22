@@ -60,35 +60,40 @@ calculateMainWidth = ->
     newWidth = maxWidth
     marginLeft = Math.ceil(Math.floor((windowWidth - newWidth)/gutterSize) / 2) * gutterSize - 2
   else 
-    if windowWidth > tinyMobileBreakpoint
-      # calculate left/right margin size
-      if windowWidth > mobileBreakpoint
-        marginSize = 4
-      else
-        marginSize = 2
-
-      # calculate each block width
-      blockWidth    = windowWidth - marginSize * gutterSize
-
-      gutterNumber  = Math.floor(blockWidth / gutterSize)
-
-      # calculate left margin number
-      if windowWidth > mobileBreakpoint 
-        marginNumber = 2
-
-        if gutterNumber % 2 == 0
-          gutterNumber -= 1
-          marginNumber = 3
-      else
-        marginNumber = 1
-
-      newWidth = gutterNumber * gutterSize + 2
-      marginLeft = marginNumber * gutterSize - 2
+    # calculate left/right margin size
+    if windowWidth > mobileBreakpoint
+      marginSize = 4
     else
-      newWidth = windowWidth
-      marginLeft = 0
+      marginSize = 2
 
-  $main.add($header).css(
+    # calculate each block width
+    blockWidth    = windowWidth - marginSize * gutterSize
+
+    gutterNumber  = Math.floor(blockWidth / gutterSize)
+
+    # calculate left margin number
+    if windowWidth > mobileBreakpoint 
+      marginNumber = 2
+
+      if gutterNumber % 2 == 0
+        gutterNumber -= 1
+        marginNumber = 3
+    else
+      marginNumber = 1
+
+    newWidth = gutterNumber * gutterSize + 2
+    marginLeft = marginNumber * gutterSize - 2
+
+  $header.css(
+    'margin-left': marginLeft
+    'width': newWidth
+  )
+
+  if windowWidth < tinyMobileBreakpoint
+    newWidth = windowWidth
+    marginLeft = 0
+
+  $main.css(
     'margin-left': marginLeft
     'width': newWidth
   )
@@ -310,6 +315,11 @@ updateVideo = ($videoContainer) ->
 
   $infoWrapper.children().remove()
   $infoWrapper.append($header).append($info)
+
+  $mobileLink = $videoContainer.find('button.link > a')
+  if $mobileLink.length > 0
+    href = $video.find('.link > a').attr('href')
+    $mobileLink.attr('href', href)
 
   updateArrows($videoContainer)
 
