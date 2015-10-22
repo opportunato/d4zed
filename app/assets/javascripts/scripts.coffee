@@ -14,6 +14,7 @@ videos = {
   right: []
 }
 
+tinyMobileBreakpoint  = 420
 smallMobileBreakpoint = 500
 mobileBreakpoint      = 804
 smallTabletBreakpoint = 930
@@ -62,8 +63,10 @@ calculateMainWidth = ->
     # calculate left/right margin size
     if windowWidth > mobileBreakpoint
       marginSize = 4
-    else
+    else if windowWidth > tinyMobileBreakpoint
       marginSize = 2
+    else
+      marginSize = 0
 
     # calculate each block width
     blockWidth    = windowWidth - marginSize * gutterSize
@@ -77,8 +80,10 @@ calculateMainWidth = ->
       if gutterNumber % 2 == 0
         gutterNumber -= 1
         marginNumber = 3
-    else
+    else if windowWidth > tinyMobileBreakpoint
       marginNumber = 1
+    else
+      marginNumber = 0
 
     newWidth = gutterNumber * gutterSize + 2
     marginLeft = marginNumber * gutterSize - 2
@@ -118,6 +123,9 @@ calculateMainWidth = ->
     else
       if $video.hasClass('interactive') then squareHeight else smallHeight
 
+    if (windowWidth < smallTabletBreakpoint)
+      height += gutterSize
+
     $video.css(width: width, height: height)
     $video.find('iframe').css(height: height)
     $video.find('article').css(width: width)
@@ -142,10 +150,7 @@ calculateMainWidth = ->
     rightPosition = (newWidth - gutterSize)/2 + gutterSize - 1
 
     # include gutter size
-    videoGutter = if windowWidth > tabletBreakpoint
-      gutterSize - 2
-    else
-      2 * gutterSize - 2
+    videoGutter = gutterSize - 2
 
     $videos.each (index, video) ->
       $video = $(video)
@@ -232,22 +237,20 @@ expandVideo = ($video) ->
   $video.toggleClass('expanded')
   $cover = $video.find('.cover')
   $bg = $video.find('.bg')
-  $info = $video.find('.info')
+  $info = $video.children('.info.mobile')
 
   if $video.hasClass('expanded')
     $info.show()
 
     $color = $bg.css('backgroundColor')
     $cover.css(
-      height: $video.height()
+      height: $video.height() - gutterSize
       position: 'relative'
     )
-
     $info.css(
-      borderTop: 'none'
       backgroundColor: $color,
       display: 'block'
-      position: 'relative'
+      top: $video.height() - gutterSize
       height: 175
       width: '100%'
     )
@@ -255,14 +258,14 @@ expandVideo = ($video) ->
     additionalHeight = $info.innerHeight() + 2
 
     $video.css(
-      height: $cover.height() + $info.innerHeight() + 6
+      height: $cover.height() + $info.innerHeight() + 6 + gutterSize
     )
   else
-    additionalHeight = ($cover.height() + 4) - $video.height()
+    additionalHeight = ($cover.height() + 4) - $video.height() + gutterSize
 
     $info.hide()
     $video.css(
-      height: $cover.height() + 4
+      height: $cover.height() + 4 + gutterSize
     )
 
   updateVideos($video, additionalHeight)
@@ -273,7 +276,7 @@ $newsWrapper   = $('#news .wrapper')
 updateArrows = ($wrapper) ->
   $container = $wrapper.find(".container")
   width = $container.children().width()
-  currentIndex = $wrapper.data('index') || 0
+  currentIndex = $wrapper.data("index") || 0
 
   $container.css('transform', "translate(#{-currentIndex * width}px)")
 
@@ -293,6 +296,17 @@ updateArrows = ($wrapper) ->
     $prev.add($next).removeClass('inactive');
 
 updateVideo = ($videoContainer) ->
+  $infoWrapper = $videoContainer.children(".info")
+  currentIndex = $videoContainer.data("index") || 0
+
+  $video = $($videoContainer.find('article').get(currentIndex))
+
+  $info = $video.find('.info.mobile').children().clone()
+  $header = $video.find('.info.desktop').children('header').clone()
+
+  $infoWrapper.children().remove()
+  $infoWrapper.append($header).append($info)
+
   updateArrows($videoContainer)
 
 updateNews = ->
@@ -335,6 +349,7 @@ initiateInfiniteScroll = ->
       calculateMainWidth()
       initializeVideoSliders()
       initializePlayer()
+      initializeExpand()
 
 prevSlide = ->
   $videoContainer = $(this.closest(".wrapper"))
@@ -357,7 +372,9 @@ initializeVideoSliders = ->
 
 
 playVideo = (e) ->
-  $container = $(e.target).parents('article')
+  $container = $(e.target).closest('.wrapper')
+  currentIndex = $container.data('index') || 0
+  $videoContainer = $($container.find('article').get(currentIndex))
 
   $videos.each (index, video) ->
     $video = $(video)
@@ -368,14 +385,12 @@ playVideo = (e) ->
 
   $container.addClass('loading')
 
-  if $container.children('iframe').length == 0
-    $container.find('.gradient').after("<iframe src='https://player.vimeo.com/video/" + $container.data("vimeoId") + "?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff' width='560' height='315' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>");
-    videoHeight = $container.height()
-    if $container.hasClass('expanded')
-      videoHeight = videoHeight - 175
-    $container.find('iframe').css(height: videoHeight)
-    
-    player = $f($container.children('iframe')[0])
+  if $videoContainer.children('iframe').length == 0
+    $videoContainer.find('.gradient').after("<iframe src='https://player.vimeo.com/video/" + $videoContainer.data("vimeoId") + "?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff' width='560' height='315' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>");
+    videoHeight = $container.find('.cover').height()
+    $videoContainer.find('iframe').css(height: videoHeight)
+
+    player = $f($videoContainer.children('iframe')[0])
 
     player.addEvent "ready", ->
       $container.removeClass('loading').addClass('playing')
@@ -398,6 +413,14 @@ playVideo = (e) ->
 initializePlayer = ->
   $('.player, .mobile-player').off 'click', playVideo
   $('.player, .mobile-player').on 'click', playVideo
+
+
+handleExpand = ->
+  expandVideo($($(@).closest('.wrapper')))
+
+initializeExpand = ->
+  $('#work .expander').on 'click', handleExpand
+    
 
 
 $ ->
@@ -426,9 +449,6 @@ $ ->
   $('#about .expander').on 'click', ->
     expandAbout()
 
-  $('#work .expander').on 'click', ->
-    expandVideo($(@).closest('.wrapper'))
-
   $('#news .prev').on 'click', ->
     navigate($newsWrapper, 'prev')
     updateNews()
@@ -454,6 +474,7 @@ $ ->
   updateNews()
   initializeVideoSliders()
   initializePlayer()
+  initializeExpand()
 
   
     

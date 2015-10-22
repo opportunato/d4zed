@@ -14,22 +14,19 @@ div[class=video_class(brand) data-id=brand.id]
             - if brand.brand.present?
               .brand = brand.brand
             .name = medium.name
-        - if brand.media.length > 1
-          button.prev
-            i.d4zed-icon-chevron-left
-          button.next
-            i.d4zed-icon-chevron-right
-        .info
+        .info.mobile
+          .credits
+            - medium.credits.group_by(&:position).each do |position, credits|
+              h2 = position_name(position, credits)
+              - credits.each do |credit|
+                p = credit.person
+        .info.desktop
           header 
             - if brand.brand.present?
               = "#{brand.brand} - #{medium.name} #{video_categories(brand)}"
             - else
               = "#{medium.name} #{video_categories(brand)}"
           p = medium.description.html_safe
-          .mobile
-            - medium.credits.each do |credit|
-              h2 = credit.position.name
-              p = credit.person
           table.desktop
             - medium.credits.map { |credit| { position: credit.position, person: credit.person } }.group_by{ |credit| credit[:position] }.values.in_groups_of(2).each do |group|
               tr
@@ -50,13 +47,19 @@ div[class=video_class(brand) data-id=brand.id]
               = link_to medium.link, target: "_blank" do
                 i.d4zed-icon-link
                 span See Project
-        - if !brand.interactive?
-            button.mobile-player
-              i.d4zed-icon-play-standalone
-        - else
-          button.link
-            = link_to medium.link, target: "_blank" do
-              i.d4zed-icon-link-standalone
-        button.expander
-          i.d4zed-icon-close
-          i.d4zed-icon-expand
+  .info.mobile
+  - if !brand.interactive?
+    button.mobile-player
+      i.d4zed-icon-play-standalone
+  - else
+    button.link
+      = link_to nil, target: "_blank" do
+        i.d4zed-icon-link-standalone
+  button.expander
+    i.d4zed-icon-close
+    i.d4zed-icon-expand
+  - if brand.media.length > 1
+    button.prev
+      i.d4zed-icon-chevron-left
+    button.next
+      i.d4zed-icon-chevron-right

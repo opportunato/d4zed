@@ -17,30 +17,39 @@
     @include respond-to(tablet) {
       margin-bottom: 2 * $gutter-size - 2;
     }
-  }
 
-  .container {
-    position: absolute;
-    height: 100%;
-    left: 0;
-    width: 100000%;
+    &.playing, &.loading {
+      .player {
+        display: none;
+      }
 
-    transition: transform .2s ease-in-out;
-  }
+      .cover {
+        z-index: -100;
+      }
 
-  article.media {
-    float: left;
-    height: 100%;
-    position: relative;
+      .mobile-player {
+        display: none;
+      }
 
-    .info, .bg, .gradient, .animation {
-      border: 2px solid $color-main;
-      position: absolute;
+      &:hover {
+        .info, .bg, .gradient {
+          display: none;
+        }
+      }
 
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;    
+      iframe {
+        z-index: 1;
+      }
+
+      .cover-info {
+        display: none;
+      }
+    }
+
+    &.playing {
+      .animation {
+        display: -20;
+      }
     }
 
     .prev, 
@@ -49,7 +58,6 @@
       top: 50%;
       cursor: pointer;
       margin-top: - 10px;
-      z-index: 1000;
 
       &.prev {
         left: 3px;
@@ -66,6 +74,65 @@
           opacity: 0.5;
         }
       }
+    }
+  }
+
+  .container {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    width: 100000%;
+
+    transition: transform .2s ease-in-out;
+
+    @include respond-to(tablet) {
+      height: calc(100% - 35px);
+    }
+  }
+
+  > .wrapper > .info.mobile {
+    border: 2px solid $color-main;
+    border-top: none;
+    display: none;
+    padding: $gutter-size;
+    position: absolute;
+
+    header {
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    h2 {
+      text-transform: uppercase;
+      font-size: 12px;
+      margin: 0;
+    }
+
+    p {
+      line-height: 1.5;
+      margin-top: 1px;
+      margin-bottom: 10px;
+    }
+  }
+
+  article.media {
+    float: left;
+    height: 100%;
+    position: relative;
+
+    .info.desktop, .bg, .gradient, .animation {
+      border: 2px solid $color-main;
+      position: absolute;
+
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;    
+    }
+
+    .info.mobile {
+      display: none;
     }
 
     .animation {
@@ -207,10 +274,6 @@
         vertical-align: top;
       }
 
-      .mobile {
-        display: none;
-      }
-
       @include respond-to(small) {
         height: 5 * $gutter-size;
       }
@@ -218,23 +281,7 @@
       @include respond-to(tablet) {
         border-top: none;
 
-        .mobile {
-          display: block;
-
-          h2 {
-            text-transform: uppercase;
-            font-size: 12px;
-            margin: 0;
-          }
-
-          p {
-            line-height: 1.5;
-            margin-top: 1px;
-            margin-bottom: 10px;
-          }
-        }
-
-        .player, .link, .desktop {
+        .player, .link, table.desktop {
           display: none;
         }
       }
@@ -287,40 +334,6 @@
       top: 0;
       left: 0;
       z-index: -10;
-    }
-
-    &.playing, &.loading {
-      .player {
-        display: none;
-      }
-
-      .cover {
-        z-index: -100;
-      }
-
-      .mobile-player {
-        display: none;
-      }
-
-      &:hover {
-        .info, .bg, .gradient {
-          display: none;
-        }
-      }
-
-      iframe {
-        z-index: 1;
-      }
-
-      .cover-info {
-        display: none;
-      }
-    }
-
-    &.playing {
-      .animation {
-        display: -20;
-      }
     }
 
     &.loading {

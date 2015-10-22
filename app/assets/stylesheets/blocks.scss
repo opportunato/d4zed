@@ -16,10 +16,11 @@ section > header {
   }
 }
 
+#work .expander,
 section > .expander,
 article > .expander,
-article > .mobile-player,
-article > .link {
+#work .mobile-player,
+#work .link {
   outline: 0;
   position: absolute;
   right: $gutter-size;
@@ -56,20 +57,29 @@ article > .link {
   }
 }
 
+#work .expander,
+#work .mobile-player,
+#work .link {
+  bottom: 0;
+  z-index: 5;
+}
+
+#work .expander,
+section > .expander,
 article > .expander,
-article > .mobile-player,
-article > .link {
+#work .mobile-player,
+#work .link {
   display: none;
 }
 
 .expanded {
   .expander {
     .d4zed-icon-close {
-      display: block;
+      display: block !important;
     }
 
     .d4zed-icon-expand {
-      display: none;
+      display: none !important;
     }
   }
 }
@@ -81,9 +91,11 @@ article > .link {
 }
 
 @include respond-to(tablet) {
+  #work .expander,
+  section > .expander,
   article > .expander,
-  article > .mobile-player,
-  article > .link {
+  #work .mobile-player,
+  #work .link {
     display: block;
   }
 }
