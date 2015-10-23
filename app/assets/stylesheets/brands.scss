@@ -20,15 +20,19 @@
 
     .prev, 
     .next {
+      padding: 40px;
       position: absolute;
       cursor: pointer;
+      outline: none;
 
       &.prev {
-        left: 3px;
+        padding-left: 0;
+        left: 5px;
       }
 
       &.next {
-        right: 3px;
+        padding-right: 0;
+        right: 5px;
       }
 
       &.inactive {

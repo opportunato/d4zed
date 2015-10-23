@@ -142,7 +142,7 @@ calculateMainWidth = ->
     $video.css(width: width, height: height)
     $video.find('iframe').css(height: containerHeight)
     $video.find('article').css(width: width)
-    $video.find('.next, .prev').css(top: (containerHeight)/2 - 10)
+    $video.find('.next, .prev').css(top: (containerHeight)/2 - 50)
 
   if windowWidth > tabletBreakpoint
     newsWidth = (newWidth - gutterSize)/2 + 1
