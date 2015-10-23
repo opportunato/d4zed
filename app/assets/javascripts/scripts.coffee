@@ -152,7 +152,7 @@ calculateMainWidth = ->
 
   # set expanders for tiny screens
   $expanders = $(".expander, #news .buttons")
-  $playButtons = $("#work .mobile-player, #work .link")
+  $playButtons = $("#work .mobile-player, #work .mobile-link")
 
   if windowWidth > tinyMobileBreakpoint
     $expanders.add($playButtons).css(right: "")
@@ -337,7 +337,7 @@ updateVideo = ($videoContainer) ->
   $infoWrapper.children().remove()
   $infoWrapper.append($infoHeader).append($info)
 
-  $mobileLink = $videoContainer.find('button.link > a')
+  $mobileLink = $videoContainer.find('button.mobile-link > a')
   if $mobileLink.length > 0
     href = $video.find('.link > a').attr('href')
     $mobileLink.attr('href', href)

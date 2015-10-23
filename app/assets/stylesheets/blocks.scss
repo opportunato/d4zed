@@ -20,7 +20,7 @@ section > header {
 section > .expander,
 article > .expander,
 #work .mobile-player,
-#work .link {
+#work .mobile-link {
   outline: 0;
   position: absolute;
   right: $gutter-size;
@@ -42,7 +42,7 @@ article > .expander,
   }
 
   &.mobile-player,
-  &.link {
+  &.mobile-link {
     a {
       color: $color-secondary;
 
@@ -59,7 +59,7 @@ article > .expander,
 
 #work .expander,
 #work .mobile-player,
-#work .link {
+#work .mobile-link {
   bottom: 0;
   z-index: 5;
 }
@@ -67,7 +67,7 @@ article > .expander,
 #work .expander,
 article > .expander,
 #work .mobile-player,
-#work .link {
+#work .mobile-link {
   display: none;
 }
 
@@ -94,7 +94,7 @@ article > .expander,
   section > .expander,
   article > .expander,
   #work .mobile-player,
-  #work .link {
+  #work .mobile-link {
     display: block;
   }
 }
