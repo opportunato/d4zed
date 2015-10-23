@@ -108,6 +108,11 @@ article > .expander,
   padding: 0;
   position: relative;
 
+  @include respond-to(tiny) {
+    border-left: none;
+    border-right: none;
+  }
+
   a {
     color: $color-main;
     text-decoration: underline;

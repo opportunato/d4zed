@@ -3,7 +3,7 @@
     @media only screen and (max-width: 350px) { @content; }
   }
   @if $media  == tiny {
-    @media only screen and (max-width: 420x) { @content; }
+    @media only screen and (max-width: 420px) { @content; }
   }
   @if $media  == mobile {
     @media only screen and (max-width: 570px) { @content; }

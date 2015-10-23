@@ -131,7 +131,8 @@
       right: 0;
 
       @include respond-to(tiny) {
-        border: none;
+        border-left: none;
+        border-right: none;
       }
     }
 
