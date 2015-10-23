@@ -413,11 +413,13 @@ playVideo = (e) ->
   $videos.each (index, video) ->
     $video = $(video).find('.media')
     $video.removeClass('playing loading')
+    $(video).removeClass('playing')
 
     if (player = $video.find('iframe')).length > 0
       $f(player[0]).api("pause")
 
   $videoContainer.addClass('loading')
+  $container.addClass('playing')
 
   if $videoContainer.children('iframe').length == 0
     $videoContainer.find('.gradient').after("<iframe src='https://player.vimeo.com/video/" + $videoContainer.data("vimeoId") + "?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff' width='560' height='315' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>");
@@ -432,14 +434,16 @@ playVideo = (e) ->
       player.api("play")
 
       player.addEvent "pause", ->
-        $videoContainer.removeClass('playing')
+        $videoContainer.add($container).removeClass('playing')
 
       player.addEvent "finish", ->
-        $videoContainer.removeClass('playing')
+        $videoContainer.add($container).removeClass('playing')
   else
     $videos.find('.media').removeClass('playing loading')
+    $videos.removeClass('playing')
     $videoContainer.addClass('playing').removeClass('loading')
-    
+    $container.addClass('playing')
+
     player = $f($videoContainer.children('iframe')[0])
     player.api("play")
 

@@ -39,6 +39,12 @@
         }
       }
     }
+
+    &.playing { 
+      .mobile-player {
+        display: none;
+      }
+    }
   }
 
   .container {
@@ -92,10 +98,6 @@
 
       .cover {
         z-index: -100;
-      }
-
-      .mobile-player {
-        display: none;
       }
 
       &:hover {
