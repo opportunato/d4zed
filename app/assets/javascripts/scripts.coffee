@@ -129,7 +129,7 @@ calculateMainWidth = ->
       else
         if $video.hasClass('interactive') then squareHeight else smallHeight
       
-      if (windowWidth < smallTabletBreakpoint)
+      if (windowWidth <= tabletBreakpoint)
         height += gutterSize
     else
       height = Math.floor(newWidth / gutterSize) * gutterSize + 2
@@ -138,6 +138,8 @@ calculateMainWidth = ->
     $video.css(width: width, height: height)
     $video.find('iframe').css(height: height)
     $video.find('article').css(width: width)
+    nextPrevTop = if windowWidth < tabletBreakpoint then height - gutterSize else height
+    $video.find('.next, .prev').css(top: (nextPrevTop)/2 - 10)
 
   if windowWidth > tabletBreakpoint
     newsWidth = (newWidth - gutterSize)/2 + 1
@@ -155,6 +157,7 @@ calculateMainWidth = ->
     expanderRight = windowWidth % gutterSize
     $expanders.css(right: expanderRight)
     $playButtons.css(right: expanderRight + gutterSize)
+
 
   $news.add($sections).css(width: newsWidth)
   updateNews()
