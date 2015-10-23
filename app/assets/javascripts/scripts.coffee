@@ -400,8 +400,7 @@ playVideo = (e) ->
     $video.removeClass('playing loading')
 
     if (player = $video.find('iframe')).length > 0
-      player.each (player) ->
-        $f(player).api("pause")
+      $f(player[0]).api("pause")
 
   $videoContainer.addClass('loading')
 
