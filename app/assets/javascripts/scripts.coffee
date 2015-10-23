@@ -393,16 +393,17 @@ initializeVideoSliders = ->
 playVideo = (e) ->
   $container = $(e.target).closest('.wrapper')
   currentIndex = $container.data('index') || 0
-  $videoContainer = $($container.find('article').get(currentIndex))
+  $videoContainer = $($container.find('.media').get(currentIndex))
 
   $videos.each (index, video) ->
-    $video = $(video)
+    $video = $(video).find('.media')
     $video.removeClass('playing loading')
 
-    if player = $video.find('iframe')[0]
-      $f(player).api("pause")
+    if (player = $video.find('iframe')).length > 0
+      player.each (player) ->
+        $f(player).api("pause")
 
-  $container.addClass('loading')
+  $videoContainer.addClass('loading')
 
   if $videoContainer.children('iframe').length == 0
     $videoContainer.find('.gradient').after("<iframe src='https://player.vimeo.com/video/" + $videoContainer.data("vimeoId") + "?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff' width='560' height='315' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>");
@@ -412,20 +413,20 @@ playVideo = (e) ->
     player = $f($videoContainer.children('iframe')[0])
 
     player.addEvent "ready", ->
-      $container.removeClass('loading').addClass('playing')
+      $videoContainer.removeClass('loading').addClass('playing')
 
       player.api("play")
 
       player.addEvent "pause", ->
-        $container.removeClass('playing')
+        $videoContainer.removeClass('playing')
 
       player.addEvent "finish", ->
-        $container.removeClass('playing')
+        $videoContainer.removeClass('playing')
   else
-    $videos.removeClass('playing loading')
-    $container.addClass('playing').removeClass('loading')
+    $videos.find('.media').removeClass('playing loading')
+    $videoContainer.addClass('playing').removeClass('loading')
     
-    player = $f($container.children('iframe')[0])
+    player = $f($videoContainer.children('iframe')[0])
     player.api("play")
 
 

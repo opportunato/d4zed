@@ -18,40 +18,6 @@
       margin-bottom: $gutter-size - 2;
     }
 
-    &.playing, &.loading {
-      .player {
-        display: none;
-      }
-
-      .cover {
-        z-index: -100;
-      }
-
-      .mobile-player {
-        display: none;
-      }
-
-      &:hover {
-        .info, .bg, .gradient {
-          display: none;
-        }
-      }
-
-      iframe {
-        z-index: 1;
-      }
-
-      .cover-info {
-        display: none;
-      }
-    }
-
-    &.playing {
-      .animation {
-        display: -20;
-      }
-    }
-
     .prev, 
     .next {
       position: absolute;
@@ -120,6 +86,40 @@
     float: left;
     height: 100%;
     position: relative;
+
+    &.playing, &.loading {
+      .player {
+        display: none;
+      }
+
+      .cover {
+        z-index: -100;
+      }
+
+      .mobile-player {
+        display: none;
+      }
+
+      &:hover {
+        .info, .bg, .gradient {
+          display: none;
+        }
+      }
+
+      iframe {
+        z-index: 1;
+      }
+
+      .cover-info {
+        display: none;
+      }
+    }
+
+    &.playing {
+      .animation {
+        display: -20;
+      }
+    }
 
     .info.desktop, .bg, .gradient, .animation, .cover {
       border: 2px solid $color-main;
