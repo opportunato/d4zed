@@ -134,12 +134,12 @@ calculateMainWidth = ->
     else
       height = Math.floor(newWidth / gutterSize) * gutterSize + 2
 
+    containerHeight = if windowWidth <= tabletBreakpoint then height - gutterSize else height
 
     $video.css(width: width, height: height)
-    $video.find('iframe').css(height: height)
+    $video.find('iframe').css(height: containerHeight)
     $video.find('article').css(width: width)
-    nextPrevTop = if windowWidth < tabletBreakpoint then height - gutterSize else height
-    $video.find('.next, .prev').css(top: (nextPrevTop)/2 - 10)
+    $video.find('.next, .prev').css(top: (containerHeight)/2 - 10)
 
   if windowWidth > tabletBreakpoint
     newsWidth = (newWidth - gutterSize)/2 + 1
