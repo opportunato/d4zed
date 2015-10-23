@@ -105,8 +105,11 @@ calculateMainWidth = ->
     smallWidth = newWidth
 
   # calculate social margins
-  if windowWidth < smallTabletBreakpoint
-    socialMargin = Math.ceil(Math.floor((newWidth - $social.width())/gutterSize) / 2) * gutterSize + 1
+  socialMargin = Math.ceil(Math.floor((newWidth - $social.width())/gutterSize) / 2) * gutterSize + 1
+
+  if windowWidth <= tinyMobileBreakpoint
+    $social.css('margin-left', "#{socialMargin - 2}px")
+  else if windowWidth <= smallTabletBreakpoint
     $social.css('margin-left', "#{socialMargin}px")
   else
     $social.css('margin-left', 'auto')
