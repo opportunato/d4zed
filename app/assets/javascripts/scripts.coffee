@@ -326,10 +326,10 @@ updateVideo = ($videoContainer) ->
   $video = $($videoContainer.find('article').get(currentIndex))
 
   $info = $video.find('.info.mobile').children().clone()
-  $header = $video.find('.info.desktop').children('header').clone()
+  $infoHeader = $video.find('.info.desktop').children('header').clone()
 
   $infoWrapper.children().remove()
-  $infoWrapper.append($header).append($info)
+  $infoWrapper.append($infoHeader).append($info)
 
   $mobileLink = $videoContainer.find('button.link > a')
   if $mobileLink.length > 0
