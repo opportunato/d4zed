@@ -144,6 +144,18 @@ calculateMainWidth = ->
   else
     newsWidth = newWidth
 
+
+  # set expanders for tiny screens
+  $expanders = $(".expander, #news .buttons")
+  $playButtons = $("#work .mobile-player, #work .link")
+
+  if windowWidth > tinyMobileBreakpoint
+    $expanders.add($playButtons).css(right: "")
+  else
+    expanderRight = windowWidth % gutterSize
+    $expanders.css(right: expanderRight)
+    $playButtons.css(right: expanderRight + gutterSize)
+
   $news.add($sections).css(width: newsWidth)
   updateNews()
   $videos.each (index, video) ->
