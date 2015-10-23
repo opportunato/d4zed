@@ -81,7 +81,7 @@ calculateMainWidth = ->
     else
       marginNumber = 1
 
-    newWidth = gutterNumber * gutterSize + 2
+    newWidth = if windowWidth > tinyMobileBreakpoint then gutterNumber * gutterSize + 2 else windowWidth - 2 * gutterSize + 2
     marginLeft = marginNumber * gutterSize - 2
 
   $header.css(
