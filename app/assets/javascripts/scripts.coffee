@@ -262,6 +262,7 @@ expandVideo = ($video) ->
   $cover = $video.find('.cover')
   $bg = $video.find('.bg')
   $info = $video.children('.info.mobile')
+  $infoWrapper = $info.children('.mobile-container')
 
   if $video.hasClass('expanded')
     $info.show()
@@ -275,9 +276,11 @@ expandVideo = ($video) ->
       backgroundColor: $color,
       display: 'block'
       top: $video.height() - gutterSize
-      height: 175
       width: '100%'
     )
+    gutterLeft = $infoWrapper.height() % gutterSize
+    gutterAdd = if gutterLeft > gutterSize/2 then 0 else gutterSize
+    $infoWrapper.css(height: Math.ceil($infoWrapper.height() / gutterSize) * gutterSize - 2 + gutterAdd)
 
     additionalHeight = $info.innerHeight() + 2
 
@@ -320,7 +323,7 @@ updateArrows = ($wrapper) ->
     $prev.add($next).removeClass('inactive');
 
 updateVideo = ($videoContainer) ->
-  $infoWrapper = $videoContainer.children(".info")
+  $infoWrapper = $videoContainer.children(".info").children('.mobile-container')
   currentIndex = $videoContainer.data("index") || 0
 
   $video = $($videoContainer.find('article').get(currentIndex))

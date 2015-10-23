@@ -84,6 +84,11 @@
       margin-top: 1px;
       margin-bottom: 10px;
     }
+
+    @include respond-to(tiny) {
+      border-left: none;
+      border-right: none;
+    }
   }
 
   article.media {
