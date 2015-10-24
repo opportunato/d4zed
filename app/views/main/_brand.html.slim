@@ -17,9 +17,10 @@ div[class=video_class(brand) data-id=brand.id]
         .info.mobile
           .credits
             - medium.credits.group_by(&:position).each do |position, credits|
-              h2 = position_name(position, credits)
-              - credits.each do |credit|
-                p = credit.person
+              - if position
+                h2 = position_name(position, credits)
+                - credits.each do |credit|
+                  p = credit.person
         .info.desktop
           header 
             - if brand.brand.present?
@@ -32,7 +33,7 @@ div[class=video_class(brand) data-id=brand.id]
               tr
                 - group.each do |credits|
                   td
-                    - if credits.present?
+                    - if credits.present? && credits[0][:position]
                       h4 = position_name(credits[0][:position], credits)
                       - credits.each do |credit|
                         p = credit[:person]
