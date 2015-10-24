@@ -406,6 +406,9 @@ initializeVideoSliders = ($videos) ->
   $videos.find('.prev').on 'click', prevSlide
   $videos.find('.next').on 'click', nextSlide
   $videos.each (index, video) ->
+    hammertime = new Hammer($(video).find('.container')[0], {})
+    hammertime.on('swipeleft', nextSlide.bind($(video).find('.container')))
+    hammertime.on('swiperight', prevSlide.bind($(video).find('.container')))
     updateVideo($(video))
 
 
