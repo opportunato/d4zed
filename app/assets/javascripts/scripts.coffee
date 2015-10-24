@@ -283,7 +283,6 @@ expandVideo = ($video) ->
     )
     gutterLeft = $infoWrapper.height() % gutterSize
     gutterAdd = if gutterLeft > 2 * gutterSize/3 then 0 else -gutterSize
-    console.log(gutterLeft, gutterSize/3, gutterAdd)
     $info.css(height: Math.ceil($infoWrapper.height() / gutterSize) * gutterSize + gutterAdd + 2 * gutterSize)
 
     additionalHeight = $info.innerHeight() + 2
