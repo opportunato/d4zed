@@ -72,6 +72,10 @@ body {
       position: fixed;
       top: 0;
 
+      @include respond-to(small) {
+        height: $mobile-header-height;
+      }
+
       > .wrapper {
         display: table;
         height: 100%;

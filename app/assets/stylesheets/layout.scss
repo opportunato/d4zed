@@ -54,10 +54,6 @@ $max-width: 1367px;
   color: $color-secondary;
   width: 100%;
 
-  @include respond-to(small) {
-    margin-top: $mobile-header-height;
-  }
-
   > .wrapper {
     max-width: $max-width;
     margin: auto;
