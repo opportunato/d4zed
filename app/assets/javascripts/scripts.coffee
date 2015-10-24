@@ -380,17 +380,17 @@ initiateInfiniteScroll = ->
   $(document).on 'scroll', ->
     return if ($invisibleVideos.length == 0)
 
-    if $(document).scrollTop() > $work.offset().top + $work.height() - $(window).height()
+    if $(document).scrollTop() > $work.offset().top + $work.height() - $(window).height() - 200
       loadVideos($invisibleVideos.slice(0, 5))
       $invisibleVideos = $invisibleVideos.slice(5)
 
-loadVideos = (videos) ->
-  $work.append(videos)
+loadVideos = ($newVideos) ->
+  $work.append($newVideos)
   $videos = $('#work > .wrapper')
   calculateMainWidth()
-  initializeVideoSliders()
-  initializePlayer()
-  initializeExpand()
+  initializeVideoSliders($newVideos)
+  initializePlayer($newVideos)
+  initializeExpand($newVideos)
 
 prevSlide = ->
   $videoContainer = $(this.closest(".wrapper"))
@@ -403,11 +403,9 @@ nextSlide = ->
   updateVideo($videoContainer)
 
 
-initializeVideoSliders = ->
-  $('#work .prev').off 'click', prevSlide
-  $('#work .prev').on 'click', prevSlide
-  $('#work .next').off 'click', nextSlide
-  $('#work .next').on 'click', nextSlide
+initializeVideoSliders = ($videos) ->
+  $videos.find('.prev').on 'click', prevSlide
+  $videos.find('.next').on 'click', nextSlide
   $videos.each (index, video) ->
     updateVideo($(video))
 
@@ -455,17 +453,15 @@ playVideo = (e) ->
     player.api("play")
 
 
-initializePlayer = ->
-  $('.player, .mobile-player').off 'click', playVideo
-  $('.player, .mobile-player').on 'click', playVideo
+initializePlayer = ($videos) ->
+  $videos.find('.player, .mobile-player').on 'click', playVideo
 
 
 handleExpand = ->
   expandVideo($($(@).closest('.wrapper')))
 
-initializeExpand = ->
-  $('#work .expander').on 'click', handleExpand
-    
+initializeExpand = ($videos) ->
+  $videos.find('.expander').on 'click', handleExpand
 
 
 $ ->
@@ -515,15 +511,17 @@ $ ->
 
     scrollToBlock(id)
 
+  $("#news").find('a').prop("target", "_blank")
+
   $('.root-link').on 'click', scrollToTop
 
   if location.hash != ''
     scrollToBlock(location.hash)
 
   updateNews()
-  initializeVideoSliders()
-  initializePlayer()
-  initializeExpand()
+  initializeVideoSliders($videos)
+  initializePlayer($videos)
+  initializeExpand($videos)
 
   
     
