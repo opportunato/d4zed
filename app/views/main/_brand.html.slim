@@ -11,8 +11,8 @@ div[class=video_class(brand) data-id=brand.id]
         .bg[style="background-color: ##{brand.bg_color};"]
         .gradient
           .cover-info
-            - if brand.brand.present?
-              .brand = brand.brand
+            - if brand.name.present?
+              .brand = brand.name
             .name = medium.name
         .info.mobile
           .credits
@@ -23,8 +23,8 @@ div[class=video_class(brand) data-id=brand.id]
                   p = credit.person
         .info.desktop
           header 
-            - if brand.brand.present?
-              = "#{brand.brand} - #{medium.name} #{video_categories(brand)}"
+            - if brand.name.present?
+              = "#{brand.name} - #{medium.name} #{video_categories(brand)}"
             - else
               = "#{medium.name} #{video_categories(brand)}"
           p = medium.description.html_safe

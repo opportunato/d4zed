@@ -27,7 +27,7 @@ RailsAdmin.config do |config|
 
   config.main_app_name = ['d4zed', 'Admin']
 
-  config.included_models = [Tag, News, Brand, Medium, Page, Credit]
+  config.included_models = [Tag, News, Brand, Medium, Page, Credit, Position]
 
   config.model 'Medium' do 
     edit do 
@@ -57,9 +57,16 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'Position' do
+    edit do
+      field :name
+      field :singular
+    end
+  end
+
   config.model 'Brand' do
     edit do
-      field :brand
+      field :name
       field :bg_color
       field :size, :enum
       field :tags
@@ -70,7 +77,7 @@ RailsAdmin.config do |config|
 
     list do
       sort_by :order_number
-      field :brand
+      field :name
       field :is_published
       field :order_number do
         sort_reverse true
