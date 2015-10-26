@@ -12,7 +12,7 @@ class Brand < ActiveRecord::Base
 
   scope :published, -> { where(is_published: true).order('order_number DESC, created_at DESC') }
 
-  validates_presence_of :brand, :size
+  validates_presence_of :name, :size
 
   def interactive?
     media.first.link.present?
