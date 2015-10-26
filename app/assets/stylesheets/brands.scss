@@ -314,6 +314,10 @@
           padding-right: 18px;
           position: relative;
           top: -1px;
+
+          &:hover {
+            opacity: 1 !important;
+          }
         }
 
         span {
