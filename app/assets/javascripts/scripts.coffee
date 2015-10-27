@@ -294,6 +294,7 @@ expandVideo = ($video) ->
     additionalHeight = ($cover.height() + 4) - $video.height() + gutterSize
 
     $info.hide()
+    $cover.css(height: "auto", position: "absolute")
     $video.css(
       height: $cover.height() + 4 + gutterSize
     )
