@@ -1,3 +1,5 @@
+Rack::Utils.multipart_part_limit = 0
+
 module ActiveRecord
   module RailsAdminEnum
     def enum(definitions)
