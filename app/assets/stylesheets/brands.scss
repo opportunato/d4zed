@@ -304,6 +304,10 @@
         transform: translate3d(0, 100px, 0);
         width: 140px;
 
+        @include respond-to(large) {
+          right: 35px;
+        }
+
         a {
           color: $color-secondary;
         }
