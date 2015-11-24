@@ -395,11 +395,13 @@ loadVideos = ($newVideos) ->
 prevSlide = ->
   $videoContainer = $(this.closest(".wrapper"))
   navigate($videoContainer, 'prev')
+  stopAllVideos()
   updateVideo($videoContainer)
 
 nextSlide = ->
   $videoContainer = $(this.closest(".wrapper"))
   navigate($videoContainer, 'next')
+  stopAllVideos()
   updateVideo($videoContainer)
 
 
@@ -412,19 +414,24 @@ initializeVideoSliders = ($videos) ->
     hammertime.on('swiperight', prevSlide.bind($(video).find('.container')))
     updateVideo($(video))
 
+stopAllVideos = ->
+  $videos.each (index, video) ->
+    $(video).removeClass('playing')
+
+    $medias = $(video).find('.media')
+
+    $medias.each (index, media) ->
+      $(media).removeClass('playing loading')
+
+      if (player = $(media).find('iframe')).length > 0
+        $f(player[0]).api("pause")  
 
 playVideo = (e) ->
   $container = $(e.target).closest('.wrapper')
   currentIndex = $container.data('index') || 0
   $videoContainer = $($container.find('.media').get(currentIndex))
 
-  $videos.each (index, video) ->
-    $video = $(video).find('.media')
-    $video.removeClass('playing loading')
-    $(video).removeClass('playing')
-
-    if (player = $video.find('iframe')).length > 0
-      $f(player[0]).api("pause")
+  stopAllVideos()
 
   $container.addClass('playing')
 
