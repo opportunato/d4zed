@@ -116,6 +116,7 @@ calculateMainWidth = ->
 
   smallHeight = Math.floor(smallWidth/(2 * gutterSize)) * gutterSize + 2
   squareHeight = 2 * smallHeight + gutterSize - 2
+  squareHeight += gutterSize if windowWidth < tabletBreakpoint
 
   # set video dimensions
   $videos.each (index, video) ->
