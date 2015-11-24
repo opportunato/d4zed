@@ -131,7 +131,7 @@ calculateMainWidth = ->
       height = if $video.hasClass('big')
         height = Math.floor(width/(ratio * gutterSize)) * gutterSize + 2
       else
-        if $video.hasClass('interactive') then squareHeight else smallHeight
+        if $video.hasClass('interactive') && windowWidth > mobileBreakpoint then squareHeight else smallHeight
       
       if (windowWidth <= tabletBreakpoint)
         height += gutterSize
