@@ -437,27 +437,24 @@ playVideo = (e) ->
 
   if $videoContainer.children('iframe').length == 0
     $videoContainer.addClass('loading')
-    $videoContainer.find('.gradient').after("<iframe src='https://player.vimeo.com/video/" + $videoContainer.data("vimeoId") + "?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff' width='560' height='315' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>");
+    $videoContainer.find('.gradient').after("<iframe id='" + $videoContainer.data("vimeoId") + "' src='https://player.vimeo.com/video/" + $videoContainer.data("vimeoId") + "?player_id=" + $videoContainer.data("vimeoId") + "&title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff' width='560' height='315' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>");
     videoHeight = $container.find('.cover').height()
     $videoContainer.find('iframe').css(height: videoHeight)
 
     $iframe = $videoContainer.children('iframe')
-    $iframe.data('firstLoad', true)
+    player = $f($iframe[0])
+
     $iframe.on 'load', ->
-      player = $f($iframe[0])
-
       player.addEvent "ready", ->
-        if $iframe.data('firstLoad')
-          $videoContainer.removeClass('loading').addClass('playing')
+        $videoContainer.removeClass('loading').addClass('playing')
 
-          player.api("play")
-          $iframe.data('firstLoad', false)
+        player.api("play")
 
-          player.addEvent "pause", ->
-            $videoContainer.add($container).removeClass('playing')
+        player.addEvent "pause", ->
+          $videoContainer.add($container).removeClass('playing')
 
-          player.addEvent "finish", ->
-            $videoContainer.add($container).removeClass('playing')
+        player.addEvent "finish", ->
+          $videoContainer.add($container).removeClass('playing')
   else
     $videoContainer.addClass('playing')
 
