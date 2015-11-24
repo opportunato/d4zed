@@ -310,6 +310,10 @@
 
         a {
           color: $color-secondary;
+
+          &:hover i {
+            opacity: 1;
+          }
         }
 
         i {
@@ -318,10 +322,6 @@
           padding-right: 18px;
           position: relative;
           top: -1px;
-
-          &:hover {
-            opacity: 1 !important;
-          }
         }
 
         span {
