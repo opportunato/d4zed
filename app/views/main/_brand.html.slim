@@ -1,6 +1,6 @@
 div[class=video_class(brand) data-id=brand.id]
   .container
-    - brand.media.each do |medium|
+    - brand.media.published.each do |medium|
       article.media[data-vimeo-id=medium.vimeo_id id=medium.name.gsub(' ', '-').downcase]
         .animation
           .spinner
