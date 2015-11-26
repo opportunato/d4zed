@@ -1,8 +1,8 @@
 class Brand < ActiveRecord::Base
   include Taggable
 
-  has_many :media, -> { order(order_number: :desc) }
-  accepts_nested_attributes_for :media
+  has_many :media, -> { order(order_number: :desc) }, dependent: :destroy
+  accepts_nested_attributes_for :media, :allow_destroy => true
 
   before_save :set_order_number
 
