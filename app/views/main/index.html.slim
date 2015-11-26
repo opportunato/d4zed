@@ -55,7 +55,8 @@ header
       header Work
 
       - @brands.each do |brand|
-        = render partial: "main/brand", locals: { brand: brand }
+        - if brand.media.size > 0
+          = render partial: "main/brand", locals: { brand: brand }
 
     footer
       section#contacts
