@@ -287,48 +287,23 @@
       @include respond-to(tablet) {
         border-top: none;
 
-        .player, .link, table.desktop {
+        table.desktop {
           display: none;
         }
       }
 
       .player,
       .link {
-        border: 2px solid $color-secondary;
-        cursor: pointer;
-        font-size: 12px;
-        height: 34px;
         position: absolute;
-        bottom: $gutter-size;
-        text-transform: uppercase;
-        transform: translate3d(0, 100px, 0);
-        width: 140px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
 
-        @include respond-to(large) {
-          right: 35px;
-        }
+        cursor: pointer;
 
-        a {
-          color: $color-secondary;
-
-          &:hover i {
-            opacity: 1;
-          }
-        }
-
-        i {
-          font-size: 32px;
-          height: 100%;
-          padding-right: 18px;
-          position: relative;
-          top: -1px;
-        }
-
-        span {
-          line-height: 30px;
-          position: relative;
-          text-align: center;
-          top: -13px;
+        @include respond-to(tablet) {
+          display: none;
         }
       }
     }

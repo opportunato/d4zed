@@ -38,16 +38,10 @@ div[class=video_class(brand) data-id=brand.id]
                       - credits.each do |credit|
                         p = credit[:person]
 
-              
-          - if !brand.interactive?
-            .player
-              i.d4zed-icon-play
-              span Play video
+          - if brand.interactive?
+            = link_to "", medium.link, target: "_blank", class: "link"
           - else
-            .link
-              = link_to medium.link, target: "_blank" do
-                i.d4zed-icon-link
-                span See Project
+            .player
   .info.mobile
     .mobile-container
   - if !brand.interactive?
