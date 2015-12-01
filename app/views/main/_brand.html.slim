@@ -1,44 +1,11 @@
 div[class=video_class(brand) data-id=brand.id]
   .container
-    - brand.media.published.each do |medium|
-      article.media[data-vimeo-id=medium.vimeo_id id=medium.name.gsub(' ', '-').downcase]
-        .animation
-          .spinner
-            .bounce1
-            .bounce2
-            .bounce3
-        .cover[style="background-image: url(#{medium_url(medium)});"]
-        .bg[style="background-color: ##{brand.bg_color};"]
-        .gradient
-          .cover-info
-            - if brand.name.present?
-              .brand = brand.name
-            .name = medium.name
-            .subtitle = medium_subtitle(medium)
-        .info.mobile
-          .credits
-            - medium.credits.group_by(&:position).each do |position, credits|
-              - if position
-                h2 = position_name(position, credits)
-                - credits.each do |credit|
-                  p = credit.person
-        .info.desktop
-          header = "#{medium_title(medium)} (#{medium_subtitle(medium)})"
-          p = medium.description.html_safe
-          table.desktop
-            - medium.credits.map { |credit| { position: credit.position, person: credit.person } }.group_by{ |credit| credit[:position] }.values.in_groups_of(2).each do |group|
-              tr
-                - group.each do |credits|
-                  td
-                    - if credits.present? && credits[0][:position]
-                      h4 = position_name(credits[0][:position], credits)
-                      - credits.each do |credit|
-                        p = credit[:person]
-
-          - if brand.interactive?
-            = link_to "", medium.link, target: "_blank", class: "link"
-          - else
-            .player
+    - if brand.media.published.length > 1
+      = render partial: "main/medium", locals: { medium: brand.media.published.last, index: -1, playable: false }
+    - brand.media.published.each_with_index do |medium, index|
+      = render partial: "main/medium", locals: { medium: medium, index: index, playable: true }
+    - if brand.media.published.length > 1
+      = render partial: "main/medium", locals: { medium: brand.media.published.first, index: brand.media.published.length, playable: false }
   .info.mobile
     .mobile-container
   - if !brand.interactive?

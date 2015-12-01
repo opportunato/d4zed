@@ -305,27 +305,23 @@ expandVideo = ($video) ->
 currentNewsIndex = 0
 $newsWrapper   = $('#news .wrapper')
 
+getCurrentIndex = ($wrapper) ->
+  if $wrapper.find(".media").length > 1
+    ($wrapper.data("index") || 0) + 1
+  else
+    0
+
 updateArrows = ($wrapper) ->
   $container = $wrapper.find(".container")
   width = $container.children().width()
-  currentIndex = $wrapper.data("index") || 0
 
-  $container.css('transform', "translate(#{-currentIndex * width}px)")
+  $container.css('transform', "translate(#{-getCurrentIndex($wrapper) * width}px)")
 
   $prev = $wrapper.find(".prev")
   $next = $wrapper.find(".next")
 
   $prev = $wrapper.closest("#news").find(".prev") if ($prev.length == 0)
   $next = $wrapper.closest("#news").find(".next") if ($next.length == 0)
-
-  if currentIndex == 0
-    $prev.addClass('inactive');
-    $next.removeClass('inactive');
-  else if currentIndex == $wrapper.find('.container').children().length - 1
-    $prev.removeClass('inactive');
-    $next.addClass('inactive');
-  else
-    $prev.add($next).removeClass('inactive');
 
 updateVideo = ($videoContainer) ->
   $infoWrapper = $videoContainer.children(".info").children('.mobile-container')
@@ -354,20 +350,19 @@ updateNews = ->
   updateArrows($newsWrapper);
 
 navigate = ($wrapper, direction) ->
+  return if ($wrapper.data("in_transition"))
+
   $container = $wrapper.find(".container")
   currentIndex = $wrapper.data('index') || 0;
-  blocksNumber = $container.children().length
+
+  $wrapper.data("in_transition", true)
 
   if direction == 'prev'
-    return if currentIndex == 0
-
     currentIndex -= 1
   else if direction == 'next'
-    return if currentIndex == blocksNumber - 1
-
     currentIndex += 1
   else
-    return
+    currentIndex = direction
 
   $wrapper.data('index', currentIndex)
 
@@ -405,6 +400,10 @@ nextSlide = ->
   stopAllVideos()
   updateVideo($videoContainer)
 
+goTo = ($wrapper, index) ->
+  navigate($wrapper, index)
+  stopAllVideos()
+  updateVideo($wrapper)
 
 initializeVideoSliders = ($videos) ->
   $videos.find('.prev').on 'click', prevSlide
@@ -414,6 +413,29 @@ initializeVideoSliders = ($videos) ->
     hammertime.on('swipeleft', nextSlide.bind($(video).find('.container')))
     hammertime.on('swiperight', prevSlide.bind($(video).find('.container')))
     updateVideo($(video))
+
+  $videos.find('.container').on 'transitionend msTransitionEnd webkitTransitionEnd oTransitionEnd', ->
+    $wrapper = $(this).closest('.wrapper')
+    index = $wrapper.data('index')
+    length = $(this).children().length - 2
+
+    $wrapper.data("in_transition", false)
+
+    if index < 0
+      $("body").addClass("no-transition")
+      goTo($wrapper, length-1)
+      setTimeout -> 
+        $("body").removeClass("no-transition")
+      , 50
+    else if index > length-1
+      $("body").addClass("no-transition")
+      goTo($wrapper, 0)
+      setTimeout -> 
+        $("body").removeClass("no-transition")
+      , 50
+
+    $wrapper.data("in_transition", false)
+
 
 stopAllVideos = ->
   $videos.each (index, video) ->
@@ -425,12 +447,11 @@ stopAllVideos = ->
       $(media).removeClass('playing loading')
 
       if (player = $(media).find('iframe')).length > 0
-        $f(player[0]).api("pause")  
+        $f(player[0]).api("pause")
 
 playVideo = (e) ->
   $container = $(e.target).closest('.wrapper')
-  currentIndex = $container.data('index') || 0
-  $videoContainer = $($container.find('.media').get(currentIndex))
+  $videoContainer = $($container.find('.media').get(getCurrentIndex($container)))
 
   stopAllVideos()
 
