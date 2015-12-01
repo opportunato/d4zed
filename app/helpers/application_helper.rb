@@ -23,15 +23,23 @@ module ApplicationHelper
     end
   end
 
-  def video_categories(video)
-    if video.tags.length > 0
-      "(#{video.tags.map(&:name).join(' ')})"
-    else
-      ""
-    end
+  def brand_categories(brand)
+    brand.tags.map(&:name).join(' ')
+  end
+
+  def medium_credits(medium)
+    medium.tags.map(&:name).join(' & ')
   end
 
   def position_name(position, credits)
     credits.length > 1 && !position.singular ? position.name.pluralize : position.name
+  end
+
+  def medium_subtitle(medium)
+    [medium_credits(medium), brand_categories(medium.brand)].select{|x| x.length > 0}.join(" - ")
+  end
+
+  def medium_title(medium)
+    [medium.brand.name, medium.name].select{|x| x.length > 0}.join(" - ")
   end
 end

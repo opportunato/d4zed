@@ -39,6 +39,13 @@ RailsAdmin.config do |config|
       field :vimeo_id
       field :link
       field :thumbnail
+      field :tags do
+        associated_collection_scope do
+          Proc.new { |scope|
+            scope = scope.where(kind: Tag.kinds[:credit])
+          }
+        end
+      end
       field :order_number
       field :is_published
       field :credits
@@ -71,7 +78,13 @@ RailsAdmin.config do |config|
       field :name
       field :bg_color
       field :size, :enum
-      field :tags
+      field :tags do
+        associated_collection_scope do
+          Proc.new { |scope|
+            scope = scope.where(kind: Tag.kinds[:project])
+          }
+        end
+      end
       field :order_number
       field :is_published
       field :media
@@ -84,6 +97,13 @@ RailsAdmin.config do |config|
       field :order_number do
         sort_reverse true
       end
+    end
+  end
+
+  config.model 'Tag' do
+    edit do
+      field :name
+      field :kind, :enum
     end
   end
 

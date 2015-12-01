@@ -14,6 +14,7 @@ div[class=video_class(brand) data-id=brand.id]
             - if brand.name.present?
               .brand = brand.name
             .name = medium.name
+            .subtitle = medium_subtitle(medium)
         .info.mobile
           .credits
             - medium.credits.group_by(&:position).each do |position, credits|
@@ -22,11 +23,7 @@ div[class=video_class(brand) data-id=brand.id]
                 - credits.each do |credit|
                   p = credit.person
         .info.desktop
-          header 
-            - if brand.name.present?
-              = "#{brand.name} - #{medium.name} #{video_categories(brand)}"
-            - else
-              = "#{medium.name} #{video_categories(brand)}"
+          header = "#{medium_title(medium)} (#{medium_subtitle(medium)})"
           p = medium.description.html_safe
           table.desktop
             - medium.credits.map { |credit| { position: credit.position, person: credit.person } }.group_by{ |credit| credit[:position] }.values.in_groups_of(2).each do |group|
