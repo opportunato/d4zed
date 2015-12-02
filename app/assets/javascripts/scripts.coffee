@@ -423,18 +423,19 @@ initializeVideoSliders = ($videos) ->
 
     if index < 0
       $("body").addClass("no-transition")
-      goTo($wrapper, length-1)
       setTimeout -> 
-        $("body").removeClass("no-transition")
-      , 50
+        goTo($wrapper, length-1)
+      , 10
     else if index > length-1
       $("body").addClass("no-transition")
-      goTo($wrapper, 0)
       setTimeout -> 
-        $("body").removeClass("no-transition")
-      , 50
+        goTo($wrapper, 0)
+      , 10
 
-    $wrapper.data("in_transition", false)
+    setTimeout -> 
+      $("body").removeClass("no-transition")
+      $wrapper.data("in_transition", false)
+    , 100
 
 
 stopAllVideos = ->
