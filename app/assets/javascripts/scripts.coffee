@@ -317,11 +317,24 @@ updateArrows = ($wrapper) ->
 
   $container.css('transform', "translate(#{-getCurrentIndex($wrapper) * width}px)")
 
-  $prev = $wrapper.find(".prev")
-  $next = $wrapper.find(".next")
+updateNewsArrows = ($wrapper) ->
+  $container = $wrapper.find(".container")
+  width = $container.children().width()
+  currentIndex = $wrapper.data("index") || 0
 
-  $prev = $wrapper.closest("#news").find(".prev") if ($prev.length == 0)
-  $next = $wrapper.closest("#news").find(".next") if ($next.length == 0)
+  $container.css('transform', "translate(#{-currentIndex * width}px)")
+
+  $prev = $wrapper.closest("#news").find(".prev")
+  $next = $wrapper.closest("#news").find(".next")
+
+  if currentIndex == 0
+    $prev.addClass('inactive');
+    $next.removeClass('inactive');
+  else if currentIndex == $wrapper.find('.container').children().length - 1
+    $prev.removeClass('inactive');
+    $next.addClass('inactive');
+  else
+    $prev.add($next).removeClass('inactive');
 
 updateVideo = ($videoContainer) ->
   $infoWrapper = $videoContainer.children(".info").children('.mobile-container')
@@ -347,7 +360,7 @@ updateNews = ->
   $block = $($container.children().get($newsWrapper.data('index')))
   $('#news .date').text($block.data('date'))
 
-  updateArrows($newsWrapper);
+  updateNewsArrows($newsWrapper);
 
 navigate = ($wrapper, direction) ->
   return if ($wrapper.data("in_transition"))
@@ -365,6 +378,25 @@ navigate = ($wrapper, direction) ->
     currentIndex = direction
 
   $wrapper.data('index', currentIndex)
+
+navigateNews = ($wrapper, direction) ->
+  $container = $wrapper.find(".container")
+  currentIndex = $wrapper.data('index') || 0;
+  blocksNumber = $container.children().length
+
+  if direction == 'prev'
+    return if currentIndex == 0
+
+    currentIndex -= 1
+  else if direction == 'next'
+    return if currentIndex == blocksNumber - 1
+
+    currentIndex += 1
+  else
+    return
+
+  $wrapper.data('index', currentIndex)
+
 
 $invisibleVideos = null
 
@@ -523,11 +555,11 @@ $ ->
     expandAbout()
 
   $('#news .prev').on 'click', ->
-    navigate($newsWrapper, 'prev')
+    navigateNews($newsWrapper, 'prev')
     updateNews()
 
   $('#news .next').on 'click', ->
-    navigate($newsWrapper, 'next')
+    navigateNews($newsWrapper, 'next')
     updateNews()
 
   $('.mobile-menu-button').on 'click', ->
