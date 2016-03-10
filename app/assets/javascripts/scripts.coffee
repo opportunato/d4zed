@@ -59,7 +59,7 @@ calculateMainWidth = ->
   if windowWidth > largeBreakbpoint
     newWidth = maxWidth
     marginLeft = Math.ceil(Math.floor((windowWidth - newWidth)/gutterSize) / 2) * gutterSize - 2
-  else 
+  else
     # calculate left/right margin size
     if windowWidth > mobileBreakpoint
       marginSize = 4
@@ -72,7 +72,7 @@ calculateMainWidth = ->
     gutterNumber  = Math.floor(blockWidth / gutterSize)
 
     # calculate left margin number
-    if windowWidth > mobileBreakpoint 
+    if windowWidth > mobileBreakpoint
       marginNumber = 2
 
       if gutterNumber % 2 == 0
@@ -132,7 +132,7 @@ calculateMainWidth = ->
         height = Math.floor(width/(ratio * gutterSize)) * gutterSize + 2
       else
         if $video.hasClass('interactive') && windowWidth > mobileBreakpoint then squareHeight else smallHeight
-      
+
       if (windowWidth <= tabletBreakpoint)
         height += gutterSize
     else
@@ -350,7 +350,7 @@ updateVideo = ($videoContainer) ->
 
   $mobileLink = $videoContainer.find('button.mobile-link > a')
   if $mobileLink.length > 0
-    href = $video.find('.link > a').attr('href')
+    href = $video.find('.link').attr('href')
     $mobileLink.attr('href', href)
 
   updateArrows($videoContainer)
@@ -455,16 +455,16 @@ initializeVideoSliders = ($videos) ->
 
     if index < 0
       $("body").addClass("no-transition")
-      setTimeout -> 
+      setTimeout ->
         goTo($wrapper, length-1)
       , 10
     else if index > length-1
       $("body").addClass("no-transition")
-      setTimeout -> 
+      setTimeout ->
         goTo($wrapper, 0)
       , 10
 
-    setTimeout -> 
+    setTimeout ->
       $("body").removeClass("no-transition")
       $wrapper.data("in_transition", false)
     , 100
@@ -586,6 +586,3 @@ $ ->
   initializeVideoSliders($videos)
   initializePlayer($videos)
   initializeExpand($videos)
-
-  
-    
