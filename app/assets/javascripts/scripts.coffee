@@ -340,7 +340,9 @@ updateVideo = ($videoContainer) ->
   $infoWrapper = $videoContainer.children(".info").children('.mobile-container')
   currentIndex = $videoContainer.data("index") || 0
 
-  $video = $($videoContainer.find('article').get(currentIndex))
+  $articles = $videoContainer.find('article')
+  $video = $($articles.filter((index, article) ->
+    $(article).data("index") == currentIndex))
 
   $info = $video.find('.info.mobile').children().clone()
   $infoHeader = $video.find('.info.desktop').children('header').clone()
