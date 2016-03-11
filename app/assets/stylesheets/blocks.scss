@@ -9,7 +9,7 @@ section > header {
 
   position: absolute;
   top: -$gutter-size;
-  left: $gutter-size;  
+  left: $gutter-size;
 
   @include respond-to(small) {
     width: 2 * $gutter-size;
@@ -44,6 +44,8 @@ article > .expander,
   &.mobile-player,
   &.mobile-link {
     a {
+      position: absolute;
+      top: 0; right: 0; left: 0; bottom: 0;
       color: $color-secondary;
 
       &:hover {
@@ -137,11 +139,11 @@ article > .expander,
 
     @include respond-to(first) {
       font-size: 14px;
-    }  
+    }
 
     @include respond-to(problem) {
       font-size: 13px;
-    } 
+    }
 
     @include respond-to(next-problem) {
       font-size: 11px;
@@ -149,11 +151,11 @@ article > .expander,
 
     @include respond-to(large-problem) {
       font-size: 16px;
-    }  
+    }
 
     @include respond-to(small-problem) {
       font-size: 14px;
-    }  
+    }
   }
 }
 
