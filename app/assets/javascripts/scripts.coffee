@@ -571,7 +571,7 @@ $ ->
     event.preventDefault()
     id = $(this).attr('href')
 
-    if $(@).data('loadAll')
+    if $(@).data('loadAll') && ($invisibleVideos.length > 0)
       loadVideos($invisibleVideos)
       $invisibleVideos = []
 
