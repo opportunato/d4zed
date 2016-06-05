@@ -114,7 +114,7 @@ calculateMainWidth = ->
   else
     $social.css('margin-left', 'auto')
 
-  smallHeight = Math.floor(smallWidth/(2 * gutterSize)) * gutterSize + 2
+  smallHeight = Math.floor(smallWidth/(2 * gutterSize)) * gutterSize + 2 + 2 * gutterSize
   squareHeight = 2 * smallHeight + gutterSize - 2
   squareHeight += gutterSize if windowWidth < tabletBreakpoint
 
@@ -129,12 +129,9 @@ calculateMainWidth = ->
 
     if windowWidth > tinyMobileBreakpoint
       height = if $video.hasClass('big')
-        height = Math.floor(width/(ratio * gutterSize)) * gutterSize + 2
+        height = Math.floor(width/(ratio * gutterSize)) * gutterSize + 3 * gutterSize + 2;
       else
         if $video.hasClass('interactive') && windowWidth > mobileBreakpoint then squareHeight else smallHeight
-
-      if (windowWidth <= tabletBreakpoint)
-        height += gutterSize
     else
       height = Math.floor(newWidth / gutterSize) * gutterSize + 2
 
@@ -494,7 +491,7 @@ playVideo = (e) ->
 
   if $videoContainer.children('iframe').length == 0
     $videoContainer.addClass('loading')
-    $videoContainer.find('.gradient').after("<iframe id='" + $videoContainer.data("vimeoId") + "' src='https://player.vimeo.com/video/" + $videoContainer.data("vimeoId") + "?player_id=" + $videoContainer.data("vimeoId") + "&title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff' width='560' height='315' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>");
+    $videoContainer.find('.gradient').after("<iframe id='" + $videoContainer.data("vimeoId") + "' src='https://player.vimeo.com/video/" + $videoContainer.data("vimeoId") + "?player_id=" + $videoContainer.data("vimeoId") + "&title=0&amp;controls=0&amp;byline=0&amp;portrait=0&amp;color=ffffff' width='593' height='278' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>");
     videoHeight = $container.find('.cover').height()
     $videoContainer.find('iframe').css(height: videoHeight)
 
