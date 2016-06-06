@@ -22,6 +22,8 @@ tabletBreakpoint      = 1024
 largeBreakbpoint      = 1507
 maxWidth              = 1367
 
+players = {}
+
 calculateAboutHeight = ->
   if $(window).width() < tabletBreakpoint
     height = $about.find('p').height()
@@ -487,33 +489,39 @@ playVideo = (e) ->
 
   stopAllVideos()
 
-  $container.addClass('playing')
+  setTimeout ->
+    $container.addClass('playing')
 
-  if $videoContainer.children('iframe').length == 0
-    $videoContainer.addClass('loading')
-    $videoContainer.find('.gradient').after("<iframe id='" + $videoContainer.data("vimeoId") + "' src='https://player.vimeo.com/video/" + $videoContainer.data("vimeoId") + "?player_id=" + $videoContainer.data("vimeoId") + "&title=0&amp;controls=0&amp;byline=0&amp;portrait=0&amp;color=ffffff' width='593' height='278' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>");
-    videoHeight = $container.find('.cover').height()
-    $videoContainer.find('iframe').css(height: videoHeight)
+    id = $videoContainer.data("vimeoId")
 
-    $iframe = $videoContainer.children('iframe')
-    player = $f($iframe[0])
+    if $videoContainer.children('iframe').length == 0
+      $videoContainer.addClass('loading')
+      $videoContainer.find('.gradient').after("<iframe id='" + id + "' src='https://player.vimeo.com/video/" + $videoContainer.data("vimeoId") + "?player_id=" + $videoContainer.data("vimeoId") + "&title=0&amp;controls=0&amp;byline=0&amp;portrait=0&amp;color=ffffff' width='593' height='278' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>");
+      videoHeight = $container.find('.cover').height()
+      $videoContainer.find('iframe').css(height: videoHeight)
 
-    $iframe.on 'load', ->
-      player.addEvent "ready", ->
-        $videoContainer.removeClass('loading').addClass('playing')
+      $iframe = $videoContainer.children('iframe')
+      player = $f($iframe[0])
 
-        player.api("play")
+      $iframe.on 'load', ->
+        players[id] = player
 
-        player.addEvent "pause", ->
-          $videoContainer.add($container).removeClass('playing')
+        player.addEvent "ready", ->
+          $videoContainer.removeClass('loading').addClass('playing')
 
-        player.addEvent "finish", ->
-          $videoContainer.add($container).removeClass('playing')
-  else
-    $videoContainer.addClass('playing')
+          player.api("play")
 
-    player = $f($videoContainer.children('iframe')[0])
-    player.api("play")
+          player.addEvent "pause", ->
+            $videoContainer.add($container).removeClass('playing')
+
+          player.addEvent "finish", ->
+            $videoContainer.add($container).removeClass('playing')
+    else
+      $videoContainer.addClass('playing')
+
+      player = players[id]
+      player.api("play")
+  , 17
 
 
 initializePlayer = ($videos) ->
