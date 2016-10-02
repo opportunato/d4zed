@@ -3,11 +3,9 @@ $main      = $('#main > .wrapper')
 $videos    = $('#work > .wrapper')
 $work      = $('#work')
 $header    = $('body > header > .header-wrapper > .wrapper')
-$sections  = $('#about, #news')
-$news      = $('#news article')
+$sections  = $('#about, #contacts')
 $about     = $('#about')
-$newsBlock = $('#news')
-$social    = $('footer .social')
+$contacts  = $('#contacts')
 
 videos = {
   left: []
@@ -15,9 +13,7 @@ videos = {
 }
 
 tinyMobileBreakpoint  = 420
-smallMobileBreakpoint = 500
 mobileBreakpoint      = 804
-smallTabletBreakpoint = 930
 tabletBreakpoint      = 1024
 largeBreakbpoint      = 1507
 maxWidth              = 1367
@@ -25,24 +21,26 @@ maxWidth              = 1367
 players = {}
 
 calculateAboutHeight = ->
-  if $(window).width() < tabletBreakpoint
-    height = $about.find('p').height()
-    newHeight = Math.ceil(height/gutterSize) * gutterSize + 2 * gutterSize - 2
+  height = $about.find('p').map((index, child) => $(child).height()).toArray().reduce((memo, x) => memo + x)
+  newHeight = Math.ceil(height/gutterSize + 0.5) * gutterSize + 2 * gutterSize - 2
+  windowWidth   = $(window).width()
+  if windowWidth > tabletBreakpoint
+    $sections.height(newHeight)
   else
-    newHeight = 5 * gutterSize - 2
+    $about.height(newHeight)
+    calculateContactsHeight()
 
-  $about.height(newHeight)
-  $about.data('height', newHeight)
+calculateContactsHeight = ->
+  height = $contacts.find('.wrapper').outerHeight();
+  $contacts.height(Math.floor(height/gutterSize) * gutterSize + gutterSize - 2)
 
 scrollToBlock = (id) ->
   $('body').removeClass('menu-opened')
 
   aTag = $("#{id}")
-  windowWidth   = $(window).width()
-  headerOffset = if windowWidth > mobileBreakpoint then 5 * 35 else 4 * 35
+  headerOffset = 4 * gutterSize
 
   $('html,body').animate({ scrollTop: aTag.offset().top - headerOffset }, 'slow')
-
 
 scrollToTop = (event) ->
   event.preventDefault()
@@ -106,16 +104,6 @@ calculateMainWidth = ->
   else
     smallWidth = newWidth
 
-  # calculate social margins
-  socialMargin = Math.ceil(Math.floor((newWidth - $social.width())/gutterSize) / 2) * gutterSize + 1
-
-  if windowWidth <= tinyMobileBreakpoint
-    $social.css('margin-left', "#{socialMargin - 2}px")
-  else if windowWidth <= smallTabletBreakpoint
-    $social.css('margin-left', "#{socialMargin}px")
-  else
-    $social.css('margin-left', 'auto')
-
   smallHeight = Math.floor(smallWidth/(2 * gutterSize)) * gutterSize + 2 + 2 * gutterSize
   squareHeight = 2 * smallHeight + gutterSize - 2
   squareHeight += gutterSize if windowWidth < tabletBreakpoint
@@ -145,13 +133,12 @@ calculateMainWidth = ->
     $video.find('.next, .prev').css(top: (containerHeight)/2 - 50)
 
   if windowWidth > tabletBreakpoint
-    newsWidth = (newWidth - gutterSize)/2 + 1
+    sectionsWidth = (newWidth - gutterSize)/2 + 1
   else
-    newsWidth = newWidth
-
+    sectionsWidth = newWidth
 
   # set expanders for tiny screens
-  $expanders = $(".expander, #news .buttons")
+  $expanders = $(".expander")
   $playButtons = $("#work .mobile-player, #work .mobile-link")
 
   if windowWidth > tinyMobileBreakpoint
@@ -161,9 +148,7 @@ calculateMainWidth = ->
     $expanders.css(right: expanderRight)
     $playButtons.css(right: expanderRight + gutterSize)
 
-
-  $news.add($sections).css(width: newsWidth)
-  updateNews()
+  $sections.css(width: sectionsWidth)
   $videos.each (index, video) ->
     updateVideo($(video))
 
@@ -240,22 +225,6 @@ updateVideos = ($updatedVideo, additionalHeight) ->
   $('#work').height($('#work').height() + additionalHeight)
 
 
-expandAbout = ->
-  $about = $('#about')
-
-  $about.toggleClass('expanded')
-
-  if $about.hasClass('expanded')
-    $content = $about.find('.content')
-    fullHeight = $content.height()
-
-    newHeight = Math.ceil(fullHeight/gutterSize) * gutterSize + gutterSize - 2
-
-    $about.height(newHeight)
-  else
-    $about.height($about.data('height'))
-
-
 expandVideo = ($video) ->
   $videos.not($video).each (index, video) ->
     if $(video).hasClass('expanded')
@@ -301,9 +270,6 @@ expandVideo = ($video) ->
 
   updateVideos($video, additionalHeight)
 
-currentNewsIndex = 0
-$newsWrapper   = $('#news .wrapper')
-
 getCurrentIndex = ($wrapper) ->
   if $wrapper.find(".media").length > 1
     ($wrapper.data("index") || 0) + 1
@@ -316,24 +282,6 @@ updateArrows = ($wrapper) ->
 
   $container.css('transform', "translate(#{-getCurrentIndex($wrapper) * width}px)")
 
-updateNewsArrows = ($wrapper) ->
-  $container = $wrapper.find(".container")
-  width = $container.children().width()
-  currentIndex = $wrapper.data("index") || 0
-
-  $container.css('transform', "translate(#{-currentIndex * width}px)")
-
-  $prev = $wrapper.closest("#news").find(".prev")
-  $next = $wrapper.closest("#news").find(".next")
-
-  if currentIndex == 0
-    $prev.addClass('inactive');
-    $next.removeClass('inactive');
-  else if currentIndex == $wrapper.find('.container').children().length - 1
-    $prev.removeClass('inactive');
-    $next.addClass('inactive');
-  else
-    $prev.add($next).removeClass('inactive');
 
 updateVideo = ($videoContainer) ->
   $infoWrapper = $videoContainer.children(".info").children('.mobile-container')
@@ -356,17 +304,9 @@ updateVideo = ($videoContainer) ->
 
   updateArrows($videoContainer)
 
-updateNews = ->
-  $container = $newsWrapper.find(".container")
-  $block = $($container.children().get($newsWrapper.data('index')))
-  $('#news .date').text($block.data('date'))
-
-  updateNewsArrows($newsWrapper);
-
 navigate = ($wrapper, direction) ->
   return if ($wrapper.data("in_transition"))
 
-  $container = $wrapper.find(".container")
   currentIndex = $wrapper.data('index') || 0;
 
   $wrapper.data("in_transition", true)
@@ -379,25 +319,6 @@ navigate = ($wrapper, direction) ->
     currentIndex = direction
 
   $wrapper.data('index', currentIndex)
-
-navigateNews = ($wrapper, direction) ->
-  $container = $wrapper.find(".container")
-  currentIndex = $wrapper.data('index') || 0;
-  blocksNumber = $container.children().length
-
-  if direction == 'prev'
-    return if currentIndex == 0
-
-    currentIndex -= 1
-  else if direction == 'next'
-    return if currentIndex == blocksNumber - 1
-
-    currentIndex += 1
-  else
-    return
-
-  $wrapper.data('index', currentIndex)
-
 
 $invisibleVideos = null
 
@@ -547,9 +468,6 @@ $ ->
       if $(video).hasClass('expanded')
         expandVideo($(video))
 
-    if $about.hasClass('expanded')
-      expandAbout()
-
     calculateMainWidth()
 
   setTimeout ->
@@ -557,17 +475,6 @@ $ ->
   , 300
 
   player = null
-
-  $('#about .expander').on 'click', ->
-    expandAbout()
-
-  $('#news .prev').on 'click', ->
-    navigateNews($newsWrapper, 'prev')
-    updateNews()
-
-  $('#news .next').on 'click', ->
-    navigateNews($newsWrapper, 'next')
-    updateNews()
 
   $('.mobile-menu-button').on 'click', ->
     $('body').toggleClass('menu-opened')
@@ -582,14 +489,11 @@ $ ->
 
     scrollToBlock(id)
 
-  $("#news").find('a').prop("target", "_blank")
-
   $('.root-link').on 'click', scrollToTop
 
   if location.hash != ''
     scrollToBlock(location.hash)
 
-  updateNews()
   initializeVideoSliders($videos)
   initializePlayer($videos)
   initializeExpand($videos)

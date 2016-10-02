@@ -17,6 +17,7 @@ p {
 }
 
 a {
+  color: inherit;
   outline: none !important;
   text-decoration: none;
 
@@ -44,11 +45,9 @@ body.no-transition {
   }
 }
 
-
 $header-height: 3 * $gutter-size;
 $mobile-header-height: 2 * $gutter-size;
 $max-width: 1367px;
-
 
 #main {
   color: $color-secondary;
@@ -57,12 +56,191 @@ $max-width: 1367px;
   > .wrapper {
     max-width: $max-width;
     margin: auto;
-    padding-top: 2 * $gutter-size - 2px;
+    padding-top: $gutter-size - 2px;
     padding-bottom: 3 * $gutter-size;
     position: relative;
 
     @include respond-to(small) {
       margin-left: $gutter-size - 2px;
+    }
+  }
+}
+
+#work .expander,
+section > .expander,
+article > .expander,
+#work .mobile-player,
+#work .mobile-link {
+  outline: 0;
+  position: absolute;
+  right: $gutter-size;
+  bottom: -$gutter-size;
+
+  background-color: $color-main;
+  border: none;
+  color: $color-secondary;
+  line-height: $gutter-size;
+  height: $gutter-size;
+  width: $gutter-size;
+
+  .d4zed-icon-close {
+    display: none;
+  }
+
+  .d4zed-icon-expand {
+    display: block;
+  }
+
+  &.mobile-player,
+  &.mobile-link {
+    a {
+      position: absolute;
+      top: 0; right: 0; left: 0; bottom: 0;
+      color: $color-secondary;
+
+      &:hover {
+        i {
+          opacity: 1;
+        }
+      }
+    }
+
+    right: 2 * $gutter-size;
+  }
+}
+
+#work .expander,
+#work .mobile-player,
+#work .mobile-link {
+  bottom: 0;
+  z-index: 5;
+}
+
+#work .expander,
+article > .expander,
+#work .mobile-player,
+#work .mobile-link {
+  display: none;
+}
+
+.expanded {
+  .expander {
+    .d4zed-icon-close {
+      display: block !important;
+    }
+
+    .d4zed-icon-expand {
+      display: none !important;
+    }
+  }
+}
+
+@include respond-to(tablet) {
+  #work .expander,
+  section > .expander,
+  article > .expander,
+  #work .mobile-player,
+  #work .mobile-link {
+    display: block;
+  }
+}
+
+#about, #contacts {
+  background-color: $color-secondary;
+  color: $color-main;
+  border: 2px solid $color-main;
+  padding: 0;
+  position: relative;
+  @include custom-transition(background-color);
+  @include custom-transition(color);
+
+  @include respond-to(tiny) {
+    border-left: none;
+    border-right: none;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+    padding: $gutter-size $gutter-size 0;
+  }
+}
+
+#about:hover,
+#contacts:hover {
+  color: $color-secondary;
+  background-color: $color-main;
+}
+
+#about {
+  margin-right: $gutter-size - 2px;
+
+  @include respond-to(tablet) {
+    margin-right: 0;
+    margin-bottom: 2 * $gutter-size - 2;
+  }
+}
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 2 * $gutter-size;
+  width: 100%;
+
+  #contacts {
+    .wrapper {
+      display: flex;
+      padding: $gutter-size;
+
+      @include respond-to(mobile) {
+        flex-direction: column;
+      }
+    }
+
+    .column {
+      font-size: 16px;
+      line-height: 1.5;
+      margin-right: $gutter-size;
+      width: 50%;
+    }
+  }
+
+  .facebook,
+  .twitter {
+    background-color: $color-secondary;
+    color: $color-main;
+    height: 2 * $gutter-size - 2;
+    display: block;
+    float: left;
+    font-size: 16px;
+    margin-top: $gutter-size + 2;
+    margin-right: $gutter-size + 2;
+    text-align: center;
+    width: 2 * $gutter-size - 2;
+
+    @include custom-transition(background-color);
+
+    &.twitter {
+      margin-right: 2px;
+    }
+
+    i {
+      @include custom-transition(color);
+
+      line-height: 2 * $gutter-size;
+    }
+
+    &:hover {
+      background-color: $color-main;
+
+      i {
+        opacity: 1;
+        color: $color-secondary;
+      }
     }
   }
 }

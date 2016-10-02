@@ -11,8 +11,8 @@ header
       = link_to "", class: "root-link" do
         = image_tag "logo.svg", class: "logo"
       ul.menu
-        li = link_to "News", "#news"
         li = link_to "Work", "#work"
+        li = link_to "About", "#about", :"data-load-all" => true
         li = link_to "Contact", "#contacts", :"data-load-all" => true
       ul.social
         li = link_to "https://www.facebook.com/D4ZEDD4ZED", target: "_blank" do
@@ -27,61 +27,46 @@ header
 
 #main
   .wrapper
-    section#about
-      header About
-      .wrapper
-        .content = Page.about_text.try(:html_safe)
-      button.expander
-        i.d4zed-icon-close
-        i.d4zed-icon-expand
-
-    section#news
-      header News
-      .wrapper
-        .container
-          - @news.each_with_index do |news, index|
-            article[data-date=format_date(news.created_at) data-index=index]
-              .cover[style="background-image: url(#{news.picture_url(:large)})"]
-              p = sanitize news.content, tags: %w(a)
-      - if @news.first.present?
-        .date = format_date(@news.first.created_at)
-        .buttons
-          button.prev
-            i.d4zed-icon-chevron-left
-          button.next
-            i.d4zed-icon-chevron-right
 
     section#work
-      header Work
-
       - @brands.each do |brand|
         - if brand.media.published.size > 0
           = render partial: "main/brand", locals: { brand: brand }
 
     footer
+      section#about
+        .wrapper
+          .content
+            p D4ZED is a Copenhagen and Los Angeles based sound design and music collective made up of Adrian Aurelius, Gregers Mærsk Møller, Lasse Martinussen, Simon Littauer and Sune Rose Wagner.
+            p All together our mission is to create and present the best sound and music for advertising, broadcast and film.
+
       section#contacts
-        header Contact
-        .column 
-          | Vesterbrogade 62D
-          br
-          | 1620 Copenhagen
-          br
-          | Denmark
-        .column 
-          | 843 1/2 Palms Blvd
-          br
-          | Venice, CA 90291
-          br
-          | United States
-        .column 
-          | DK: +45 60601221
-          br
-          | US: +1 (213) 457-3385
-          br
-          = link_to "hello@d4zed.com", "mailto:hello@d4zed.com"
-      
-      .social  
-        = link_to "https://www.facebook.com/D4ZEDD4ZED", class: "facebook", target: "_blank" do
-          i.d4zed-icon-facebook
-        = link_to "https://twitter.com/d_4_z_e_d", class: "twitter", target: "_blank" do
-          i.d4zed-icon-twitter
+        .wrapper
+          .column
+            = link_to "hello@d4zed.com", "mailto:hello@d4zed.com"
+            br
+            br
+            | Vesterbrogade 62D
+            br
+            | 1620 Copenhagen
+            br
+            | Denmark
+            br
+            | +45 60601221
+          .column
+            br
+            br
+            | 108 West 2nd Street #1002
+            br
+            | Los Angeles, CA 90012
+            br
+            | United States
+            br
+            | +1 (213) 457-3385
+
+      /
+      /.social
+      /  = link_to "https://www.facebook.com/D4ZEDD4ZED", class: "facebook", target: "_blank" do
+      /    i.d4zed-icon-facebook
+      /  = link_to "https://twitter.com/d_4_z_e_d", class: "twitter", target: "_blank" do
+      /    i.d4zed-icon-twitter

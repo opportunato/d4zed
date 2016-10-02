@@ -3,6 +3,5 @@ class MainController < ApplicationController
 
   def index
     @brands = Brand.published.select { |brand| brand.media.length > 0 }
-    @news   = News.published
   end
 end

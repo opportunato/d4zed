@@ -1,11 +1,8 @@
 @mixin respond-to($media) {
-  @if $media  == ultra-small {
-    @media only screen and (max-width: 350px) { @content; }
-  }
   @if $media  == tiny {
     @media only screen and (max-width: 420px) { @content; }
   }
-  @if $media  == mobile {
+  @if $media == mobile {
     @media only screen and (max-width: 570px) { @content; }
   }
   @if $media == small {
@@ -22,27 +19,6 @@
   }
   @if $media == large {
     @media only screen and (max-width: 1435px) { @content; }
-  }
-  @if $media == second {
-    @media only screen and (min-width: 930px) and (max-width: 1096px) { @content; }
-  }
-  @if $media == third {
-    @media only screen and (max-width: 930px) { @content; }
-  }
-  @if $media == only-tablet {
-    @media only screen and (min-width: 930px) and (max-width: 1100px) { @content; }
-  }
-  @if $media == problem {
-    @media only screen and (min-width: 1087px) and (max-width: 1155px) { @content; }
-  }
-  @if $media == next-problem {
-    @media only screen and (min-width: 1024px) and (max-width: 1087px) { @content; }
-  }
-  @if $media == large-problem {
-    @media only screen and (max-width: 1024px) { @content; }
-  }
-  @if $media == small-problem {
-    @media only screen and (max-width: 600px) { @content; }
   }
 }
 
