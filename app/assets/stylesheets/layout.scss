@@ -61,6 +61,7 @@ $max-width: 1367px;
     position: relative;
 
     @include respond-to(small) {
+      padding-top: $gutter-size - 2px;
       margin-left: $gutter-size - 2px;
     }
   }
@@ -206,6 +207,10 @@ footer {
       line-height: 1.5;
       margin-right: $gutter-size;
       width: 50%;
+
+      @include respond-to(mobile) {
+        width: 100%;
+      }
     }
   }
 

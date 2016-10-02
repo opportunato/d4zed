@@ -14,6 +14,11 @@ header
         li = link_to "Work", "#work"
         li = link_to "About", "#about", :"data-load-all" => true
         li = link_to "Contact", "#contacts", :"data-load-all" => true
+        li.social-links
+          = link_to "https://www.facebook.com/D4ZEDD4ZED", target: "_blank" do
+            i.d4zed-icon-facebook
+          = link_to "https://twitter.com/d_4_z_e_d", target: "_blank" do
+            i.d4zed-icon-twitter
       ul.social
         li = link_to "https://www.facebook.com/D4ZEDD4ZED", target: "_blank" do
           i.d4zed-icon-facebook
@@ -62,10 +67,3 @@ header
             | United States
             br
             | +1 (213) 457-3385
-
-      /
-      /.social
-      /  = link_to "https://www.facebook.com/D4ZEDD4ZED", class: "facebook", target: "_blank" do
-      /    i.d4zed-icon-facebook
-      /  = link_to "https://twitter.com/d_4_z_e_d", class: "twitter", target: "_blank" do
-      /    i.d4zed-icon-twitter

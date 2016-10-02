@@ -180,6 +180,24 @@ body {
       }
     }
 
+    .social-links {
+      display: none;
+
+      @include respond-to(small) {
+        display: block;
+      }
+
+      a {
+        &:first-child {
+          margin-right: 20px;
+        }
+
+        &:hover {
+          border-bottom: none !important;
+        }
+      }
+    }
+
     a {
       color: $color-secondary;
       text-transform: uppercase;

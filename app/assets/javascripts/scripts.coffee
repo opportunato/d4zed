@@ -212,8 +212,6 @@ updateVideos = ($updatedVideo, additionalHeight) ->
     position = if $updatedVideo.css('left') == '0px' then 'left' else 'right'
     $updatedVideos = videos[position]
 
-  index = $updatedVideos.indexOf($updatedVideo)
-
   laterVideos = $updatedVideos.filter (video) ->
     parseInt($(video).css('top')) > parseInt($updatedVideo.css('top'))
 
@@ -330,7 +328,7 @@ initiateInfiniteScroll = ->
   $(document).on 'scroll', ->
     return if ($invisibleVideos.length == 0)
 
-    if $(document).scrollTop() > $work.offset().top + $work.height() - $(window).height() - 200
+    if $(document).scrollTop() > $work.offset().top + $work.height() - $(window).height() - 1000
       loadVideos($invisibleVideos.slice(0, 5))
       $invisibleVideos = $invisibleVideos.slice(5)
 
@@ -473,8 +471,6 @@ $ ->
   setTimeout ->
     $('body').removeClass('no-transition')
   , 300
-
-  player = null
 
   $('.mobile-menu-button').on 'click', ->
     $('body').toggleClass('menu-opened')
