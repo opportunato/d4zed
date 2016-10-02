@@ -20,19 +20,18 @@ maxWidth              = 1367
 
 players = {}
 
-calculateAboutHeight = ->
+calculateSectionsHeight = ->
   height = $about.find('p').map((index, child) => $(child).height()).toArray().reduce((memo, x) => memo + x)
-  newHeight = Math.ceil(height/gutterSize + 0.5) * gutterSize + 2 * gutterSize - 2
+  aboutHeight = Math.ceil(height/gutterSize + 0.5) * gutterSize + 2 * gutterSize - 2
+  contactsHeight = Math.floor($contacts.find('.wrapper').outerHeight()/gutterSize) * gutterSize - 2
   windowWidth   = $(window).width()
-  if windowWidth > tabletBreakpoint
-    $sections.height(newHeight)
-  else
-    $about.height(newHeight)
-    calculateContactsHeight()
 
-calculateContactsHeight = ->
-  height = $contacts.find('.wrapper').outerHeight();
-  $contacts.height(Math.floor(height/gutterSize) * gutterSize + gutterSize - 2)
+  if windowWidth > tabletBreakpoint
+    $sections.height(Math.max(aboutHeight, contactsHeight))
+  else
+    $about.height(aboutHeight)
+    $contacts.height(contactsHeight)
+
 
 scrollToBlock = (id) ->
   $('body').removeClass('menu-opened')
@@ -152,7 +151,7 @@ calculateMainWidth = ->
   $videos.each (index, video) ->
     updateVideo($(video))
 
-  calculateAboutHeight()
+  calculateSectionsHeight()
 
   # calculate video positions
   if windowWidth > mobileBreakpoint
