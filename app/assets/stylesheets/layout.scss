@@ -56,7 +56,7 @@ $max-width: 1367px;
   > .wrapper {
     max-width: $max-width;
     margin: auto;
-    padding-top: $gutter-size - 2px;
+    padding-top: 2 * $gutter-size - 2px;
     padding-bottom: 3 * $gutter-size;
     position: relative;
 
