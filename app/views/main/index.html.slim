@@ -41,8 +41,7 @@ header
     footer
       section#about
         .wrapper
-          .content
-            p D4ZED is an award-winning sound design and music collective based in Copenhagen and Los Angeles. D4ZED is made up of Adrian Aurelius, Gregers Mærsk Møller, Lasse Martinussen, Simon Littauer and Sune Rose Wagner.
+          .content = Page.about_text.try(:html_safe)
 
       section#contacts
         .wrapper
