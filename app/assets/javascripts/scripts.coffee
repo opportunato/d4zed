@@ -327,7 +327,7 @@ initiateInfiniteScroll = ->
   $(document).on 'scroll', ->
     return if ($invisibleVideos.length == 0)
 
-    if $(document).scrollTop() > $work.offset().top + $work.height() - $(window).height() - 1000
+    if $(document).scrollTop() > $work.offset().top + $work.height() - $(window).height() - 2000
       loadVideos($invisibleVideos.slice(0, 5))
       $invisibleVideos = $invisibleVideos.slice(5)
 
