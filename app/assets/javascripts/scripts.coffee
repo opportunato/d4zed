@@ -21,7 +21,7 @@ maxWidth              = 1367
 players = {}
 
 calculateSectionsHeight = ->
-  height = $about.find('p').map((index, child) => $(child).height()).toArray().reduce((memo, x) => memo + x)
+  height = $about.find('.content > p, .content > div').map((index, child) => $(child).height()).toArray().reduce((memo, x) => memo + x)
   aboutHeight = Math.ceil(height/gutterSize + 0.5) * gutterSize + 2 * gutterSize - 2
   contactsHeight = Math.floor($contacts.find('.wrapper').outerHeight()/gutterSize) * gutterSize - 2
   windowWidth   = $(window).width()
